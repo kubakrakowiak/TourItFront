@@ -1,34 +1,50 @@
-import React from 'react';
-import { StyleSheet, View, TextInput, TouchableOpacity, Text, Image } from 'react-native';
+import React, {useState} from 'react';
+import { StyleSheet, View, TouchableOpacity, Text, Image, TextInput } from 'react-native';
 import Button from '../../../components/ui/Button';
+import InputText from '../../../components/ui/InputText';
+
+
 
 
 const LoginScreen = () => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    function loginHandler() {
+        alert(email + "\n"+ password);
+      }
+
     return (
         <View style={styles.container}>
             <View style={styles.logoContainer}>
                 <Image style={styles.image} source={require('../../../assets/logo_TourIT.png')}/>
             </View>
-            <TextInput
-                style={styles.input}
-                placeholder="email"
-                placeholderTextColor="#aaaaaa"
-                keyboardType="email-address"
+            <InputText value={email} onUpdateValue={setEmail}
+            textInputConfig={{
+                placeholder:"email",
+                keyboardType:"email-address",
+            }}
             />
-            <TextInput
-                style={styles.input}
-                placeholder="password"
-                placeholderTextColor="#aaaaaa"
-                secureTextEntry
-            />
-            <Button>
+            
+            <InputText value={password} onUpdateValue={setPassword}
+            textInputConfig={{
+                placeholder: "password",
+                secureTextEntry: true,
+                keyboardType: 'default',
+            }}
+           />
+
+            <Button onPress={loginHandler}>
                 Sign In
             </Button>
+
             <View style={styles.registerContainer}>
                 <Text style={styles.registerText}>Still don't have an account?</Text>
-                <TouchableOpacity>
+            </View>
+            <View>
+            <TouchableOpacity>
                     <Text style={styles.registerButton}>Register Here!</Text>
-                </TouchableOpacity>
+            </TouchableOpacity>
             </View>
         </View>
     );
@@ -53,23 +69,21 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold',
     },
-    input: {
-        height: 50,
-        width: '80%',
-        backgroundColor: 'white',
-        marginBottom: 10,
-        paddingLeft: 15,
-        borderRadius: 25,
-        borderWidth: 1,
-        borderColor: '#dddddd',
-    },
+    
     registerContainer: {
         flexDirection: 'row',
         alignItems: 'center',
     },
     registerText: {
-        marginRight: 5,
-        color: '#aaaaaa',
+        color: '#626262',
+        textAlign: 'center',
+        fontFamily: 'Poppins',
+        fontSize: 12,
+        fontStyle: 'normal',
+        fontWeight: '700',
+        lineHeight: 'normal',
+        letterSpacing: 2.4,
+        textTransform: 'capitalize'
     },
     registerButton: {
         color: '#1292B4',
