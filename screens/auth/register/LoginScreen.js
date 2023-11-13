@@ -1,31 +1,34 @@
 import React from 'react';
-import { StyleSheet, View, TextInput, Button, Text, Image } from 'react-native';
+import { StyleSheet, View, TextInput, TouchableOpacity, Text, Image } from 'react-native';
 
 const LoginScreen = () => {
     return (
         <View style={styles.container}>
-            <Image
-                source={{ uri: 'path_to_your_logo.png' }}
-                style={styles.logo}
-            />
+            <View style={styles.logoContainer}>
+                <Image source={{uri: 'asset:/logo.jpg'}} style={styles.logo} />
+                <Text style={styles.logoText}>TourIT</Text>
+            </View>
             <TextInput
-                placeholder="email"s
                 style={styles.input}
+                placeholder="email"
+                placeholderTextColor="#aaaaaa"
                 keyboardType="email-address"
             />
             <TextInput
-                placeholder="password"
                 style={styles.input}
+                placeholder="password"
+                placeholderTextColor="#aaaaaa"
                 secureTextEntry
             />
-            <Button
-                title="Sign In"
-                onPress={() => console.log('Sign In pressed')}
-            />
-            <Text style={styles.registerText}>
-                Still don’t have an account?
-                <Text style={styles.registerLink}> Register Here!</Text>
-            </Text>
+            <TouchableOpacity style={styles.button}>
+                <Text style={styles.buttonText}>Sign In</Text>
+            </TouchableOpacity>
+            <View style={styles.registerContainer}>
+                <Text style={styles.registerText}>Still don't have an account?</Text>
+                <TouchableOpacity>
+                    <Text style={styles.registerButton}>Register Here!</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 };
@@ -33,30 +36,57 @@ const LoginScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
+        backgroundColor: '#f5f5f5',
         alignItems: 'center',
-        padding: 20,
-        backgroundColor: '#ecf0f1',
+        justifyContent: 'center',
+    },
+    logoContainer: {
+        alignItems: 'center',
+        marginBottom: 50,
     },
     logo: {
         width: 100,
         height: 100,
-        marginBottom: 20,
+    },
+    logoText: {
+        fontSize: 24,
+        fontWeight: 'bold',
     },
     input: {
-        height: 40,
-        width: '100%',
-        borderColor: 'gray',
+        height: 50,
+        width: '80%',
+        backgroundColor: 'white',
+        marginBottom: 10,
+        paddingLeft: 15,
+        borderRadius: 25,
         borderWidth: 1,
+        borderColor: '#dddddd',
+    },
+    button: {
+        backgroundColor: '#1292B4',
+        borderRadius: 25,
+        width: '80%',
+        padding: 15,
+        alignItems: 'center',
+        justifyContent: 'center',
         marginBottom: 20,
-        paddingHorizontal: 10,
+    },
+    buttonText: {
+        color: 'white',
+        fontWeight: 'bold',
+        fontSize: 16,
+    },
+    registerContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     registerText: {
-        marginTop: 20,
+        marginRight: 5,
+        color: '#aaaaaa',
     },
-    registerLink: {
-        color: 'blue',
-        textDecorationLine: 'underline',
+    registerButton: {
+        color: '#1292B4',
+        fontWeight: 'bold',
     },
 });
 
