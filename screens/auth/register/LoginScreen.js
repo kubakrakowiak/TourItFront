@@ -1,12 +1,13 @@
 import React from 'react';
 import { StyleSheet, View, TextInput, TouchableOpacity, Text, Image } from 'react-native';
+import Button from '../../../components/ui/Button';
+
 
 const LoginScreen = () => {
     return (
         <View style={styles.container}>
             <View style={styles.logoContainer}>
-                <Image source={{uri: 'asset:/logo.jpg'}} style={styles.logo} />
-                <Text style={styles.logoText}>TourIT</Text>
+                <Image style={styles.image} source={require('../../../assets/logo_TourIT.png')}/>
             </View>
             <TextInput
                 style={styles.input}
@@ -20,9 +21,9 @@ const LoginScreen = () => {
                 placeholderTextColor="#aaaaaa"
                 secureTextEntry
             />
-            <TouchableOpacity style={styles.button}>
-                <Text style={styles.buttonText}>Sign In</Text>
-            </TouchableOpacity>
+            <Button>
+                Sign In
+            </Button>
             <View style={styles.registerContainer}>
                 <Text style={styles.registerText}>Still don't have an account?</Text>
                 <TouchableOpacity>
@@ -36,7 +37,7 @@ const LoginScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#f5f5f5',
+        backgroundColor: '#F1F1F1',
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -62,20 +63,6 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#dddddd',
     },
-    button: {
-        backgroundColor: '#1292B4',
-        borderRadius: 25,
-        width: '80%',
-        padding: 15,
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginBottom: 20,
-    },
-    buttonText: {
-        color: 'white',
-        fontWeight: 'bold',
-        fontSize: 16,
-    },
     registerContainer: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -88,6 +75,11 @@ const styles = StyleSheet.create({
         color: '#1292B4',
         fontWeight: 'bold',
     },
+    image: {
+        width: 237,
+        height: 177,
+        margin: 20,
+    }
 });
 
 export default LoginScreen;

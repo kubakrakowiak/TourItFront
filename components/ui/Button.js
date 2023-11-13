@@ -22,7 +22,7 @@ export default Button;
 
 const styles = StyleSheet.create({
   button: {
-      width: 320,
+      width: '70%',
       height: 45,
       flexShrink: 0,
       borderRadius: 16,
@@ -31,14 +31,14 @@ const styles = StyleSheet.create({
       shadowOffset: { width: 0, height: 4 },
       shadowOpacity: 0.8,
       shadowRadius: 4,
-      elevation: 4
+      elevation: 4,
+      alignItems: "center",
+      justifyContent: "center",
   },
   pressed: {
     opacity: 0.7,
   },
   buttonText: {
-    width: 131.859,
-    height: 21.977,
     flexShrink: 0,
     color: '#FFF',
     textAlign: 'center',
