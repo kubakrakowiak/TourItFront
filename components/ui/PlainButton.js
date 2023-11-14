@@ -1,14 +1,17 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { Colors } from "../../constans/styles.js";
 
-function PlainButton ({ children, onPress, color, underline }) {
+function PlainButton({ children, onPress, color, underline }) {
   return (
     <Pressable
       style={({ pressed }) => [
         styles.button,
         pressed && styles.pressed,
         color && { backgroundColor: color },
-        underline && {textDecoration: 'underline', textDecorationColor: '#0579E3'},
+        underline && {
+          textDecoration: "underline",
+          textDecorationColor: "#0579E3",
+        },
       ]}
       onPress={onPress}
     >
@@ -23,11 +26,10 @@ export default PlainButton;
 
 const styles = StyleSheet.create({
   button: {
-      width: '100%',
-      flexShrink: 0,
-      alignItems: "center",
-      justifyContent: "center",
-      
+    width: "100%",
+    flexShrink: 0,
+    alignItems: "center",
+    justifyContent: "center",
   },
   pressed: {
     opacity: 0.7,
@@ -35,13 +37,13 @@ const styles = StyleSheet.create({
   buttonText: {
     flexShrink: 0,
     color: Colors.registerLogin,
-    textAlign: 'center',
-    fontFamily: 'Poppins',
+    textAlign: "center",
+    fontFamily: "Poppins",
     fontSize: 12,
-    fontStyle: 'normal',
-    fontWeight: '700',
+    fontStyle: "normal",
+    fontWeight: "700",
     lineHeight: undefined,
     letterSpacing: 2.32,
-    textTransform: 'capitalize',
+    textTransform: "capitalize",
   },
 });
