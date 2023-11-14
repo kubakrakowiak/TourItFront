@@ -1,110 +1,132 @@
-import React from 'react';
-import { StyleSheet, View, TextInput, TouchableOpacity, Text, Image, SafeAreaView } from 'react-native';
+import React, {useState} from 'react';
+import { StyleSheet, View, TouchableOpacity, Text, Image, TextInput } from 'react-native';
+import Button from '../../../components/ui/Button';
+import InputText from '../../../components/ui/InputText';
+import PlainButton from '../../../components/ui/PlainButton';
+
+
+
 
 const RegistrationScreen = () => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    function loginHandler() {
+        alert(email + "\n"+ password);
+      }
+
     return (
-        <SafeAreaView style={styles.safeArea}>
-            <View style={styles.container}>
-                <View style={styles.headerContainer}>
-                    <Image source={('')} style={styles.logo} />
-                    <Text style={styles.headerText}>Register here!</Text>
-                </View>
-                <TextInput
-                    style={styles.input}
-                    placeholder="email"
-                    placeholderTextColor="#aaaaaa"
-                    keyboardType="email-address"
-                    autoCapitalize="none"
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholder="password"
-                    placeholderTextColor="#aaaaaa"
-                    secureTextEntry
-                    autoCapitalize="none"
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholder="confirm password"
-                    placeholderTextColor="#aaaaaa"
-                    secureTextEntry
-                    autoCapitalize="none"
-                />
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.buttonText}>Sign Up</Text>
-                </TouchableOpacity>
-                <View style={styles.footerContainer}>
-                    <Text style={styles.footerText}>Already have an account?</Text>
-                    <TouchableOpacity>
-                        <Text style={styles.footerButton}>Login Here!</Text>
-                    </TouchableOpacity>
-                </View>
+
+        <View style={styles.container}>
+
+            <View style={styles.logoContainer}>
+                <Image style={styles.image} source={require('../../../assets/smallLogo.png')}/>
             </View>
-        </SafeAreaView>
+
+            <View style={styles.imagePaperPlane}>
+                <Image style={styles.image} source={require('../../../assets/paperPlane.png')}/>
+            </View>
+
+            <View style={styles.registerContainer}>
+            <InputText value={email} onUpdateValue={setEmail}
+            textInputConfig={{
+                placeholder:"email",
+                keyboardType:"email-address",
+            }}
+            />
+            
+            <InputText value={password} onUpdateValue={setPassword}
+            textInputConfig={{
+                placeholder: "password",
+                secureTextEntry: true,
+                keyboardType: 'default',
+            }}
+           />
+          
+           
+
+            <Button onPress={loginHandler}>
+                Sign In
+            </Button>
+           
+
+            
+            <View>
+                <Text style={styles.registerText}>Still don't have an account?</Text>
+            </View>
+
+            <View>
+            <PlainButton underline={true}>
+                Register Here!
+            </PlainButton>
+            </View>
+            </View>
+            
+        </View>
     );
 };
 
 const styles = StyleSheet.create({
-    safeArea: {
-        flex: 1,
-        backgroundColor: 'white',
-    },
     container: {
         flex: 1,
+        backgroundColor: '#F1F1F1',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 16,
     },
-    headerContainer: {
-        marginBottom: 48,
-        alignItems: 'center',
+    logoContainer: {
+        top: 0,
+        marginTop: 30,
+        flexDirection: 'row',
+        flex: 1,
+        justifyContent: 'center',
+        paddingLeft: '50%',
+        
+       
     },
     logo: {
-        width: 80, // Adjust according to your logo's aspect ratio
-        height: 80, // Adjust according to your logo's aspect ratio
-        resizeMode: 'contain',
+        width: 100,
+        height: 100,
     },
-    headerText: {
+    logoText: {
         fontSize: 24,
         fontWeight: 'bold',
-        marginVertical: 8,
     },
-    input: {
-        height: 50,
-        width: '90%',
-        backgroundColor: 'white',
-        marginBottom: 16,
-        paddingLeft: 20,
-        borderRadius: 25,
-        borderWidth: 1,
-        borderColor: '#dddddd',
-    },
-    button: {
-        backgroundColor: '#4CAF50',
-        borderRadius: 25,
-        width: '90%',
-        padding: 15,
+    
+    registerContainer: {
+        width: '100%',
+        flex: 3,
+        alignContent: 'center',
         alignItems: 'center',
-        justifyContent: 'center',
-        marginBottom: 20,
+        
     },
-    buttonText: {
-        color: 'white',
-        fontSize: 18,
-        fontWeight: 'bold',
+    registerText: {
+        color: '#626262',
+        textAlign: 'center',
+        fontFamily: 'Poppins',
+        fontSize: 12,
+        fontStyle: 'normal',
+        fontWeight: '700',
+        lineHeight: 'normal',
+        letterSpacing: 2.4,
+        textTransform: 'capitalize'
     },
-    footerContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    footerText: {
-        color: '#aaaaaa',
-        marginRight: 5,
-    },
-    footerButton: {
+    registerButton: {
         color: '#1292B4',
         fontWeight: 'bold',
     },
+    image: {
+        width: 220,
+        height: 66,
+        flexShrink: 0,
+    },
+    imagePaperPlane: {
+        flex: 2,
+        width: 100,
+        height: 100,
+        transform: [{rotate: '15.179deg'}],
+        flexShrink: 0,
+    },
 });
+
 
 export default RegistrationScreen;
