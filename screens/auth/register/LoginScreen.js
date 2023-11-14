@@ -16,9 +16,12 @@ const LoginScreen = () => {
 
     return (
         <View style={styles.container}>
+
             <View style={styles.logoContainer}>
                 <Image style={styles.image} source={require('../../../assets/logo_TourIT.png')}/>
             </View>
+
+            <View style={styles.registerContainer}>
             <InputText value={email} onUpdateValue={setEmail}
             textInputConfig={{
                 placeholder:"email",
@@ -33,19 +36,26 @@ const LoginScreen = () => {
                 keyboardType: 'default',
             }}
            />
+          
+           
 
             <Button onPress={loginHandler}>
                 Sign In
             </Button>
+           
 
-            <View style={styles.registerContainer}>
+            
+            <View>
                 <Text style={styles.registerText}>Still don't have an account?</Text>
             </View>
+
             <View>
             <TouchableOpacity>
                     <Text style={styles.registerButton}>Register Here!</Text>
             </TouchableOpacity>
             </View>
+            </View>
+            
         </View>
     );
 };
@@ -58,8 +68,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     logoContainer: {
-        alignItems: 'center',
-        marginBottom: 50,
+        marginTop: 30,
+        flex: 4,
+        alignItems: '1',
+        justifyContent: 'center'
+       
     },
     logo: {
         width: 100,
@@ -71,8 +84,11 @@ const styles = StyleSheet.create({
     },
     
     registerContainer: {
-        flexDirection: 'row',
+        width: '100%',
+        flex: 3,
+        alignContent: 'center',
         alignItems: 'center',
+        
     },
     registerText: {
         color: '#626262',
@@ -93,7 +109,7 @@ const styles = StyleSheet.create({
         width: 237,
         height: 177,
         margin: 20,
-    }
+    },
 });
 
 export default LoginScreen;

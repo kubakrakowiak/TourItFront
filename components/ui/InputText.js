@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
         height: 50,
         borderWidth: 1,
         borderColor: "#EBEBEB",
+        
     },
     input: {
         width: "100%",
@@ -40,6 +41,7 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         letterSpacing: 2.03,
         textTransform: 'lowercase',
+        
 
     },
     label: {
