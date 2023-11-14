@@ -6,9 +6,9 @@ import React from "react";
 function InputText({ onUpdateValue, value, textInputConfig, icon }) {
   return (
     <View style={styles.inputContainer}>
-      {icon &&
-          <Ionicons name={icon} size={32} color="green" />
-      }
+      {icon && (
+        <Ionicons style={styles.icon} name={icon} size={26} />
+      )}
       <TextInput
         style={styles.input}
         onChangeText={onUpdateValue}
@@ -21,6 +21,7 @@ function InputText({ onUpdateValue, value, textInputConfig, icon }) {
 
 const styles = StyleSheet.create({
   inputContainer: {
+    flexDirection: "row",
     marginHorizontal: 4,
     marginBottom: 18,
     borderRadius: 13,
@@ -44,6 +45,13 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     letterSpacing: 2.03,
     textTransform: "lowercase",
+    outlineStyle: "none",
+  },
+  icon: {
+    marginBottom: 9,
+    marginLeft: 9,
+    marginTop: 9,
+    color: "#9E9E9E",
   },
 });
 
