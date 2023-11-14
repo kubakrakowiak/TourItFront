@@ -1,110 +1,181 @@
-import React from 'react';
-import { StyleSheet, View, TextInput, TouchableOpacity, Text, Image, SafeAreaView } from 'react-native';
+import React, { useState } from "react";
+import { StyleSheet, View, Text, Image } from "react-native";
+import Button from "../../../components/ui/Button";
+import InputText from "../../../components/ui/InputText";
+import PlainButton from "../../../components/ui/PlainButton";
 
 const RegistrationScreen = () => {
-    return (
-        <SafeAreaView style={styles.safeArea}>
-            <View style={styles.container}>
-                <View style={styles.headerContainer}>
-                    <Image source={('')} style={styles.logo} />
-                    <Text style={styles.headerText}>Register here!</Text>
-                </View>
-                <TextInput
-                    style={styles.input}
-                    placeholder="email"
-                    placeholderTextColor="#aaaaaa"
-                    keyboardType="email-address"
-                    autoCapitalize="none"
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholder="password"
-                    placeholderTextColor="#aaaaaa"
-                    secureTextEntry
-                    autoCapitalize="none"
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholder="confirm password"
-                    placeholderTextColor="#aaaaaa"
-                    secureTextEntry
-                    autoCapitalize="none"
-                />
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.buttonText}>Sign Up</Text>
-                </TouchableOpacity>
-                <View style={styles.footerContainer}>
-                    <Text style={styles.footerText}>Already have an account?</Text>
-                    <TouchableOpacity>
-                        <Text style={styles.footerButton}>Login Here!</Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
-        </SafeAreaView>
-    );
+  const [username, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+
+  function loginHandler() {
+    alert(username + "\n" + password);
+  }
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.logoContainer}>
+        <Image
+          style={styles.image}
+          source={require("../../../assets/smallLogo.png")}
+        />
+      </View>
+
+      <View style={styles.registerBox}>
+        <View style={styles.registerTextContainer}>
+          <Text style={styles.registerHereText}>Register</Text>
+          <Text style={styles.registerHereTextHere}>here!</Text>
+        </View>
+        <View style={styles.imagePaperContainer}>
+          <View>
+            <Image
+              style={styles.imagePaper}
+              source={require("../../../assets/paperPlane.png")}
+            />
+          </View>
+        </View>
+      </View>
+
+      <View style={styles.registerContainer}>
+        <InputText
+          value={username}
+          onUpdateValue={setUserName}
+          textInputConfig={{
+            placeholder: "login",
+            keyboardType: "default",
+          }}
+        />
+
+        <InputText
+          value={email}
+          onUpdateValue={setEmail}
+          textInputConfig={{
+            placeholder: "email",
+            secureTextEntry: true,
+            keyboardType: "email-address",
+          }}
+        />
+        <InputText
+          value={password}
+          onUpdateValue={setPassword}
+          textInputConfig={{
+            placeholder: "password",
+            secureTextEntry: true,
+            keyboardType: "default",
+          }}
+        />
+        <InputText
+          textInputConfig={{
+            placeholder: "confirm password",
+            secureTextEntry: true,
+            keyboardType: "default",
+          }}
+        />
+
+        <Button onPress={loginHandler}>Sign Up</Button>
+
+        <View>
+          <Text style={styles.registerText}>Already have an account?</Text>
+        </View>
+
+        <View>
+          <PlainButton underline={true}>Login Here!</PlainButton>
+        </View>
+      </View>
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
-    safeArea: {
-        flex: 1,
-        backgroundColor: 'white',
-    },
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: 16,
-    },
-    headerContainer: {
-        marginBottom: 48,
-        alignItems: 'center',
-    },
-    logo: {
-        width: 80, // Adjust according to your logo's aspect ratio
-        height: 80, // Adjust according to your logo's aspect ratio
-        resizeMode: 'contain',
-    },
-    headerText: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        marginVertical: 8,
-    },
-    input: {
-        height: 50,
-        width: '90%',
-        backgroundColor: 'white',
-        marginBottom: 16,
-        paddingLeft: 20,
-        borderRadius: 25,
-        borderWidth: 1,
-        borderColor: '#dddddd',
-    },
-    button: {
-        backgroundColor: '#4CAF50',
-        borderRadius: 25,
-        width: '90%',
-        padding: 15,
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginBottom: 20,
-    },
-    buttonText: {
-        color: 'white',
-        fontSize: 18,
-        fontWeight: 'bold',
-    },
-    footerContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    footerText: {
-        color: '#aaaaaa',
-        marginRight: 5,
-    },
-    footerButton: {
-        color: '#1292B4',
-        fontWeight: 'bold',
-    },
+  container: {
+    flex: 1,
+    backgroundColor: "#F1F1F1",
+  },
+  logoContainer: {
+    top: 0,
+    marginTop: 30,
+    flexDirection: "row",
+    justifyContent: "center",
+    paddingLeft: "60%",
+  },
+  logo: {
+    width: 100,
+    height: 100,
+  },
+  logoText: {
+    fontSize: 24,
+    fontWeight: "bold",
+  },
+  registerBox: {
+    marginTop: 60,
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "flex-start",
+    paddingLeft: "15%",
+  },
+  registerTextContainer: {
+    flex: 1,
+  },
+  registerHereText: {
+    color: "#4D4D4D",
+    textAlign: "left",
+    fontFamily: "Poppins",
+    fontSize: 42,
+    fontStyle: "normal",
+    fontWeight: "500",
+    lineHeight: "normal",
+    letterSpacing: 3.57,
+    top: 10,
+  },
+  registerHereTextHere: {
+    color: "#FEA02F",
+    textAlign: "left",
+    fontFamily: "Poppins",
+    fontSize: 20,
+    fontStyle: "normal",
+    fontWeight: "500",
+    lineHeight: "normal",
+    letterSpacing: 1.7,
+  },
+  registerContainer: {
+    width: "100%",
+    flex: 2.5,
+    alignContent: "center",
+    alignItems: "center",
+  },
+  registerText: {
+    color: "#626262",
+    textAlign: "center",
+    fontFamily: "Poppins",
+    fontSize: 12,
+    fontStyle: "normal",
+    fontWeight: "700",
+    lineHeight: "normal",
+    letterSpacing: 2.4,
+    textTransform: "capitalize",
+  },
+  registerButton: {
+    color: "#1292B4",
+    fontWeight: "bold",
+  },
+  image: {
+    width: 125,
+    height: 66,
+    margin: 10,
+  },
+  imagePaperContainer: {
+    flex: 0.5,
+    width: 100,
+    height: 100,
+    paddingRight: "15%",
+    alignItems: "flex-end",
+  },
+  imagePaper: {
+    width: 100,
+    height: 100,
+    margin: 10,
+  },
 });
 
 export default RegistrationScreen;
