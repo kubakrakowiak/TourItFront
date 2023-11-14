@@ -1,4 +1,5 @@
 import { StyleSheet, View, TextInput, Text } from "react-native";
+import { Colors } from "../../constans/Styles.js";
 
 
 function InputText ({label, onUpdateValue, value, textInputConfig}) {
@@ -32,7 +33,7 @@ const styles = StyleSheet.create({
         padding: 13,
         borderRadius: 13,
         fontSize: 12,
-        placeholderTextColor: "rgba(0, 0, 0, 0.35)",
+        placeholderTextColor: Colors.placeholderText,
         fontFamily: "Poppins",
         fontSize: 14,
         elevation: 4,
