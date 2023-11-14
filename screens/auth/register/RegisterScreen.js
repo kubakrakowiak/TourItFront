@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, Image } from "react-native";
 import Button from "../../../components/ui/Button";
 import InputText from "../../../components/ui/InputText";
 import PlainButton from "../../../components/ui/PlainButton";
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 const RegistrationScreen = () => {
   const [username, setUserName] = useState("");
@@ -44,6 +45,7 @@ const RegistrationScreen = () => {
             placeholder: "login",
             keyboardType: "default",
           }}
+          icon={'md-checkmark-circle'}
         />
 
         <InputText

@@ -1,9 +1,14 @@
 import { StyleSheet, View, TextInput, Text } from "react-native";
 import { Colors } from "../../constans/styles.js";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import React from "react";
 
-function InputText({ onUpdateValue, value, textInputConfig }) {
+function InputText({ onUpdateValue, value, textInputConfig, icon }) {
   return (
     <View style={styles.inputContainer}>
+      {icon &&
+          <Ionicons name={icon} size={32} color="green" />
+      }
       <TextInput
         style={styles.input}
         onChangeText={onUpdateValue}
