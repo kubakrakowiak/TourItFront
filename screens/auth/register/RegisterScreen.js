@@ -8,11 +8,11 @@ import PlainButton from '../../../components/ui/PlainButton';
 
 
 const RegistrationScreen = () => {
-    const [email, setEmail] = useState("");
+    const [username, setUserName] = useState("");
     const [password, setPassword] = useState("");
 
     function loginHandler() {
-        alert(email + "\n"+ password);
+        alert(username + "\n"+ password);
       }
 
     return (
@@ -46,10 +46,10 @@ const RegistrationScreen = () => {
 
 
             <View style={styles.registerContainer}>
-            <InputText value={email} onUpdateValue={setEmail}
+            <InputText value={username} onUpdateValue={setUserName}
             textInputConfig={{
-                placeholder:"email",
-                keyboardType:"email-address",
+                placeholder:"login",
+                keyboardType:"default",
             }}
             />
             
