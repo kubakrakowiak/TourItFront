@@ -11,6 +11,7 @@ function InputText({
   iconColor,
   iconSize,
   iconRightAlign,
+  textTransform,
 }) {
   const Icon = () => (
     <Ionicons
@@ -26,10 +27,11 @@ function InputText({
         {icon && !iconRightAlign && <Icon />}
       </View>
       <TextInput
-        style={styles.input}
+        style={[styles.input, {textTransform: textTransform}]}
         onChangeText={onUpdateValue}
         value={value}
         {...textInputConfig}
+        {...textTransform}
       />
       <View style={styles.innerContainer}>
         {icon && iconRightAlign && <Icon />}

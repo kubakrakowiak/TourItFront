@@ -37,15 +37,15 @@ const WelcomePage = () => {
       </View>
 
       <View style={styles.pageContent}>
-        
+
         <Text style={styles.captionText}>Where do you want to go?</Text>
         <InputText
           textInputConfig={{
             placeholder: "Search",
             keyboardType: "default",
-            textTransform: "capitalize",
           }}
           icon={"search"}
+          textTransform= "capitalize"
         />
 
         <Text style={styles.captionText}>Category</Text>
@@ -87,20 +87,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   pageContent: {
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
-  },
-  logoContainer: {
-    alignItems: "center",
-    marginBottom: 50,
-  },
-  logo: {
-    width: 100,
-    height: 100,
-  },
-  logoText: {
-    fontSize: 24,
-    fontWeight: "bold",
   },
   input: {
     height: 50,
@@ -115,14 +104,6 @@ const styles = StyleSheet.create({
   registerContainer: {
     flexDirection: "row",
     alignItems: "center",
-  },
-  registerText: {
-    marginRight: 5,
-    color: "#aaaaaa",
-  },
-  registerButton: {
-    color: "#1292B4",
-    fontWeight: "bold",
   },
   image: {
     width: 237,
