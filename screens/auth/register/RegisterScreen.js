@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
         fontWeight: '500',
         lineHeight: 'normal',
         letterSpacing: 3.57,
-        top: 16,
+        top: 10,
         
     },
     registerHereTextHere:{
