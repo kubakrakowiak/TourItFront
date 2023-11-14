@@ -47,6 +47,9 @@ const RegistrationScreen = () => {
             keyboardType: "default",
           }}
           icon={'md-checkmark-circle'}
+          iconColor={'#9E9E9E'}
+          iconSize={36}
+          iconRightAlign={true}
         />
 
         <InputText

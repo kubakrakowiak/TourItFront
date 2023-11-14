@@ -3,11 +3,17 @@ import { Colors } from "../../constans/styles.js";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import React from "react";
 
-function InputText({ onUpdateValue, value, textInputConfig, icon }) {
+function InputText({ onUpdateValue, value, textInputConfig, icon, iconColor, iconSize, iconRightAlign }) {
+  const Icon = () => <Ionicons
+      style={styles.icon}
+      name={icon}
+      size={iconSize ? iconSize : 26}
+      color={iconColor ? iconColor : '#9E9E9E'}
+  />
   return (
     <View style={styles.inputContainer}>
-      {icon && (
-        <Ionicons style={styles.icon} name={icon} size={26} />
+      {(icon && !iconRightAlign) && (
+        <Icon/>
       )}
       <TextInput
         style={styles.input}
@@ -15,6 +21,9 @@ function InputText({ onUpdateValue, value, textInputConfig, icon }) {
         value={value}
         {...textInputConfig}
       />
+      {(icon && iconRightAlign) && (
+          <Icon/>
+      )}
     </View>
   );
 }
@@ -51,7 +60,6 @@ const styles = StyleSheet.create({
     marginBottom: 9,
     marginLeft: 9,
     marginTop: 9,
-    color: "#9E9E9E",
   },
 });
 
