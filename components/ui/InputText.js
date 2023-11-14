@@ -1,11 +1,11 @@
 import { StyleSheet, View, TextInput, Text } from "react-native";
-import { Colors } from "../../constans/Styles.js";
+import { Colors } from "../../constans/styles.js";
 
 
-function InputText ({label, onUpdateValue, value, textInputConfig}) {
+function InputText ({onUpdateValue, value, textInputConfig}) {
     return (
         <View style={styles.inputContainer}>
-            <Text style={styles.label}>{label}</Text>
+            
             <TextInput style={styles.input}
               onChangeText={onUpdateValue}
               value={value}
@@ -32,7 +32,6 @@ const styles = StyleSheet.create({
         height:50,
         padding: 13,
         borderRadius: 13,
-        fontSize: 12,
         placeholderTextColor: Colors.placeholderText,
         fontFamily: "Poppins",
         fontSize: 14,
@@ -42,13 +41,6 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         letterSpacing: 2.03,
         textTransform: 'lowercase',
-        
-
-    },
-    label: {
-        fontSize: 12,
-        color: "white",
-        
     },
 });
 

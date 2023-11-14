@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { StyleSheet, View, TouchableOpacity, Text, Image, TextInput } from 'react-native';
+import { StyleSheet, View, Text, Image, } from 'react-native';
 import Button from '../../../components/ui/Button';
 import InputText from '../../../components/ui/InputText';
 import PlainButton from '../../../components/ui/PlainButton';

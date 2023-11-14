@@ -1,5 +1,5 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import { Colors } from "../../constans/Styles.js";
+import { Colors } from "../../constans/styles.js";
 
 function PlainButton ({ children, onPress, color, underline }) {
   return (

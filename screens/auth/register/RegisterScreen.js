@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { StyleSheet, View, TouchableOpacity, Text, Image, TextInput } from 'react-native';
+import { StyleSheet, View, Text, Image } from 'react-native';
 import Button from '../../../components/ui/Button';
 import InputText from '../../../components/ui/InputText';
 import PlainButton from '../../../components/ui/PlainButton';
@@ -23,9 +23,27 @@ const RegistrationScreen = () => {
                 <Image style={styles.image} source={require('../../../assets/smallLogo.png')}/>
             </View>
 
-            <View style={styles.imagePaperPlane}>
-                <Image style={styles.image} source={require('../../../assets/paperPlane.png')}/>
+
+
+            <View style={styles.registerBox}>
+
+            <View style={styles.registerTextContainer}>
+
+            <Text style={styles.registerHereText}>Register</Text>
+            <Text style={styles.registerHereTextHere}>here!</Text>
+
             </View>
+            <View style={styles.imagePaperContainer}>
+
+            <View>
+                <Image style={styles.imagePaper} source={require('../../../assets/paperPlane.png')}/>
+            </View>
+
+            </View>
+
+
+            </View>
+
 
             <View style={styles.registerContainer}>
             <InputText value={email} onUpdateValue={setEmail}
@@ -69,19 +87,14 @@ const RegistrationScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#F1F1F1',
-        alignItems: 'center',
-        justifyContent: 'center',
+        backgroundColor: '#F1F1F1',     
     },
     logoContainer: {
         top: 0,
         marginTop: 30,
         flexDirection: 'row',
-        flex: 1,
         justifyContent: 'center',
-        paddingLeft: '50%',
-        
-       
+        paddingLeft: '60%',
     },
     logo: {
         width: 100,
@@ -91,10 +104,41 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold',
     },
-    
+    registerBox:{
+        marginTop: 60,
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        paddingLeft: '15%'
+        
+    },
+    registerTextContainer:{
+        flex:1,
+    },
+    registerHereText:{
+        color: '#4D4D4D',
+        textAlign: 'left',
+        fontFamily: 'Poppins',
+        fontSize: 42,
+        fontStyle: 'normal',
+        fontWeight: '500',
+        lineHeight: 'normal',
+        letterSpacing: 3.57,
+        
+    },
+    registerHereTextHere:{
+        color: '#FEA02F',
+        textAlign: 'left',
+        fontFamily: 'Poppins',
+        fontSize: 20,
+        fontStyle: 'normal',
+        fontWeight: '500',
+        lineHeight: 'normal',
+        letterSpacing: 1.7,
+    },
     registerContainer: {
         width: '100%',
-        flex: 3,
+        flex: 2,
         alignContent: 'center',
         alignItems: 'center',
         
@@ -115,16 +159,22 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     image: {
-        width: 220,
-        height: 66,
-        flexShrink: 0,
+        width: 125,
+        height: 66,  
+        margin:10,
     },
-    imagePaperPlane: {
-        flex: 2,
+    imagePaperContainer: {
+        flex:0.5,
         width: 100,
-        height: 100,
-        transform: [{rotate: '15.179deg'}],
-        flexShrink: 0,
+        height: 100,  
+        paddingRight: "15%",
+        alignItems: 'flex-end'
+    },
+    imagePaper: {
+        width: 100,
+        height: 100,  
+        margin:10,
+
     },
 });
 
