@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
       elevation: 4,
       alignItems: "center",
       justifyContent: "center",
+      marginBottom: 25,
   },
   pressed: {
     opacity: 0.7,
