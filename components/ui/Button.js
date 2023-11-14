@@ -48,7 +48,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontStyle: "normal",
     fontWeight: "700",
-    lineHeight: undefined,
     letterSpacing: 2.32,
     textTransform: "capitalize",
   },

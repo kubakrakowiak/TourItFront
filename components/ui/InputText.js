@@ -1,29 +1,39 @@
-import { StyleSheet, View, TextInput, Text } from "react-native";
+import { StyleSheet, View, TextInput } from "react-native";
 import { Colors } from "../../constans/styles.js";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import React from "react";
 
-function InputText({ onUpdateValue, value, textInputConfig, icon, iconColor, iconSize, iconRightAlign }) {
-  const Icon = () => <Ionicons
+function InputText({
+  onUpdateValue,
+  value,
+  textInputConfig,
+  icon,
+  iconColor,
+  iconSize,
+  iconRightAlign,
+}) {
+  const Icon = () => (
+    <Ionicons
       style={styles.icon}
       name={icon}
       size={iconSize ? iconSize : 26}
-      color={iconColor ? iconColor : '#9E9E9E'}
-  />
+      color={iconColor ? iconColor : "#9E9E9E"}
+    />
+  );
   return (
     <View style={styles.inputContainer}>
-      {(icon && !iconRightAlign) && (
-        <Icon/>
-      )}
+      <View style={styles.innerContainer}>
+        {icon && !iconRightAlign && <Icon />}
+      </View>
       <TextInput
         style={styles.input}
         onChangeText={onUpdateValue}
         value={value}
         {...textInputConfig}
       />
-      {(icon && iconRightAlign) && (
-          <Icon/>
-      )}
+      <View style={styles.innerContainer}>
+        {icon && iconRightAlign && <Icon />}
+      </View>
     </View>
   );
 }
@@ -41,6 +51,7 @@ const styles = StyleSheet.create({
     borderColor: "#EBEBEB",
   },
   input: {
+    flex: 1,
     width: "100%",
     height: 50,
     padding: 13,
@@ -55,11 +66,16 @@ const styles = StyleSheet.create({
     letterSpacing: 2.03,
     textTransform: "lowercase",
     outlineStyle: "none",
+    paddingLeft: 1,
   },
   icon: {
+    marginLeft:9,
     marginBottom: 9,
-    marginLeft: 9,
     marginTop: 9,
+  },
+  innerContainer: {
+    flexDirection: "row",
+    marginRight: 9,
   },
 });
 

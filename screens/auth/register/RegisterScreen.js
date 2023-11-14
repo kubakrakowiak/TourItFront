@@ -48,7 +48,7 @@ const RegistrationScreen = () => {
           }}
           icon={'md-checkmark-circle'}
           iconColor={'#9E9E9E'}
-          iconSize={36}
+          iconSize={26}
           iconRightAlign={true}
         />
 
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     fontSize: 42,
     fontStyle: "normal",
     fontWeight: "500",
-    lineHeight: "normal",
+   
     letterSpacing: 3.57,
     top: 10,
   },
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontStyle: "normal",
     fontWeight: "500",
-    lineHeight: "normal",
+    
     letterSpacing: 1.7,
   },
   registerContainer: {
@@ -156,7 +156,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontStyle: "normal",
     fontWeight: "700",
-    lineHeight: "normal",
     letterSpacing: 2.4,
     textTransform: "capitalize",
   },
