@@ -5,7 +5,7 @@ import  RegisterScreen from  "./screens/auth/register/RegisterScreen"
 
 export default function App() {
   return (
-    <LoginScreen/>
+    <RegisterScreen/>
   );
 }
 
