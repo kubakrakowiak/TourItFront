@@ -7,6 +7,7 @@ import PlainButton from "../../../components/ui/PlainButton";
 const RegistrationScreen = () => {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
 
   function loginHandler() {
     alert(username + "\n" + password);
@@ -47,6 +48,15 @@ const RegistrationScreen = () => {
         />
 
         <InputText
+          value={email}
+          onUpdateValue={setEmail}
+          textInputConfig={{
+            placeholder: "email",
+            secureTextEntry: true,
+            keyboardType: "email-address",
+          }}
+        />
+        <InputText
           value={password}
           onUpdateValue={setPassword}
           textInputConfig={{
@@ -55,15 +65,22 @@ const RegistrationScreen = () => {
             keyboardType: "default",
           }}
         />
+        <InputText
+          textInputConfig={{
+            placeholder: "confirm password",
+            secureTextEntry: true,
+            keyboardType: "default",
+          }}
+        />
 
-        <Button onPress={loginHandler}>Sign In</Button>
+        <Button onPress={loginHandler}>Sign Up</Button>
 
         <View>
-          <Text style={styles.registerText}>Still don't have an account?</Text>
+          <Text style={styles.registerText}>Already have an account?</Text>
         </View>
 
         <View>
-          <PlainButton underline={true}>Register Here!</PlainButton>
+          <PlainButton underline={true}>Login Here!</PlainButton>
         </View>
       </View>
     </View>
@@ -123,7 +140,7 @@ const styles = StyleSheet.create({
   },
   registerContainer: {
     width: "100%",
-    flex: 2,
+    flex: 2.5,
     alignContent: "center",
     alignItems: "center",
   },
