@@ -90,7 +90,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontStyle: "normal",
     fontWeight: "700",
-    lineHeight: "normal",
     letterSpacing: 2.4,
     textTransform: "capitalize",
   },

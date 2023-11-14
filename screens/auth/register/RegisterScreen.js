@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, Image } from "react-native";
 import Button from "../../../components/ui/Button";
 import InputText from "../../../components/ui/InputText";
 import PlainButton from "../../../components/ui/PlainButton";
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 const RegistrationScreen = () => {
   const [username, setUserName] = useState("");
@@ -45,6 +46,10 @@ const RegistrationScreen = () => {
             placeholder: "login",
             keyboardType: "default",
           }}
+          icon={'md-checkmark-circle'}
+          iconColor={'#9E9E9E'}
+          iconSize={26}
+          iconRightAlign={true}
         />
 
         <InputText
@@ -124,7 +129,7 @@ const styles = StyleSheet.create({
     fontSize: 42,
     fontStyle: "normal",
     fontWeight: "500",
-    lineHeight: "normal",
+   
     letterSpacing: 3.57,
     top: 10,
   },
@@ -135,7 +140,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontStyle: "normal",
     fontWeight: "500",
-    lineHeight: "normal",
+    
     letterSpacing: 1.7,
   },
   registerContainer: {
@@ -151,7 +156,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontStyle: "normal",
     fontWeight: "700",
-    lineHeight: "normal",
     letterSpacing: 2.4,
     textTransform: "capitalize",
   },
