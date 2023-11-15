@@ -1,5 +1,6 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { Colors } from "../../constans/styles.js";
+import OuterCardLayout from "./OuterCardLayout";
 
 function LocationCard({ onPress, location}) {
     return (
@@ -9,12 +10,12 @@ function LocationCard({ onPress, location}) {
             ]}
             onPress={onPress}
         >
-            <View>
+            <OuterCardLayout>
                 <Text>{location.image}</Text>
                 <Text>{location.city}</Text>
                 <Text>{location.name}</Text>
                 <Text>{location.rating}</Text>
-            </View>
+            </OuterCardLayout>
         </Pressable>
     );
 }
