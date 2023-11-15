@@ -1,5 +1,4 @@
 import {
-  Pressable,
   StyleSheet,
   Text,
   View,
