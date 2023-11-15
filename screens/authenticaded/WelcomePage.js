@@ -93,18 +93,24 @@ const WelcomePage = () => {
               onCategoryPress={handleCategoryPress}
             ></HorizontalMenu>
           </View>
-          
         </View>
 
         <View style={styles.cardContainer}>
-          <View style={styles.innerCardTitleContainer}>
-        <SectionTitle fontSize={20}>Last seen</SectionTitle>
-          <PlainButton>View all</PlainButton>
+          <View style={styles.textHolderContent}>
+            <SectionTitle fontSize={20}>Last seen</SectionTitle>
           </View>
+        </View>
+
+        <View style={styles.plainButtonHolder}>
+          <PlainButton>View all</PlainButton>
+        </View>
+
+        <View style={styles.cardHolder}>
           {locations.map((location) => (
             <LocationCard onPress={() => alert("test")} location={location} />
           ))}
         </View>
+
       </View>
     </View>
   );
@@ -119,13 +125,13 @@ const styles = StyleSheet.create({
     flex: 1.4,
   },
   pageContent: {
-    flex: 7,
+    flex: 5,
   },
   searchContent: {
     flex: 1,
   },
   categoryContent: {
-    flex: 1.5,
+    flex: 2,
   },
   horizontalMenu: {
     alignItems: "center",
@@ -143,10 +149,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   cardContainer: {
-    flex: 4.5,
+    flex: 0.5,
   },
-  innerCardTitleContainer:{
-    
+  plainButtonHolder: {
+    textAlign: "right",
+    alignItems: "flex-end",
+    width: "80%",
+    paddingRight: "5%",
+  },
+  cardHolder: {
+    flex: 4,
   },
 });
 
