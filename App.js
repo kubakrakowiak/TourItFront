@@ -5,10 +5,11 @@ import RegisterScreen from "./screens/auth/register/RegisterScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Colors } from "./constans/styles.js";
-import WelcomeScreen from "./screens/sample-auth/WelcomeScreen";
+import WelcomeScreen from "./screens/authenticaded/WelcomeScreen";
 import AppLoading from "expo-app-loading";
 import AuthContextProvider, { AuthContext } from "./store/auth-context";
 import { useContext } from "react";
+import {useFonts} from "expo-font";
 
 const Stack = createStackNavigator();
 
@@ -70,7 +71,6 @@ function Navigation() {
     </NavigationContainer>
   );
 }
-
 export default function App() {
     const [fontsLoaded] = useFonts({
         'Poppins-Black': require('./assets/fonts/Poppins-Black.ttf'),
