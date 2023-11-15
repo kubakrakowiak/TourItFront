@@ -44,7 +44,7 @@ const locations = [
   },
 ];
 
-const WelcomePage = () => {
+const WelcomeScreen = () => {
   const handleCategoryPress = (categoryId) => {
     alert(`Category ${categoryId} pressed`);
   };
@@ -267,4 +267,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default WelcomePage;
+export default WelcomeScreen;
