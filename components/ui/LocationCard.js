@@ -1,9 +1,16 @@
-import { Pressable, StyleSheet, Text, View, Image, KeyboardAvoidingView } from "react-native";
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  KeyboardAvoidingView,
+} from "react-native";
 import { Colors } from "../../constans/styles.js";
 import OuterCardLayout from "./OuterCardLayout";
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
-import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome } from "@expo/vector-icons";
 
 function LocationCard({ onPress, location }) {
   return (
@@ -18,12 +25,19 @@ function LocationCard({ onPress, location }) {
         <View style={styles.dataContainer}>
           <Text style={styles.locationTitle}>{location.city}</Text>
           <View style={styles.rowDirection}>
-            <FontAwesome5 name={"map-marker-alt"} color={Colors.darkgreen} size={15} bottom={3} />
+            <FontAwesome5
+              name={"map-marker-alt"}
+              color={Colors.darkgreen}
+              size={15}
+              bottom={3}
+            />
             <Text style={styles.locationPlace}>{location.name}</Text>
           </View>
           <View style={styles.rowDirection}>
-            <FontAwesome name={"star"} color={"#FEA02F"} size={17} right={2}/>
-            <Text style={styles.locationPlace} top={2} right={3}>{location.rating}</Text>
+            <FontAwesome name={"star"} color={"#FEA02F"} size={17} right={2} />
+            <Text style={styles.locationPlace} top={2} right={3}>
+              {location.rating}
+            </Text>
           </View>
         </View>
       </OuterCardLayout>
@@ -60,7 +74,7 @@ const styles = StyleSheet.create({
   },
   rowDirection: {
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
   },
   locationPlace: {
     fontFamily: "Poppins-Bold",
@@ -69,6 +83,5 @@ const styles = StyleSheet.create({
     color: "#767676",
     marginLeft: 5,
     textTransform: "capitalize",
-    letterSpacing: 1,
   },
 });
