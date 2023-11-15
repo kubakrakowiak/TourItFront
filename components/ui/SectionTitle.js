@@ -9,10 +9,23 @@ function SectionTitle({
   fontSize,
   children,
   fontFamily,
+  fontWeight,
+  marginBottom,
 }) {
-  
   return (
-    <Text style={[styles.textSectionTitle, { fontSize: fontSize || "2vw", fontFamily: fontFamily || "Poppins" }]}>{children}</Text>
+    <Text
+      style={[
+        styles.textSectionTitle,
+        {
+          fontSize: fontSize || 32,
+          fontFamily: fontFamily || "Poppins",
+          fontWeight: fontWeight || "700",
+          marginBottom: marginBottom || 5,
+        },
+      ]}
+    >
+      {children}
+    </Text>
   );
 }
 
@@ -23,7 +36,7 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     letterSpacing: 0.99,
     marginBottom: height * 0.009,
-    paddingLeft: width * 0.02
+    paddingLeft: width * 0.02,
   },
 });
 
