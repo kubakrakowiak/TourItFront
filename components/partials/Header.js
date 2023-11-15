@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     paddingLeft: width * 0.06,
     paddingRight: width * 0.01,
+    top: 40,
   },
   headerContainer: {
     flex: 1,

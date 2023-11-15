@@ -10,6 +10,7 @@ function PlainButton({
   color,
   fontFamily,
   letterSpacing,
+  textDecorationLine,
 }) {
   return (
     <Pressable
@@ -18,7 +19,6 @@ function PlainButton({
         pressed && styles.pressed,
         backgroundColor && { backgroundColor: backgroundColor },
         underline && {
-          textDecoration: "underline",
           textDecorationColor: "#0579E3",
         },
       ]}
@@ -28,10 +28,11 @@ function PlainButton({
         <Text
           style={[
             styles.buttonText,
-            { fontSize: fontSize || 23 },
+            { fontSize: fontSize || 12 },
             { color: color || Colors.registerLogin },
-            { fontFamily: fontFamily || "Poppins-Medium"},
+            { fontFamily: fontFamily || "Poppins-Bold" },
             { letterSpacing: letterSpacing || 2.32 },
+            { textDecorationLine: textDecorationLine || "underline"},
           ]}
         >
           {children}

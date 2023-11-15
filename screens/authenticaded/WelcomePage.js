@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  StyleSheet,
-  View,
-  TouchableOpacity,
-  Text,
-  Image,
-  ScrollView,
-  Dimensions,
-} from "react-native";
+import { StyleSheet, View, Dimensions, ScrollView } from "react-native";
 import Header from "../../components/partials/Header";
 import InputText from "../../components/ui/InputText";
 import LocationCard from "../../components/ui/LocationCard";
@@ -27,7 +19,7 @@ const locations = [
     id: "id",
   },
   {
-    image: require("../../assets/smallLogo.png"),
+    image: require("../../assets/malbork.jpeg"),
     name: "nazwa2",
     rating: 4.6,
     city: "Poznan",
@@ -35,14 +27,13 @@ const locations = [
     id: "id",
   },
   {
-    image: require("../../assets/smallLogo.png"),
+    image: require("../../assets/suntago.jpeg"),
     name: "nazwa3",
     rating: 3.1,
     city: "Krakow",
     isLiked: false,
     id: "id",
   },
-  
 ];
 const WelcomePage = () => {
   const handleCategoryPress = (categoryId) => {
@@ -51,68 +42,73 @@ const WelcomePage = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <View>
+      <ScrollView keyboardShouldPersistTaps="handled">
+        <View style={styles.header}>
           <Header headerText={"Welcome"} subHeaderText={"back!"} />
         </View>
-      </View>
 
-      <View style={styles.pageContent}>
-        <View style={styles.searchContent}>
-          <View style={styles.textHolderContent}>
-            <SectionTitle fontSize={20}>Where do you want to go?</SectionTitle>
-          </View>
+        <View style={styles.pageContent}>
+          <View style={styles.searchContent}>
+            <View style={styles.textHolderContent}>
+              <SectionTitle fontSize={20}>
+                Where do you want to go?
+              </SectionTitle>
+            </View>
 
-          <View style={styles.searchBar}>
-            <InputText
-              textInputConfig={{
-                placeholder: "Search",
-                keyboardType: "default",
-              }}
-              icon={"search"}
-              textTransform="capitalize"
-              containerWidth="95%"
-            />
-          </View>
-        </View>
-        <View style={styles.categoryContent}>
-          <View style={styles.textHolderContent}>
-            <SectionTitle fontSize={20} marginBottom={5}>
-              Category
-            </SectionTitle>
-          </View>
-          <View style={styles.horizontalMenu}>
-            <HorizontalMenu
-              onCategoryPress={handleCategoryPress}
-            ></HorizontalMenu>
-          </View>
-        </View>
-
-        <View style={styles.cardHolderContainer}>
-          <View style={styles.cardContainer}>
-            <View style={styles.textCardHolderContent}>
-              <SectionTitle fontSize={20} color={"#494949"}>Last seen</SectionTitle>
+            <View style={styles.searchBar}>
+              <InputText
+                textInputConfig={{
+                  placeholder: "Search",
+                  keyboardType: "default",
+                }}
+                icon={"search"}
+                textTransform="capitalize"
+                containerWidth="95%"
+              />
             </View>
           </View>
 
-          <View style={styles.plainButtonHolder}>
-            <PlainButton fontSize={14} color={"#7E7D7D"} letterSpacing={0.77}>
-              View all
-            </PlainButton>
+          <View style={styles.categoryContent}>
+            <View style={styles.textHolderContent}>
+              <SectionTitle fontSize={20} marginBottom={5}>
+                Category
+              </SectionTitle>
+            </View>
+            <View style={styles.horizontalMenu}>
+              <HorizontalMenu onCategoryPress={handleCategoryPress} />
+            </View>
           </View>
 
-          <View style={styles.cardHolder}>
-            {locations.map((location) => (
-              <LocationCard onPress={() => alert("test")} location={location} />
-            ))}
+          <View style={styles.cardHolderContainer}>
+            <View style={styles.cardContainer}>
+              <View style={styles.textCardHolderContent}>
+                <SectionTitle fontSize={20} color={"#494949"}>
+                  Last seen
+                </SectionTitle>
+              </View>
+            </View>
+
+            <View style={styles.plainButtonHolder}>
+              <PlainButton fontSize={14} color={"#7E7D7D"} letterSpacing={0.77} textDecorationLine={"normal"}>
+                View all
+              </PlainButton>
+            </View>
+
+            <View style={styles.cardHolder}>
+              {locations.map((location) => (
+                <LocationCard
+                  onPress={() => alert("test")}
+                  location={location}
+                  key={location.id}
+                />
+              ))}
+            </View>
           </View>
         </View>
-
-      </View>
+      </ScrollView>
     </View>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
