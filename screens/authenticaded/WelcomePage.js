@@ -16,7 +16,6 @@ import HorizontalMenu from "../../components/partials/HorizontalMenu";
 
 const { width, height } = Dimensions.get("window");
 
-
 const locations = [
   {
     image: "image_source",
@@ -67,7 +66,7 @@ const WelcomePage = () => {
       <View style={styles.pageContent}>
         <View style={styles.searchContent}>
           <View style={styles.textHolderContent}>
-          <SectionTitle fontSize={20}>Where do you want to go?</SectionTitle>
+            <SectionTitle fontSize={20}>Where do you want to go?</SectionTitle>
           </View>
 
           <View style={styles.searchBar}>
@@ -84,10 +83,14 @@ const WelcomePage = () => {
         </View>
         <View style={styles.categoryContent}>
           <View style={styles.textHolderContent}>
-            <SectionTitle fontSize={20} marginBottom={15}>Category</SectionTitle>
+            <SectionTitle fontSize={20} marginBottom={15}>
+              Category
+            </SectionTitle>
           </View>
           <View style={styles.horizontalMenu}>
-            <HorizontalMenu onCategoryPress={handleCategoryPress}></HorizontalMenu>
+            <HorizontalMenu
+              onCategoryPress={handleCategoryPress}
+            ></HorizontalMenu>
           </View>
         </View>
       </View>
@@ -118,7 +121,6 @@ const styles = StyleSheet.create({
   horizontalMenu: {
     alignItems: "center",
     width: "100%",
-    
   },
   textHolderContent: {
     width: "80%",
