@@ -17,7 +17,7 @@ function AuthStack() {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerTintColor: "white",
+        headerTintColor: "black",
         contentStyle: { backgroundColor: "red" },
         headerShown: false,
       }}
@@ -65,7 +65,7 @@ function Navigation() {
   const authCtx = useContext(AuthContext);
   return (
     <NavigationContainer>
-        {authCtx.isAuthenticated ? <AuthenticatedStack /> : <AuthStack />}
+      {authCtx.isAuthenticated ? <AuthenticatedStack /> : <AuthStack />}
     </NavigationContainer>
   );
 }
@@ -84,7 +84,7 @@ export default function App() {
     "Poppins-LightItalic": require("./assets/fonts/Poppins-LightItalic.ttf"),
     "Poppins-Medium": require("./assets/fonts/Poppins-Medium.ttf"),
     "Poppins-MediumItalic": require("./assets/fonts/Poppins-MediumItalic.ttf"),
-    "Poppins":require("./assets/fonts/Poppins-Regular.ttf"),
+    Poppins: require("./assets/fonts/Poppins-Regular.ttf"),
     "Poppins-SemiBold": require("./assets/fonts/Poppins-SemiBold.ttf"),
     "Poppins-SemiBoldItalic": require("./assets/fonts/Poppins-SemiBoldItalic.ttf"),
     "Poppins-Thin": require("./assets/fonts/Poppins-Thin.ttf"),
@@ -96,9 +96,9 @@ export default function App() {
   }
   return (
     <SafeAreaView style={styles.container}>
-        <AuthContextProvider>
-            <Navigation />
-        </AuthContextProvider>
+      <AuthContextProvider>
+        <Navigation />
+      </AuthContextProvider>
     </SafeAreaView>
   );
 }
@@ -106,5 +106,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#F1F1F1",
   },
 });
