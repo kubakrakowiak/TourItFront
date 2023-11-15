@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, {useContext, useState} from "react";
 import { StyleSheet, View, Text, Image } from "react-native";
 import Button from "../../../components/ui/Button";
 import InputText from "../../../components/ui/InputText";
 import PlainButton from "../../../components/ui/PlainButton";
+import {AuthContext} from "../../../store/auth-context";
 
 const LoginScreen = ({navigation}) => {
+
+  const authCtx = useContext(AuthContext);
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
@@ -12,7 +15,7 @@ const LoginScreen = ({navigation}) => {
     navigation.navigate("Register");
   }
   function loginHandler() {
-    alert(username + "\n" + password);
+    authCtx.authenticate("abc");
   }
 
   return (

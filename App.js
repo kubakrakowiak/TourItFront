@@ -65,9 +65,7 @@ function Navigation() {
   const authCtx = useContext(AuthContext);
   return (
     <NavigationContainer>
-      <AuthContextProvider>
         {authCtx.isAuthenticated ? <AuthenticatedStack /> : <AuthStack />}
-      </AuthContextProvider>
     </NavigationContainer>
   );
 }
@@ -98,7 +96,9 @@ export default function App() {
   }
   return (
     <SafeAreaView style={styles.container}>
-      <Navigation />
+        <AuthContextProvider>
+            <Navigation />
+        </AuthContextProvider>
     </SafeAreaView>
   );
 }
