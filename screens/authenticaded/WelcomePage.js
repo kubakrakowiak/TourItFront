@@ -13,6 +13,7 @@ import LocationCard from "../../components/ui/LocationCard";
 import SectionTitle from "../../components/ui/SectionTitle";
 import HorizontalMenu from "../../components/partials/HorizontalMenu";
 import PlainButton from "../../components/ui/PlainButton";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const { width, height } = Dimensions.get("window");
 
@@ -48,12 +49,9 @@ const WelcomePage = () => {
     alert(`Category ${categoryId} pressed`);
   };
 
-  return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={styles.container}
-    >
-      <ScrollView keyboardShouldPersistTaps="handled">
+  const renderScrollView = () => {
+    return (
+      <ScrollView style={styles.container} keyboardShouldPersistTaps="handled">
         <View style={styles.header}>
           <Header headerText={"Welcome"} subHeaderText={"back!"} />
         </View>
@@ -122,8 +120,90 @@ const WelcomePage = () => {
           </View>
         </View>
       </ScrollView>
-    </KeyboardAvoidingView>
-  );
+    );
+  };
+
+  const renderKeyboardAwareScrollView = () => {
+    return (
+      <KeyboardAwareScrollView
+        style={styles.container}
+        enableOnAndroid={true}
+        extraHeight={Platform.select({ android: 200, ios: 0 })}
+      >
+        <View style={styles.header}>
+          <Header headerText={"Welcome"} subHeaderText={"back!"} />
+        </View>
+
+        <View style={styles.pageContent}>
+          <View style={styles.searchContent}>
+            <View style={styles.textHolderContent}>
+              <SectionTitle fontSize={20}>
+                Where do you want to go?
+              </SectionTitle>
+            </View>
+
+            <View style={styles.searchBar}>
+              <InputText
+                textInputConfig={{
+                  placeholder: "Search",
+                  keyboardType: "default",
+                }}
+                icon={"search"}
+                textTransform="capitalize"
+                containerWidth="95%"
+              />
+            </View>
+          </View>
+
+          <View style={styles.categoryContent}>
+            <View style={styles.textHolderContent}>
+              <SectionTitle fontSize={20} marginBottom={5}>
+                Category
+              </SectionTitle>
+            </View>
+            <View style={styles.horizontalMenu}>
+              <HorizontalMenu onCategoryPress={handleCategoryPress} />
+            </View>
+          </View>
+
+          <View style={styles.cardHolderContainer}>
+            <View style={styles.cardContainer}>
+              <View style={styles.textCardHolderContent}>
+                <SectionTitle fontSize={20} color={"#494949"}>
+                  Last seen
+                </SectionTitle>
+              </View>
+            </View>
+
+            <View style={styles.plainButtonHolder}>
+              <PlainButton
+                fontSize={14}
+                color={"#7E7D7D"}
+                letterSpacing={0.77}
+                textDecorationLine={"normal"}
+              >
+                View all
+              </PlainButton>
+            </View>
+
+            <View style={styles.cardHolder}>
+              {locations.map((location) => (
+                <LocationCard
+                  onPress={() => alert("test")}
+                  location={location}
+                  key={location.id}
+                />
+              ))}
+            </View>
+          </View>
+        </View>
+      </KeyboardAwareScrollView>
+    );
+  };
+
+  return Platform.OS === "ios"
+    ? renderKeyboardAwareScrollView()
+    : renderScrollView();
 };
 
 const styles = StyleSheet.create({
