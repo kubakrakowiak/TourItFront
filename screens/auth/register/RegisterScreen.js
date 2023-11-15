@@ -5,11 +5,14 @@ import InputText from "../../../components/ui/InputText";
 import PlainButton from "../../../components/ui/PlainButton";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-const RegistrationScreen = () => {
+const RegistrationScreen = ({navigation}) => {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
+  function navigateGoBack() {
+    navigation.goBack();
+  }
   function loginHandler() {
     alert(username + "\n" + password);
   }
@@ -82,7 +85,7 @@ const RegistrationScreen = () => {
           </View>
 
           <View>
-            <PlainButton underline={true}>Login Here!</PlainButton>
+            <PlainButton onPress={navigateGoBack} underline={true}>Login Here!</PlainButton>
           </View>
         </View>
       </ScrollView>

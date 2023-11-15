@@ -4,10 +4,13 @@ import Button from "../../../components/ui/Button";
 import InputText from "../../../components/ui/InputText";
 import PlainButton from "../../../components/ui/PlainButton";
 
-const LoginScreen = () => {
+const LoginScreen = ({navigation}) => {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
+  function navigateToRegister() {
+    navigation.navigate("Register");
+  }
   function loginHandler() {
     alert(username + "\n" + password);
   }
@@ -48,7 +51,7 @@ const LoginScreen = () => {
         </View>
 
         <View>
-          <PlainButton underline={true}>Register Here!</PlainButton>
+          <PlainButton onPress={navigateToRegister} underline={true}>Register Here!</PlainButton>
         </View>
       </View>
     </View>
