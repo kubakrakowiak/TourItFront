@@ -12,6 +12,7 @@ function InputText({
   iconSize,
   iconRightAlign,
   textTransform,
+  containerWidth,
 }) {
   const Icon = () => (
     <Ionicons
@@ -22,7 +23,7 @@ function InputText({
     />
   );
   return (
-    <View style={styles.inputContainer}>
+    <View style={[styles.inputContainer, { width: containerWidth || "70%" }]}>
       <View style={styles.innerContainer}>
         {icon && !iconRightAlign && <Icon />}
       </View>

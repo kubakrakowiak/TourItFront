@@ -37,16 +37,23 @@ const WelcomePage = () => {
       </View>
 
       <View style={styles.pageContent}>
+        <View style={styles.searchContent}>
+          <View style={styles.textSearchContent}>
 
-        <Text style={styles.captionText}>Where do you want to go?</Text>
-        <InputText
-          textInputConfig={{
-            placeholder: "Search",
-            keyboardType: "default",
-          }}
-          icon={"search"}
-          textTransform= "capitalize"
-        />
+            <Text style={styles.textSearchStyle}>Where do you want to go?</Text>
+          </View>
+
+          <View style={styles.searchBar}>
+            <InputText
+              textInputConfig={{
+                placeholder: "Search",
+                keyboardType: "default",
+              }}
+              icon={"search"}
+              textTransform="capitalize"
+            />
+          </View>
+        </View>
 
         <Text style={styles.captionText}>Category</Text>
         <ScrollView
@@ -88,28 +95,32 @@ const styles = StyleSheet.create({
   },
   pageContent: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
   },
-  input: {
-    height: 50,
+  searchContent: {
+    flex: 1,
+  },
+  textSearchContent: {
     width: "80%",
-    backgroundColor: "white",
-    marginBottom: 10,
-    paddingLeft: 15,
-    borderRadius: 25,
-    borderWidth: 1,
-    borderColor: "#dddddd",
-  },
-  registerContainer: {
-    flexDirection: "row",
+    textAlign: "left",
     alignItems: "center",
+    paddingLeft: "5%",
+    right:10
   },
-  image: {
-    width: 237,
-    height: 177,
-    margin: 20,
+  textSearchStyle:{
+    color: "#323232",
+    fontFamily: "SourceSansPro-Bold",
+    fontSize: '4vw',
+    fontStyle: "normal",
+    fontWeight: "900",
+    letterSpacing: 0.99,
   },
+  searchBar: {
+    flex: 1,
+    width: "100%",
+    alignItems: "center",
+    paddingHorizontal: 16,
+  },
+  
   welcomeText: undefined,
   captionText: undefined,
 });
