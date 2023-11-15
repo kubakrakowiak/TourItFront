@@ -4,7 +4,6 @@ import {
   View,
   Dimensions,
   ScrollView,
-  KeyboardAvoidingView,
   Platform,
 } from "react-native";
 import Header from "../../components/partials/Header";
@@ -49,166 +48,79 @@ const WelcomeScreen = () => {
     alert(`Category ${categoryId} pressed`);
   };
 
-  const renderScrollView = () => {
-    return (
-      <ScrollView
-        style={styles.container}
-        keyboardShouldPersistTaps="handled"
-        scrollEnabled={false}
-      >
-        <View style={styles.header}>
-          <Header headerText={"Welcome"} subHeaderText={"back!"} />
+  return (
+    <ScrollView
+      style={styles.container}
+      keyboardShouldPersistTaps={Platform.OS === "android" ? "handled" : "never"}
+      scrollEnabled={Platform.OS === "ios" ? false : true}
+    >
+      <View style={styles.header}>
+        <Header headerText={"Welcome"} subHeaderText={"back!"} />
+      </View>
+
+      <View style={styles.pageContent}>
+        <View style={styles.searchContent}>
+          <View style={styles.textHolderContent}>
+            <SectionTitle fontSize={20}>Where do you want to go?</SectionTitle>
+          </View>
+
+          <View style={styles.searchBar}>
+            <InputText
+              textInputConfig={{
+                placeholder: "Search",
+                keyboardType: "default",
+              }}
+              icon={"search"}
+              textTransform="capitalize"
+              containerWidth="95%"
+            />
+          </View>
         </View>
 
-        <View style={styles.pageContent}>
-          <View style={styles.searchContent}>
-            <View style={styles.textHolderContent}>
-              <SectionTitle fontSize={20}>
-                Where do you want to go?
+        <View style={styles.categoryContent}>
+          <View style={styles.textHolderContent}>
+            <SectionTitle fontSize={20} marginBottom={5}>
+              Category
+            </SectionTitle>
+          </View>
+          <View style={styles.horizontalMenu}>
+            <HorizontalMenu onCategoryPress={handleCategoryPress} />
+          </View>
+        </View>
+
+        <View style={styles.cardHolderContainer}>
+          <View style={styles.cardContainer}>
+            <View style={styles.textCardHolderContent}>
+              <SectionTitle fontSize={20} color={"#494949"}>
+                Last seen
               </SectionTitle>
             </View>
+          </View>
 
-            <View style={styles.searchBar}>
-              <InputText
-                textInputConfig={{
-                  placeholder: "Search",
-                  keyboardType: "default",
-                }}
-                icon={"search"}
-                textTransform="capitalize"
-                containerWidth="95%"
+          <View style={styles.plainButtonHolder}>
+            <PlainButton
+              fontSize={14}
+              color={"#7E7D7D"}
+              letterSpacing={0.77}
+              textDecorationLine={"normal"}
+            >
+              View all
+            </PlainButton>
+          </View>
+
+          <View style={styles.cardHolder}>
+            {locations.map((location) => (
+              <LocationCard
+                onPress={() => alert("test")}
+                location={location}
+                key={location.id}
               />
-            </View>
-          </View>
-
-          <View style={styles.categoryContent}>
-            <View style={styles.textHolderContent}>
-              <SectionTitle fontSize={20} marginBottom={5}>
-                Category
-              </SectionTitle>
-            </View>
-            <View style={styles.horizontalMenu}>
-              <HorizontalMenu onCategoryPress={handleCategoryPress} />
-            </View>
-          </View>
-
-          <View style={styles.cardHolderContainer}>
-            <View style={styles.cardContainer}>
-              <View style={styles.textCardHolderContent}>
-                <SectionTitle fontSize={20} color={"#494949"}>
-                  Last seen
-                </SectionTitle>
-              </View>
-            </View>
-
-            <View style={styles.plainButtonHolder}>
-              <PlainButton
-                fontSize={14}
-                color={"#7E7D7D"}
-                letterSpacing={0.77}
-                textDecorationLine={"normal"}
-              >
-                View all
-              </PlainButton>
-            </View>
-
-            <View style={styles.cardHolder}>
-              {locations.map((location) => (
-                <LocationCard
-                  onPress={() => alert("test")}
-                  location={location}
-                  key={location.id}
-                />
-              ))}
-            </View>
+            ))}
           </View>
         </View>
-      </ScrollView>
-    );
-  };
-
-  const renderKeyboardAwareScrollView = () => {
-    return (
-      <KeyboardAwareScrollView
-        style={styles.container}
-        enableOnAndroid={true}
-        extraHeight={Platform.select({ android: 200, ios: 0 })}
-        scrollEnabled={false}
-      >
-        <View style={styles.header}>
-          <Header headerText={"Welcome"} subHeaderText={"back!"} />
-        </View>
-
-        <View style={styles.pageContent}>
-          <View style={styles.searchContent}>
-            <View style={styles.textHolderContent}>
-              <SectionTitle fontSize={20}>
-                Where do you want to go?
-              </SectionTitle>
-            </View>
-
-            <View style={styles.searchBar}>
-              <InputText
-                textInputConfig={{
-                  placeholder: "Search",
-                  keyboardType: "default",
-                }}
-                icon={"search"}
-                textTransform="capitalize"
-                containerWidth="95%"
-              />
-            </View>
-          </View>
-
-          <View style={styles.categoryContent}>
-            <View style={styles.textHolderContent}>
-              <SectionTitle fontSize={20} marginBottom={5}>
-                Category
-              </SectionTitle>
-            </View>
-            <View style={styles.horizontalMenu}>
-              <HorizontalMenu onCategoryPress={handleCategoryPress} />
-            </View>
-          </View>
-
-          <View style={styles.cardHolderContainer}>
-            <View style={styles.cardContainer}>
-              <View style={styles.textCardHolderContent}>
-                <SectionTitle fontSize={20} color={"#494949"}>
-                  Last seen
-                </SectionTitle>
-              </View>
-            </View>
-
-            <View style={styles.plainButtonHolder}>
-              <PlainButton
-                fontSize={14}
-                color={"#7E7D7D"}
-                letterSpacing={0.77}
-                textDecorationLine={"normal"}
-              >
-                View all
-              </PlainButton>
-            </View>
-
-            <View style={styles.cardHolder}>
-              {locations.map((location) => (
-                <LocationCard
-                  onPress={() => alert("test")}
-                  location={location}
-                  key={location.id}
-                />
-              ))}
-            </View>
-          </View>
-        </View>
-      </KeyboardAwareScrollView>
-    );
-  };
-
-  return Platform.OS === "ios"
-    ? renderKeyboardAwareScrollView()
-    : renderScrollView();
+      </View>
+    </ScrollView>
+  );
 };
 
 const styles = StyleSheet.create({
