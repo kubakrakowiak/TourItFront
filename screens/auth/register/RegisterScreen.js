@@ -1,9 +1,17 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text, Image, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  Image,
+  ScrollView,
+  Dimensions,
+} from "react-native";
 import Button from "../../../components/ui/Button";
 import InputText from "../../../components/ui/InputText";
 import PlainButton from "../../../components/ui/PlainButton";
-import Ionicons from "@expo/vector-icons/Ionicons";
+
+const { width, height } = Dimensions.get("window");
 
 const RegistrationScreen = () => {
   const [username, setUserName] = useState("");
@@ -16,13 +24,17 @@ const RegistrationScreen = () => {
 
   return (
     <View style={styles.container}>
-      <ScrollView keyboardShouldPersistTaps="handled">
+      <ScrollView
+        keyboardShouldPersistTaps="handled"
+        contentContainerStyle={styles.scrollContent}
+      >
         <View style={styles.logoContainer}>
           <Image
             style={styles.image}
             source={require("../../../assets/smallLogo.png")}
           />
         </View>
+        
 
         <View style={styles.registerBox}>
           <View style={styles.registerTextContainer}>
@@ -30,12 +42,10 @@ const RegistrationScreen = () => {
             <Text style={styles.registerHereTextHere}>here!</Text>
           </View>
           <View style={styles.imagePaperContainer}>
-            <View>
-              <Image
-                style={styles.imagePaper}
-                source={require("../../../assets/paperPlane.png")}
-              />
-            </View>
+            <Image
+              style={styles.imagePaper}
+              source={require("../../../assets/paperPlane.png")}
+            />
           </View>
         </View>
 
@@ -58,6 +68,7 @@ const RegistrationScreen = () => {
               keyboardType: "email-address",
             }}
           />
+
           <InputText
             value={password}
             onUpdateValue={setPassword}
@@ -67,6 +78,7 @@ const RegistrationScreen = () => {
               keyboardType: "default",
             }}
           />
+
           <InputText
             textInputConfig={{
               placeholder: "confirm password",
@@ -91,34 +103,37 @@ const RegistrationScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  scrollContent: {
+    paddingBottom: height *0.2,
+  },
   container: {
     flex: 1,
     backgroundColor: "#F1F1F1",
   },
   logoContainer: {
+    flex: 1,
     marginTop: 30,
-    flexDirection: "row",
-    justifyContent: "center",
-    paddingLeft: "60%",
+    alignSelf: "flex-end",
+    paddingRight: "5%",
   },
   logo: {
     width: 100,
-    height: 100,
+    height: undefined,
   },
   logoText: {
     fontSize: 24,
     fontWeight: "bold",
   },
   registerBox: {
-    marginTop: 60,
+    marginTop: "5%",
     flex: 1,
     flexDirection: "row",
     alignItems: "flex-start",
     paddingLeft: "15%",
-    marginBottom: 70,
   },
   registerTextContainer: {
     flex: 1,
+    
   },
   registerHereText: {
     color: "#4D4D4D",
@@ -139,6 +154,7 @@ const styles = StyleSheet.create({
     flex: 2.5,
     alignContent: "center",
     alignItems: "center",
+    top: height*0.05,
   },
   registerText: {
     color: "#626262",

@@ -31,7 +31,7 @@ export default function App() {
   if (!fontsLoaded) {
     return <AppLoading/>
   }
-  return <WelcomePage />;
+  return <RegisterScreen />;
 }
 
 const styles = StyleSheet.create({
