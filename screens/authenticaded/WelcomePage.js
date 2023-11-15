@@ -51,7 +51,11 @@ const WelcomePage = () => {
 
   const renderScrollView = () => {
     return (
-      <ScrollView style={styles.container} keyboardShouldPersistTaps="handled">
+      <ScrollView
+        style={styles.container}
+        keyboardShouldPersistTaps="handled"
+        scrollEnabled={false}
+      >
         <View style={styles.header}>
           <Header headerText={"Welcome"} subHeaderText={"back!"} />
         </View>
@@ -129,6 +133,7 @@ const WelcomePage = () => {
         style={styles.container}
         enableOnAndroid={true}
         extraHeight={Platform.select({ android: 200, ios: 0 })}
+        scrollEnabled={false}
       >
         <View style={styles.header}>
           <Header headerText={"Welcome"} subHeaderText={"back!"} />
