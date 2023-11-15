@@ -19,7 +19,7 @@ const { width, height } = Dimensions.get("window");
 
 const locations = [
   {
-    image: require("../../assets/smallLogo.png"),
+    image: require("../../assets/sniezka.jpeg"),
     name: "nazwa1",
     rating: 5.9,
     city: "Krakow",
@@ -42,14 +42,7 @@ const locations = [
     isLiked: false,
     id: "id",
   },
-  {
-    image: require("../../assets/smallLogo.png"),
-    name: "nazwa4",
-    rating: 2.1,
-    city: "Gdynia",
-    isLiked: true,
-    id: "id",
-  },
+  
 ];
 const WelcomePage = () => {
   const handleCategoryPress = (categoryId) => {
@@ -95,20 +88,24 @@ const WelcomePage = () => {
           </View>
         </View>
 
-        <View style={styles.cardContainer}>
-          <View style={styles.textHolderContent}>
-            <SectionTitle fontSize={20}>Last seen</SectionTitle>
+        <View style={styles.cardHolderContainer}>
+          <View style={styles.cardContainer}>
+            <View style={styles.textCardHolderContent}>
+              <SectionTitle fontSize={20} color={"#494949"}>Last seen</SectionTitle>
+            </View>
           </View>
-        </View>
 
-        <View style={styles.plainButtonHolder}>
-          <PlainButton>View all</PlainButton>
-        </View>
+          <View style={styles.plainButtonHolder}>
+            <PlainButton fontSize={14} color={"#7E7D7D"} letterSpacing={0.77}>
+              View all
+            </PlainButton>
+          </View>
 
-        <View style={styles.cardHolder}>
-          {locations.map((location) => (
-            <LocationCard onPress={() => alert("test")} location={location} />
-          ))}
+          <View style={styles.cardHolder}>
+            {locations.map((location) => (
+              <LocationCard onPress={() => alert("test")} location={location} />
+            ))}
+          </View>
         </View>
 
       </View>
@@ -122,23 +119,21 @@ const styles = StyleSheet.create({
     backgroundColor: "#F1F1F1",
   },
   header: {
-    flex: 1.4,
+    flex: 1,
   },
   pageContent: {
     flex: 5,
   },
   searchContent: {
-    flex: 1,
+    flex: 1.5,
   },
   categoryContent: {
-    flex: 2,
+    flex: 1.8,
   },
   horizontalMenu: {
     alignItems: "center",
-    width: "100%",
   },
   textHolderContent: {
-    width: "80%",
     textAlign: "left",
     alignItems: "flex-start",
     paddingLeft: "5%",
@@ -148,17 +143,28 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 16,
   },
+  cardHolderContainer: {
+    flex: 6,
+  },
   cardContainer: {
     flex: 0.5,
   },
   plainButtonHolder: {
     textAlign: "right",
-    alignItems: "flex-end",
-    width: "80%",
     paddingRight: "5%",
+    alignSelf: "flex-end",
+    paddingLeft: 15,
+    right: 15,
+    marginBottom: 5,
   },
   cardHolder: {
     flex: 4,
+  },
+  textCardHolderContent: {
+    textAlign: "left",
+    alignItems: "flex-start",
+    paddingLeft: "5%",
+    top: 20,
   },
 });
 
