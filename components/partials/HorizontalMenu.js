@@ -41,7 +41,7 @@ const HorizontalMenu = ({ onCategoryPress }) => {
             style={styles.categoryItem}
           >
             <Image source={category.image} style={styles.categoryImage} />
-            <Text>{category.name}</Text>
+            <Text style={styles.categoryText}>{category.name}</Text>
           </TouchableOpacity>
         ))}
       </ScrollView>
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   horizontalMenu: {
     alignItems: "center",
     width: "100%",
-    paddingRight: 10,
+    marginLeft: 12,
   },
   categoryItem: {
     alignItems: "center",
@@ -66,6 +66,12 @@ const styles = StyleSheet.create({
     borderRadius: width * 0.125,
     marginBottom: 4,
   },
+  categoryText:{
+    fontFamily: "Poppins",
+    fontSize: 12,
+    fontWeight: "semi-bold",
+    letterSpacing: 1,
+  }
 });
 
 export default HorizontalMenu;

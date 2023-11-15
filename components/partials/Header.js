@@ -43,10 +43,9 @@ const styles = StyleSheet.create({
   headerFirstText: {
     color: "#4D4D4D",
     textAlign: "left",
-    fontFamily: "Poppins",
+    fontFamily: "Poppins-Bold",
     fontSize: 42,
     fontStyle: "normal",
-    fontWeight: "200",
     letterSpacing: 3.57,
     top: height * 0.02,
     right: 5,
@@ -54,12 +53,10 @@ const styles = StyleSheet.create({
   subHeaderFirstText: {
     color: "#FEA02F",
     textAlign: "left",
-    fontFamily: "Poppins",
-    fontSize: 32,
-    fontStyle: "normal",
-    fontWeight: "500",
+    fontFamily: "Poppins-Medium",
+    fontSize: 24,
     letterSpacing: 1.7,
-    marginTop: 2,
+    bottom: width * 0.026,
   },
   smallLogoContainer: {
     width: width * 0.15,
