@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     fontFamily: "Poppins-Medium",
     fontSize: 24,
     letterSpacing: 1.7,
-    paddingTop: 1,
+    paddingTop: width * 0.01,
   },
   smallLogoContainer: {
     width: width * 0.15,
