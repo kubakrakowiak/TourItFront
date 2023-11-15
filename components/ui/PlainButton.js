@@ -1,22 +1,42 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { Colors } from "../../constans/styles.js";
 
-function PlainButton({ children, onPress, color, underline }) {
+function PlainButton({
+  children,
+  onPress,
+  backgroundColor,
+  underline,
+  fontSize,
+  color,
+  fontFamily,
+  letterSpacing,
+  textDecorationLine,
+}) {
   return (
     <Pressable
       style={({ pressed }) => [
         styles.button,
         pressed && styles.pressed,
-        color && { backgroundColor: color },
+        backgroundColor && { backgroundColor: backgroundColor },
         underline && {
-          textDecoration: "underline",
           textDecorationColor: "#0579E3",
         },
       ]}
       onPress={onPress}
     >
       <View>
-        <Text style={styles.buttonText}>{children}</Text>
+        <Text
+          style={[
+            styles.buttonText,
+            { fontSize: fontSize || 12 },
+            { color: color || Colors.registerLogin },
+            { fontFamily: fontFamily || "Poppins-Bold" },
+            { letterSpacing: letterSpacing || 2.32 },
+            { textDecorationLine: textDecorationLine || "underline"},
+          ]}
+        >
+          {children}
+        </Text>
       </View>
     </Pressable>
   );
@@ -36,12 +56,8 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     flexShrink: 0,
-    color: Colors.registerLogin,
     textAlign: "center",
-    fontFamily: "Poppins",
     fontSize: 12,
-    fontStyle: "normal",
-    fontWeight: "700",
     letterSpacing: 2.32,
     textTransform: "capitalize",
   },
