@@ -1,10 +1,4 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  Dimensions,
-} from "react-native";
+import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
 import { Colors } from "../../constans/styles.js";
 
 const { width, height } = Dimensions.get("window");
@@ -57,7 +51,7 @@ const styles = StyleSheet.create({
     fontFamily: "Poppins-Medium",
     fontSize: 24,
     letterSpacing: 1.7,
-    bottom: width * 0.026,
+    bottom: width * 0.016,
   },
   smallLogoContainer: {
     width: width * 0.15,
