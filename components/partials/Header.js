@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     fontFamily: "Poppins",
     fontSize: 42,
     fontStyle: "normal",
-    fontWeight: "500",
+    fontWeight: "200",
     letterSpacing: 3.57,
     top: height * 0.02,
     right: 5,

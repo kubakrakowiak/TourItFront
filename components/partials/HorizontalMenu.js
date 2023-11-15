@@ -40,10 +40,7 @@ const HorizontalMenu = ({ onCategoryPress }) => {
             onPress={() => onCategoryPress(category.id)}
             style={styles.categoryItem}
           >
-            <Image
-              source={category.image}
-              style={styles.categoryImage}
-            />
+            <Image source={category.image} style={styles.categoryImage} />
             <Text>{category.name}</Text>
           </TouchableOpacity>
         ))}
@@ -56,6 +53,7 @@ const styles = StyleSheet.create({
   horizontalMenu: {
     alignItems: "center",
     width: "100%",
+    paddingRight: 10,
   },
   categoryItem: {
     alignItems: "center",

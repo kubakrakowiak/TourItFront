@@ -19,7 +19,7 @@ function SectionTitle({
         {
           fontSize: fontSize || 32,
           fontFamily: fontFamily || "Poppins",
-          fontWeight: fontWeight || "700",
+          fontWeight: fontWeight || "200",
           marginBottom: marginBottom || 5,
         },
       ]}
