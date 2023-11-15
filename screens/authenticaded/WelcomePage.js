@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import Header from "../../components/partials/Header";
 import InputText from "../../components/ui/InputText";
+import LocationCard from "../../components/ui/LocationCard";
 
 const categories = [
   { id: "mount", name: "Mount", image: require("../../assets/mount.png") },
@@ -82,6 +83,17 @@ const WelcomePage = () => {
           ))}
         </ScrollView>
       </View>
+      <LocationCard
+        onPress={() => alert('test')}
+        location={{
+          image: 'image_source',
+          name: 'nazwa',
+          rating: 4.6,
+          city:'Krakow',
+          isLiked: false,
+          id: 'id'
+        }}
+      />
     </View>
   );
 };
