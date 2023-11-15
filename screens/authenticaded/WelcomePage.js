@@ -87,6 +87,7 @@ const WelcomePage = () => {
               }}
               icon={"search"}
               textTransform="capitalize"
+              containerWidth="95%"
             />
           </View>
         </View>
@@ -146,12 +147,12 @@ const styles = StyleSheet.create({
     textAlign: "left",
     alignItems: "center",
     paddingLeft: "5%",
-    right:10
+    right:20
   },
   textSearchStyle:{
     color: "#323232",
     fontFamily: "SourceSansPro-Bold",
-    fontSize: '4vw',
+    fontSize: '5vw',
     fontStyle: "normal",
     fontWeight: "900",
     letterSpacing: 0.99,
