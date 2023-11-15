@@ -24,6 +24,41 @@ const categories = [
   { id: "river", name: "River", image: require("../../assets/river.png") },
   { id: "city", name: "City", image: require("../../assets/city.png") },
 ];
+
+const locations = [
+  {
+    image: 'image_source',
+    name: 'nazwa1',
+    rating: 5.9,
+    city:'Krakow',
+    isLiked: false,
+    id: 'id'
+  },
+  {
+    image: 'image_source',
+    name: 'nazwa2',
+    rating: 4.6,
+    city:'Poznan',
+    isLiked: false,
+    id: 'id'
+  },
+  {
+    image: 'image_source',
+    name: 'nazwa3',
+    rating: 3.1,
+    city:'Krakow',
+    isLiked: false,
+    id: 'id'
+  },
+  {
+    image: 'image_source',
+    name: 'nazwa4',
+    rating: 2.1,
+    city:'Gdynia',
+    isLiked: true,
+    id: 'id'
+  }
+];
 const WelcomePage = () => {
   const onCategoryPress = (categoryId) => {
     console.log(`Category ${categoryId} pressed`);
@@ -82,17 +117,12 @@ const WelcomePage = () => {
           ))}
         </ScrollView>
       </View>
-      <LocationCard
-        onPress={() => alert('test')}
-        location={{
-          image: 'image_source',
-          name: 'nazwa',
-          rating: 4.6,
-          city:'Krakow',
-          isLiked: false,
-          id: 'id'
-        }}
-      />
+      {locations.map((location) => (
+          <LocationCard
+              onPress={() => alert('test')}
+              location={location}
+          />
+      ))}
     </View>
   );
 };
