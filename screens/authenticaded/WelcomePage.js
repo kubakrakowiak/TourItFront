@@ -20,15 +20,15 @@ const { width, height } = Dimensions.get("window");
 const locations = [
   {
     image: require("../../assets/sniezka.jpeg"),
-    name: "nazwa1",
-    rating: 5.9,
+    name: "Poland",
+    rating: 4.9,
     city: "Krakow",
     isLiked: false,
     id: "id",
   },
   {
     image: require("../../assets/malbork.jpeg"),
-    name: "nazwa2",
+    name: "Poland",
     rating: 4.6,
     city: "Poznan",
     isLiked: false,
@@ -36,9 +36,9 @@ const locations = [
   },
   {
     image: require("../../assets/suntago.jpeg"),
-    name: "nazwa3",
-    rating: 3.1,
-    city: "Krakow",
+    name: "Poland",
+    rating: 4.1,
+    city: "Warszawa",
     isLiked: false,
     id: "id",
   },
@@ -224,6 +224,7 @@ const styles = StyleSheet.create({
   },
   searchContent: {
     flex: 1.5,
+    bottom: 20,
   },
   categoryContent: {
     flex: 1.8,
