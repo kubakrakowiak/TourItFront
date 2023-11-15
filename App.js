@@ -60,7 +60,7 @@ function AuthenticatedStack() {
 function Navigation() {
   return (
     <NavigationContainer>
-      <AuthenticatedStack />
+      <AuthStack />
     </NavigationContainer>
   );
 }
