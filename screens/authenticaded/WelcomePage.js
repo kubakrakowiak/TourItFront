@@ -11,59 +11,48 @@ import {
 import Header from "../../components/partials/Header";
 import InputText from "../../components/ui/InputText";
 import LocationCard from "../../components/ui/LocationCard";
+import SectionTitle from "../../components/ui/SectionTitle";
+import HorizontalMenu from "../../components/partials/HorizontalMenu";
 
-const { width, height } = Dimensions.get('window');
-
-const categories = [
-  { id: "mount", name: "Mount", image: require("../../assets/mount.png") },
-  { id: "beach", name: "Beach", image: require("../../assets/beach.png") },
-  {
-    id: "waterfall",
-    name: "Waterfall",
-    image: require("../../assets/waterfall.png"),
-  },
-  { id: "lake", name: "Lake", image: require("../../assets/lake.png") },
-  { id: "river", name: "River", image: require("../../assets/river.png") },
-  { id: "city", name: "City", image: require("../../assets/city.png") },
-];
+const { width, height } = Dimensions.get("window");
 
 const locations = [
   {
-    image: 'image_source',
-    name: 'nazwa1',
+    image: "image_source",
+    name: "nazwa1",
     rating: 5.9,
-    city:'Krakow',
+    city: "Krakow",
     isLiked: false,
-    id: 'id'
+    id: "id",
   },
   {
-    image: 'image_source',
-    name: 'nazwa2',
+    image: "image_source",
+    name: "nazwa2",
     rating: 4.6,
-    city:'Poznan',
+    city: "Poznan",
     isLiked: false,
-    id: 'id'
+    id: "id",
   },
   {
-    image: 'image_source',
-    name: 'nazwa3',
+    image: "image_source",
+    name: "nazwa3",
     rating: 3.1,
-    city:'Krakow',
+    city: "Krakow",
     isLiked: false,
-    id: 'id'
+    id: "id",
   },
   {
-    image: 'image_source',
-    name: 'nazwa4',
+    image: "image_source",
+    name: "nazwa4",
     rating: 2.1,
-    city:'Gdynia',
+    city: "Gdynia",
     isLiked: true,
-    id: 'id'
-  }
+    id: "id",
+  },
 ];
 const WelcomePage = () => {
-  const onCategoryPress = (categoryId) => {
-    console.log(`Category ${categoryId} pressed`);
+  const handleCategoryPress = (categoryId) => {
+    alert(`Category ${categoryId} pressed`);
   };
 
   return (
@@ -76,9 +65,8 @@ const WelcomePage = () => {
 
       <View style={styles.pageContent}>
         <View style={styles.searchContent}>
-          <View style={styles.textSearchContent}>
-
-            <Text style={styles.textSearchStyle}>Where do you want to go?</Text>
+          <View style={styles.textHolderContent}>
+            <SectionTitle fontSize={20}>Where do you want to go?</SectionTitle>
           </View>
 
           <View style={styles.searchBar}>
@@ -93,38 +81,21 @@ const WelcomePage = () => {
             />
           </View>
         </View>
-
-        <Text style={styles.captionText}>Category</Text>
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          style={{ flexGrow: 0 }}
-        >
-          {categories.map((category) => (
-            <TouchableOpacity
-              key={category.id}
-              onPress={() => onCategoryPress(category.id)}
-              style={{ alignItems: "center", marginRight: 16 }}
-            >
-              <Image
-                source={category.image}
-                style={{
-                  width: 60,
-                  height: 60,
-                  borderRadius: 30,
-                  marginBottom: 4,
-                }}
-              />
-              <Text>{category.name}</Text>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
+        <View style={styles.categoryContent}>
+          <View style={styles.textHolderContent}>
+            <SectionTitle fontSize={20} marginBottom={15}>
+              Category
+            </SectionTitle>
+          </View>
+          <View style={styles.horizontalMenu}>
+            <HorizontalMenu
+              onCategoryPress={handleCategoryPress}
+            ></HorizontalMenu>
+          </View>
+        </View>
       </View>
       {locations.map((location) => (
-          <LocationCard
-              onPress={() => alert('test')}
-              location={location}
-          />
+        <LocationCard onPress={() => alert("test")} location={location} />
       ))}
     </View>
   );
@@ -144,22 +115,18 @@ const styles = StyleSheet.create({
   searchContent: {
     flex: 2,
   },
-  textSearchContent: {
+  categoryContent: {
+    flex: 4,
+  },
+  horizontalMenu: {
+    alignItems: "center",
+    width: "100%",
+  },
+  textHolderContent: {
     width: "80%",
     textAlign: "left",
     alignItems: "flex-start",
     paddingLeft: "5%",
-    
-  },
-  textSearchStyle:{
-    color: "#323232",
-    fontFamily: "Poppins",
-    fontSize: '4vw',
-    fontStyle: "normal",
-    fontWeight: "600",
-    letterSpacing: 0.99,
-    marginBottom: height * 0.009,
-    paddingLeft: width * 0.02
   },
   searchBar: {
     flex: 1,
@@ -167,9 +134,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 16,
   },
-  
-  welcomeText: undefined,
-  captionText: undefined,
 });
 
 export default WelcomePage;

@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
     height: 50,
     borderWidth: 1,
     borderColor: "#EBEBEB",
+    elevation: 4,
   },
   input: {
     flex: 1,
@@ -62,7 +63,6 @@ const styles = StyleSheet.create({
     placeholderTextColor: Colors.placeholderText,
     fontFamily: "Poppins",
     fontSize: 14,
-    elevation: 4,
     textAlign: "left",
     fontStyle: "normal",
     fontWeight: "600",
