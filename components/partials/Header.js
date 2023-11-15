@@ -33,12 +33,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     top: height * 0.025,
     alignItems: "flex-start",
-    paddingLeft: width * 0.08,
+    paddingLeft: width * 0.06,
     paddingRight: width * 0.01,
   },
   headerContainer: {
     flex: 1,
-    paddingBottom: height * 0.2,
+    paddingBottom: height * 0.1,
   },
   headerFirstText: {
     color: "#4D4D4D",

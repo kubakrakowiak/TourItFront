@@ -13,12 +13,13 @@ import InputText from "../../components/ui/InputText";
 import LocationCard from "../../components/ui/LocationCard";
 import SectionTitle from "../../components/ui/SectionTitle";
 import HorizontalMenu from "../../components/partials/HorizontalMenu";
+import PlainButton from "../../components/ui/PlainButton";
 
 const { width, height } = Dimensions.get("window");
 
 const locations = [
   {
-    image: "image_source",
+    image: require("../../assets/smallLogo.png"),
     name: "nazwa1",
     rating: 5.9,
     city: "Krakow",
@@ -26,7 +27,7 @@ const locations = [
     id: "id",
   },
   {
-    image: "image_source",
+    image: require("../../assets/smallLogo.png"),
     name: "nazwa2",
     rating: 4.6,
     city: "Poznan",
@@ -34,7 +35,7 @@ const locations = [
     id: "id",
   },
   {
-    image: "image_source",
+    image: require("../../assets/smallLogo.png"),
     name: "nazwa3",
     rating: 3.1,
     city: "Krakow",
@@ -42,7 +43,7 @@ const locations = [
     id: "id",
   },
   {
-    image: "image_source",
+    image: require("../../assets/smallLogo.png"),
     name: "nazwa4",
     rating: 2.1,
     city: "Gdynia",
@@ -83,7 +84,7 @@ const WelcomePage = () => {
         </View>
         <View style={styles.categoryContent}>
           <View style={styles.textHolderContent}>
-            <SectionTitle fontSize={20} marginBottom={15}>
+            <SectionTitle fontSize={20} marginBottom={5}>
               Category
             </SectionTitle>
           </View>
@@ -92,11 +93,19 @@ const WelcomePage = () => {
               onCategoryPress={handleCategoryPress}
             ></HorizontalMenu>
           </View>
+          
+        </View>
+
+        <View style={styles.cardContainer}>
+          <View style={styles.innerCardTitleContainer}>
+        <SectionTitle fontSize={20}>Last seen</SectionTitle>
+          <PlainButton>View all</PlainButton>
+          </View>
+          {locations.map((location) => (
+            <LocationCard onPress={() => alert("test")} location={location} />
+          ))}
         </View>
       </View>
-      {locations.map((location) => (
-        <LocationCard onPress={() => alert("test")} location={location} />
-      ))}
     </View>
   );
 };
@@ -107,16 +116,16 @@ const styles = StyleSheet.create({
     backgroundColor: "#F1F1F1",
   },
   header: {
-    flex: 1,
+    flex: 1.4,
   },
   pageContent: {
-    flex: 2,
+    flex: 7,
   },
   searchContent: {
-    flex: 2,
+    flex: 1,
   },
   categoryContent: {
-    flex: 4,
+    flex: 1.5,
   },
   horizontalMenu: {
     alignItems: "center",
@@ -130,9 +139,14 @@ const styles = StyleSheet.create({
   },
   searchBar: {
     flex: 1,
-    width: "100%",
     alignItems: "center",
     paddingHorizontal: 16,
+  },
+  cardContainer: {
+    flex: 4.5,
+  },
+  innerCardTitleContainer:{
+    
   },
 });
 

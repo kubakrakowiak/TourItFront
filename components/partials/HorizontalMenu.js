@@ -67,9 +67,8 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   categoryText:{
-    fontFamily: "Poppins",
+    fontFamily: "Poppins-SemiBold",
     fontSize: 12,
-    fontWeight: "semi-bold",
     letterSpacing: 1,
   }
 });
