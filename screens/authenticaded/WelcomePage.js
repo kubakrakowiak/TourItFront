@@ -1,5 +1,12 @@
 import React from "react";
-import { StyleSheet, View, Dimensions, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Dimensions,
+  ScrollView,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native";
 import Header from "../../components/partials/Header";
 import InputText from "../../components/ui/InputText";
 import LocationCard from "../../components/ui/LocationCard";
@@ -35,13 +42,17 @@ const locations = [
     id: "id",
   },
 ];
+
 const WelcomePage = () => {
   const handleCategoryPress = (categoryId) => {
     alert(`Category ${categoryId} pressed`);
   };
 
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.container}
+    >
       <ScrollView keyboardShouldPersistTaps="handled">
         <View style={styles.header}>
           <Header headerText={"Welcome"} subHeaderText={"back!"} />
@@ -89,7 +100,12 @@ const WelcomePage = () => {
             </View>
 
             <View style={styles.plainButtonHolder}>
-              <PlainButton fontSize={14} color={"#7E7D7D"} letterSpacing={0.77} textDecorationLine={"normal"}>
+              <PlainButton
+                fontSize={14}
+                color={"#7E7D7D"}
+                letterSpacing={0.77}
+                textDecorationLine={"normal"}
+              >
                 View all
               </PlainButton>
             </View>
@@ -106,9 +122,10 @@ const WelcomePage = () => {
           </View>
         </View>
       </ScrollView>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
