@@ -2,15 +2,17 @@ import React from "react";
 import {
   StyleSheet,
   View,
-  TextInput,
   TouchableOpacity,
   Text,
   Image,
   ScrollView,
+  Dimensions,
 } from "react-native";
 import Header from "../../components/partials/Header";
 import InputText from "../../components/ui/InputText";
 import LocationCard from "../../components/ui/LocationCard";
+
+const { width, height } = Dimensions.get('window');
 
 const categories = [
   { id: "mount", name: "Mount", image: require("../../assets/mount.png") },
@@ -117,7 +119,7 @@ const styles = StyleSheet.create({
     textAlign: "left",
     alignItems: "center",
     paddingLeft: "5%",
-    right:20
+    right: width * 0.04
   },
   textSearchStyle:{
     color: "#323232",
