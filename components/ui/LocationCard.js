@@ -14,7 +14,6 @@ function LocationCard({ onPress, location}) {
                 <Text>{location.city}</Text>
                 <Text>{location.name}</Text>
                 <Text>{location.rating}</Text>
-                <Text>{location.isLiked}</Text>
             </View>
         </Pressable>
     );

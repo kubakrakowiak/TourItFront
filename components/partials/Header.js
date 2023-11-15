@@ -1,5 +1,14 @@
-import { Pressable, StyleSheet, Text, View, Image } from "react-native";
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  Dimensions,
+} from "react-native";
 import { Colors } from "../../constans/styles.js";
+
+const { width, height } = Dimensions.get("window");
 
 function Header({ headerText, subHeaderText }) {
   return (
@@ -23,22 +32,24 @@ function Header({ headerText, subHeaderText }) {
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    marginTop: 30,
+    top: height * 0.025,
     alignItems: "flex-start",
-    paddingLeft: "15%",
+    paddingLeft: width * 0.08,
+    paddingRight: width * 0.01,
   },
   headerContainer: {
     flex: 1,
+    paddingBottom: height * 0.2,
   },
   headerFirstText: {
     color: "#4D4D4D",
     textAlign: "left",
     fontFamily: "Poppins",
-    fontSize: "9vw",
+    fontSize: "8vw",
     fontStyle: "normal",
     fontWeight: "500",
     letterSpacing: 3.57,
-    top: 10,
+    top: height * 0.02,
     right: 5,
   },
   subHeaderFirstText: {
@@ -49,18 +60,20 @@ const styles = StyleSheet.create({
     fontStyle: "normal",
     fontWeight: "500",
     letterSpacing: 1.7,
+    marginTop: 2,
   },
   smallLogoContainer: {
-    width: 50,
-    height: 50,
+    width: width * 0.15,
+    height: width * 0.15,
     paddingRight: "5%",
     alignItems: "flex-end",
-    top: 15,
+    top: height * 0.015,
   },
+
   imageLogo: {
-    width: 100,
-    height: 65,
-    margin: 10,
+    width: width * 0.25,
+    height: width * 0.24,
+    resizeMode: "contain",
   },
 });
 
