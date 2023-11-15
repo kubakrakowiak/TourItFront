@@ -139,25 +139,27 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   pageContent: {
-    flex: 1,
+    flex: 2,
   },
   searchContent: {
-    flex: 1,
+    flex: 2,
   },
   textSearchContent: {
     width: "80%",
     textAlign: "left",
-    alignItems: "center",
+    alignItems: "flex-start",
     paddingLeft: "5%",
-    right: width * 0.04
+    
   },
   textSearchStyle:{
     color: "#323232",
-    fontFamily: "SourceSansPro-Bold",
-    fontSize: '5vw',
+    fontFamily: "Poppins",
+    fontSize: '4vw',
     fontStyle: "normal",
-    fontWeight: "900",
+    fontWeight: "600",
     letterSpacing: 0.99,
+    marginBottom: height * 0.009,
+    paddingLeft: width * 0.02
   },
   searchBar: {
     flex: 1,
