@@ -1,96 +1,167 @@
-import React from 'react';
-import { StyleSheet, View, TextInput, TouchableOpacity, Text, Image, ScrollView } from 'react-native';
+import React from "react";
+import { StyleSheet, View, Dimensions, ScrollView } from "react-native";
+import Header from "../../components/partials/Header";
+import InputText from "../../components/ui/InputText";
+import LocationCard from "../../components/ui/LocationCard";
+import SectionTitle from "../../components/ui/SectionTitle";
+import HorizontalMenu from "../../components/partials/HorizontalMenu";
+import PlainButton from "../../components/ui/PlainButton";
 
-const categories = [
-    { id: 'mount', name: 'Mount', image: require('../../assets/mount.png') },
-    { id: 'beach', name: 'Beach', image: require('../../assets/beach.png') },
-    { id: 'waterfall', name: 'Waterfall', image: require('../../assets/waterfall.png') },
-    { id: 'lake', name: 'Lake', image: require('../../assets/lake.png') },
-    { id: 'river', name: 'River', image: require('../../assets/river.png') },
-    { id: 'city', name: 'City', image: require('../../assets/city.png') },
+const { width, height } = Dimensions.get("window");
+
+const locations = [
+  {
+    image: require("../../assets/sniezka.jpeg"),
+    name: "nazwa1",
+    rating: 5.9,
+    city: "Krakow",
+    isLiked: false,
+    id: "id",
+  },
+  {
+    image: require("../../assets/malbork.jpeg"),
+    name: "nazwa2",
+    rating: 4.6,
+    city: "Poznan",
+    isLiked: false,
+    id: "id",
+  },
+  {
+    image: require("../../assets/suntago.jpeg"),
+    name: "nazwa3",
+    rating: 3.1,
+    city: "Krakow",
+    isLiked: false,
+    id: "id",
+  },
 ];
 const WelcomePage = () => {
-    const onCategoryPress = (categoryId) => {
-        console.log(`Category ${categoryId} pressed`);
-    };
+  const handleCategoryPress = (categoryId) => {
+    alert(`Category ${categoryId} pressed`);
+  };
 
-    return (
-        <View style={styles.container}>
-            <View style={styles.logoContainer}>
-                <Text style={styles.welcomeText}>Welcome back!</Text>
-                <Image style={styles.image} source={require('../../assets/logo_TourIT.png')} />
-            </View>
-            <Text style={styles.captionText}>Where do you want to go?</Text>
-            <TextInput style={styles.input} placeholder="Search" />
-            <Text style={styles.captionText}>Category</Text>
-            <ScrollView
-                horizontal
-                showsHorizontalScrollIndicator={false}
-                style={{ flexGrow: 0 }}
-            >
-                {categories.map((category) => (
-                    <TouchableOpacity
-                        key={category.id}
-                        onPress={() => onCategoryPress(category.id)}
-                        style={{ alignItems: 'center', marginRight: 16 }}
-                    >
-                        <Image source={category.image} style={{ width: 60, height: 60, borderRadius: 30, marginBottom: 4 }} />
-                        <Text>{category.name}</Text>
-                    </TouchableOpacity>
-                ))}
-            </ScrollView>
+  return (
+    <View style={styles.container}>
+      <ScrollView keyboardShouldPersistTaps="handled">
+        <View style={styles.header}>
+          <Header headerText={"Welcome"} subHeaderText={"back!"} />
         </View>
-    );
-};
 
+        <View style={styles.pageContent}>
+          <View style={styles.searchContent}>
+            <View style={styles.textHolderContent}>
+              <SectionTitle fontSize={20}>
+                Where do you want to go?
+              </SectionTitle>
+            </View>
+
+            <View style={styles.searchBar}>
+              <InputText
+                textInputConfig={{
+                  placeholder: "Search",
+                  keyboardType: "default",
+                }}
+                icon={"search"}
+                textTransform="capitalize"
+                containerWidth="95%"
+              />
+            </View>
+          </View>
+
+          <View style={styles.categoryContent}>
+            <View style={styles.textHolderContent}>
+              <SectionTitle fontSize={20} marginBottom={5}>
+                Category
+              </SectionTitle>
+            </View>
+            <View style={styles.horizontalMenu}>
+              <HorizontalMenu onCategoryPress={handleCategoryPress} />
+            </View>
+          </View>
+
+          <View style={styles.cardHolderContainer}>
+            <View style={styles.cardContainer}>
+              <View style={styles.textCardHolderContent}>
+                <SectionTitle fontSize={20} color={"#494949"}>
+                  Last seen
+                </SectionTitle>
+              </View>
+            </View>
+
+            <View style={styles.plainButtonHolder}>
+              <PlainButton fontSize={14} color={"#7E7D7D"} letterSpacing={0.77} textDecorationLine={"normal"}>
+                View all
+              </PlainButton>
+            </View>
+
+            <View style={styles.cardHolder}>
+              {locations.map((location) => (
+                <LocationCard
+                  onPress={() => alert("test")}
+                  location={location}
+                  key={location.id}
+                />
+              ))}
+            </View>
+          </View>
+        </View>
+      </ScrollView>
+    </View>
+  );
+};
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#F1F1F1',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    logoContainer: {
-        alignItems: 'center',
-        marginBottom: 50,
-    },
-    logo: {
-        width: 100,
-        height: 100,
-    },
-    logoText: {
-        fontSize: 24,
-        fontWeight: 'bold',
-    },
-    input: {
-        height: 50,
-        width: '80%',
-        backgroundColor: 'white',
-        marginBottom: 10,
-        paddingLeft: 15,
-        borderRadius: 25,
-        borderWidth: 1,
-        borderColor: '#dddddd',
-    },
-    registerContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    registerText: {
-        marginRight: 5,
-        color: '#aaaaaa',
-    },
-    registerButton: {
-        color: '#1292B4',
-        fontWeight: 'bold',
-    },
-    image: {
-        width: 237,
-        height: 177,
-        margin: 20,
-    },
-    welcomeText: undefined,
-    captionText: undefined
+  container: {
+    flex: 1,
+    backgroundColor: "#F1F1F1",
+  },
+  header: {
+    flex: 1,
+  },
+  pageContent: {
+    flex: 5,
+  },
+  searchContent: {
+    flex: 1.5,
+  },
+  categoryContent: {
+    flex: 1.8,
+  },
+  horizontalMenu: {
+    alignItems: "center",
+  },
+  textHolderContent: {
+    textAlign: "left",
+    alignItems: "flex-start",
+    paddingLeft: "5%",
+  },
+  searchBar: {
+    flex: 1,
+    alignItems: "center",
+    paddingHorizontal: 16,
+  },
+  cardHolderContainer: {
+    flex: 6,
+  },
+  cardContainer: {
+    flex: 0.5,
+  },
+  plainButtonHolder: {
+    textAlign: "right",
+    paddingRight: "5%",
+    alignSelf: "flex-end",
+    paddingLeft: 15,
+    right: 15,
+    marginBottom: 5,
+  },
+  cardHolder: {
+    flex: 4,
+  },
+  textCardHolderContent: {
+    textAlign: "left",
+    alignItems: "flex-start",
+    paddingLeft: "5%",
+    top: 20,
+  },
 });
 
 export default WelcomePage;

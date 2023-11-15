@@ -11,6 +11,8 @@ function InputText({
   iconColor,
   iconSize,
   iconRightAlign,
+  textTransform,
+  containerWidth,
 }) {
   const Icon = () => (
     <Ionicons
@@ -21,15 +23,16 @@ function InputText({
     />
   );
   return (
-    <View style={styles.inputContainer}>
+    <View style={[styles.inputContainer, { width: containerWidth || "70%" }]}>
       <View style={styles.innerContainer}>
         {icon && !iconRightAlign && <Icon />}
       </View>
       <TextInput
-        style={styles.input}
+        style={[styles.input, {textTransform: textTransform}]}
         onChangeText={onUpdateValue}
         value={value}
         {...textInputConfig}
+        {...textTransform}
       />
       <View style={styles.innerContainer}>
         {icon && iconRightAlign && <Icon />}
@@ -49,6 +52,7 @@ const styles = StyleSheet.create({
     height: 50,
     borderWidth: 1,
     borderColor: "#EBEBEB",
+    elevation: 4,
   },
   input: {
     flex: 1,
@@ -57,12 +61,9 @@ const styles = StyleSheet.create({
     padding: 13,
     borderRadius: 13,
     placeholderTextColor: Colors.placeholderText,
-    fontFamily: "Poppins",
+    fontFamily: "Poppins-Medium",
     fontSize: 14,
-    elevation: 4,
     textAlign: "left",
-    fontStyle: "normal",
-    fontWeight: "600",
     letterSpacing: 2.03,
     textTransform: "lowercase",
     outlineStyle: "none",
