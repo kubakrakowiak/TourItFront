@@ -1,6 +1,7 @@
 import { Pressable, StyleSheet, Text, View, Image } from "react-native";
 import { Colors } from "../../constans/styles.js";
 import OuterCardLayout from "./OuterCardLayout";
+import {Ionicons} from "@expo/vector-icons";
 
 function LocationCard({ onPress, location }) {
   return (
@@ -15,7 +16,13 @@ function LocationCard({ onPress, location }) {
         <View style={styles.dataContainer}>
           <Text style={styles.locationTitle}>{location.city}</Text>
           <Text>{location.name}</Text>
-          <Text>{location.rating}</Text>
+          <View style={styles.rowDirection}>
+            <Ionicons
+              name={'star'}
+              color={"#ffd800"}
+            />
+            <Text>{location.rating}</Text>
+          </View>
         </View>
       </OuterCardLayout>
     </Pressable>
@@ -47,4 +54,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.88,
     color: "#3C3B3B",
   },
+  rowDirection: {
+    flexDirection: "row"
+  }
 });
