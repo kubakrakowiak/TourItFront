@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
   horizontalMenu: {
     alignItems: "center",
     marginLeft: 12,
+
   },
   categoryItem: {
     alignItems: "center",

@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   },
   locationTitle: {
     fontFamily: "Poppins-Bold",
-    fontSize: 32,
+    fontSize: 30,
     letterSpacing: 0.88,
     color: "#3C3B3B",
     top: height * 0.01,

@@ -1,33 +1,50 @@
 import React from "react";
-import {
-  StyleSheet,
-  View,
-  Dimensions,
-  ScrollView,
-  KeyboardAvoidingView,
-  Platform,
-} from "react-native";
-import Header from "../../components/partials/Header";
-import InputText from "../../components/ui/InputText";
-import LocationCard from "../../components/ui/LocationCard";
+import { StyleSheet, View, ScrollView } from "react-native";
 import SectionTitle from "../../components/ui/SectionTitle";
-import HorizontalMenu from "../../components/partials/HorizontalMenu";
 import PlainButton from "../../components/ui/PlainButton";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import PlaceScreenImages from "../../components/partials/PlaceScreenImages.js";
 import BackButton from "../../components/ui/BackButton";
 import PlaceCard from "../../components/ui/PlaceCard.js";
+import CommentCard from "../../components/ui/CommentCard.js";
 
-const { width, height } = Dimensions.get("window");
+const location = {
+  image: require("../../assets/sniezka.jpeg"),
+  name: "Wieliczka",
+  rating: 4.2,
+  city: "Kopalnia Soli",
+  isLiked: false,
+  id: "id",
+};
 
-const locations = [
+const comments = [
   {
-    image: require("../../assets/sniezka.jpeg"),
-    name: "Wieliczka",
-    rating: 4.2,
-    city: "Kopalnia Soli",
+    userImage: require("../../assets/sniezka.jpeg"),
+    commentDate: "month ago",
+    userRating: 2,
+    userName: "Andrzej Kowalski",
     isLiked: false,
     id: "id",
+    commentText:
+      "asdddddddddwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwqdq",
+  },
+  {
+    userImage: require("../../assets/sniezka.jpeg"),
+    commentDate: "month ago",
+    userRating: 4,
+    userName: "Andrzej Nowak",
+    isLiked: false,
+    id: "id",
+    commentText: "asddddddddddddddd",
+  },
+  {
+    userImage: require("../../assets/sniezka.jpeg"),
+    commentDate: "month ago",
+    userRating: 3,
+    userName: "Andrzej Kowalski",
+    isLiked: false,
+    id: "id",
+    commentText:
+      "Lorem Ipsum aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
   },
 ];
 
@@ -54,17 +71,12 @@ const PlaceScreen = () => {
 
       <View style={styles.cardHolderContainer}>
         <View style={styles.cardHolder}>
-          {locations.map((location) => (
-            <PlaceCard
-              location={location}
-              key={location.id}
-            />
-          ))}
+          <PlaceCard location={location} key={location.id} />
         </View>
         <View style={styles.cardContainer}>
           <View style={styles.textCardHolderContent}>
-            <SectionTitle fontSize={20} color={"#494949"}>
-              Last seen
+            <SectionTitle fontSize={19} color={"#494949"}>
+              Comments
             </SectionTitle>
           </View>
         </View>
@@ -76,8 +88,13 @@ const PlaceScreen = () => {
             letterSpacing={0.77}
             textDecorationLine={"none"}
           >
-            View all
+            Add Comment
           </PlainButton>
+        </View>
+        <View>
+          {comments.map((comment) => (
+            <CommentCard comment={comment} key={comment.id} />
+          ))}
         </View>
       </View>
     </ScrollView>
@@ -118,10 +135,10 @@ const styles = StyleSheet.create({
   },
   cardContainer: {
     flex: 0.5,
+    marginTop: 20,
   },
   plainButtonHolder: {
     textAlign: "right",
-    paddingRight: "5%",
     alignSelf: "flex-end",
     paddingLeft: 15,
     right: 15,
@@ -133,7 +150,7 @@ const styles = StyleSheet.create({
   textCardHolderContent: {
     textAlign: "left",
     alignItems: "flex-start",
-    paddingLeft: "5%",
+    paddingLeft: "3%",
     top: 20,
   },
 });
