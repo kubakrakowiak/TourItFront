@@ -17,14 +17,13 @@ import StarRating from "./StarRating.js";
 const { width, height } = Dimensions.get("window");
 
 function PlaceCard({ location }) {
-
   const formattedRating = location.rating.toFixed(1);
-  
+
   return (
     <OuterPlaceCardLayout>
       <View style={styles.cardContainer}>
         <Text style={styles.locationTitle}>{location.city}</Text>
-        
+
         <View style={styles.rowDirection}>
           <FontAwesome5
             name={"map-marker-alt"}
@@ -37,7 +36,7 @@ function PlaceCard({ location }) {
         <View style={styles.rowDirection}>
           <Text style={styles.locationRating}> {formattedRating}</Text>
           <View style={styles.ratingStar}>
-          <StarRating rating={location.rating} />
+            <StarRating rating={location.rating} />
           </View>
         </View>
       </View>
@@ -59,7 +58,7 @@ const styles = StyleSheet.create({
     fontSize: 32,
     letterSpacing: 0.88,
     color: "#3C3B3B",
-    top: 10,
+    top: height * 0.01,
   },
   rowDirection: {
     flexDirection: "row",

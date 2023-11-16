@@ -74,7 +74,7 @@ const PlaceScreen = () => {
             fontSize={14}
             color={"#7E7D7D"}
             letterSpacing={0.77}
-            textDecorationLine={"normal"}
+            textDecorationLine={"none"}
           >
             View all
           </PlainButton>
