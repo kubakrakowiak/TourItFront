@@ -16,31 +16,16 @@ import PlainButton from "../../components/ui/PlainButton";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import PlaceScreenImages from "../../components/partials/PlaceScreenImages.js";
 import BackButton from "../../components/ui/BackButton";
+import PlaceCard from "../../components/ui/PlaceCard.js";
 
 const { width, height } = Dimensions.get("window");
 
 const locations = [
   {
     image: require("../../assets/sniezka.jpeg"),
-    name: "Poland",
-    rating: 4.9,
-    city: "Kraków",
-    isLiked: false,
-    id: "id",
-  },
-  {
-    image: require("../../assets/malbork.jpeg"),
-    name: "Poland",
-    rating: 4.6,
-    city: "Poznań",
-    isLiked: false,
-    id: "id",
-  },
-  {
-    image: require("../../assets/suntago.jpeg"),
-    name: "Poland",
-    rating: 4.1,
-    city: "Warszawa",
+    name: "Wieliczka",
+    rating: 4.2,
+    city: "Kopalnia Soli",
     isLiked: false,
     id: "id",
   },
@@ -68,6 +53,14 @@ const PlaceScreen = () => {
       </View>
 
       <View style={styles.cardHolderContainer}>
+        <View style={styles.cardHolder}>
+          {locations.map((location) => (
+            <PlaceCard
+              location={location}
+              key={location.id}
+            />
+          ))}
+        </View>
         <View style={styles.cardContainer}>
           <View style={styles.textCardHolderContent}>
             <SectionTitle fontSize={20} color={"#494949"}>
@@ -85,16 +78,6 @@ const PlaceScreen = () => {
           >
             View all
           </PlainButton>
-        </View>
-
-        <View style={styles.cardHolder}>
-          {locations.map((location) => (
-            <LocationCard
-              onPress={() => alert("test")}
-              location={location}
-              key={location.id}
-            />
-          ))}
         </View>
       </View>
     </ScrollView>
@@ -119,7 +102,6 @@ const styles = StyleSheet.create({
   },
   horizontalMenu: {
     alignItems: "flex-start",
-    
   },
   textHolderContent: {
     textAlign: "left",
@@ -132,7 +114,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   cardHolderContainer: {
-    flex: 6,
+    marginTop: 20,
   },
   cardContainer: {
     flex: 0.5,
