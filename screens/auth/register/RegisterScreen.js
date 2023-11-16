@@ -18,7 +18,11 @@ const RegistrationScreen = ({navigation}) => {
     navigation.goBack();
   }
   function loginHandler() {
-    registerUser(registerUserData);
+    registerUser({
+      username:username,
+      password:password,
+      email:email
+    });
     authCtx.authenticate("abc");
   }
 

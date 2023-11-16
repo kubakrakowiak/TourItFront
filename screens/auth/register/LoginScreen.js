@@ -15,12 +15,16 @@ const LoginScreen = ({navigation}) => {
   function navigateToRegister() {
     navigation.navigate("Register");
   }
-  function loginHandler() {
-    loginUser({
-      username:username,
-      password:password
-    });
-    authCtx.authenticate("abc");
+  async function loginHandler() {
+    try {
+      const loginResponse = await loginUser({
+        username:username,
+        password:password
+      });
+      authCtx.authenticate(loginResponse.token);
+    }catch (error) {
+      console.error('Login error: ', error);
+    }
   }
 
   return (
