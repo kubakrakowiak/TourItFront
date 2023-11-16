@@ -10,6 +10,7 @@ import AppLoading from "expo-app-loading";
 import AuthContextProvider, { AuthContext } from "./store/auth-context";
 import { useContext } from "react";
 import { useFonts } from "expo-font";
+import PlaceScreen from "./screens/authenticaded/PlaceScreen.js";
 
 const Stack = createStackNavigator();
 
@@ -52,7 +53,7 @@ function AuthenticatedStack() {
     >
       <Stack.Screen
         name="Home"
-        component={WelcomeScreen}
+        component={PlaceScreen}
         options={{
           cardStyle: { backgroundColor: Colors.darkgreen },
         }}
