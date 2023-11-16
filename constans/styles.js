@@ -3,4 +3,5 @@ export const Colors = {
   registerLogin: "#0579E3",
   placeholderText: "rgba(0, 0, 0, 0.35)",
   shadowColor: "#817F7F",
+  orange500: "#FEA02F",
 };
