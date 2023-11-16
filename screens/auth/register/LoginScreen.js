@@ -4,6 +4,7 @@ import Button from "../../../components/ui/Button";
 import InputText from "../../../components/ui/InputText";
 import PlainButton from "../../../components/ui/PlainButton";
 import {AuthContext} from "../../../store/auth-context";
+import {loginUser} from "../../../util/http";
 
 const LoginScreen = ({navigation}) => {
 
@@ -14,8 +15,16 @@ const LoginScreen = ({navigation}) => {
   function navigateToRegister() {
     navigation.navigate("Register");
   }
-  function loginHandler() {
-    authCtx.authenticate("abc");
+  async function loginHandler() {
+    try {
+      const loginResponse = await loginUser({
+        username:username,
+        password:password
+      });
+      authCtx.authenticate(loginResponse.token);
+    }catch (error) {
+      console.error('Login error: ', error);
+    }
   }
 
   return (

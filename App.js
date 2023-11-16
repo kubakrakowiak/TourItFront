@@ -1,18 +1,27 @@
 import { StatusBar } from "expo-status-bar";
-import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context";
 import LoginScreen from "./screens/auth/register/LoginScreen";
 import RegisterScreen from "./screens/auth/register/RegisterScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Colors } from "./constans/styles.js";
 import WelcomeScreen from "./screens/authenticaded/WelcomeScreen";
 import AppLoading from "expo-app-loading";
 import AuthContextProvider, { AuthContext } from "./store/auth-context";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useFonts } from "expo-font";
+import ProfileScreen from "./screens/authenticaded/ProfileScreen";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { FontAwesome5, FontAwesome } from "@expo/vector-icons";
 import PlaceScreen from "./screens/authenticaded/PlaceScreen.js";
 
 const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
 function AuthStack() {
   return (
@@ -46,14 +55,13 @@ function AuthenticatedStack() {
     <Stack.Navigator
       screenOptions={{
         headerStyle: { backgroundColor: "red" },
-        headerTintColor: "white",
         contentStyle: { backgroundColor: "red" },
         headerShown: false,
       }}
     >
       <Stack.Screen
-        name="Home"
-        component={PlaceScreen}
+        name="BottomTabNavigator"
+        component={BottomTabNavigator}
         options={{
           cardStyle: { backgroundColor: Colors.darkgreen },
         }}
@@ -62,15 +70,72 @@ function AuthenticatedStack() {
   );
 }
 
+function BottomTabNavigator() {
+  return (
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: false,
+        tabBarStyle: { backgroundColor: Colors.darkgreen },
+      }}
+      tabBarOptions={{
+        showLabel: false,
+        activeTintColor: Colors.orange500,
+      }}
+    >
+      <Tab.Screen
+        name="Home"
+        component={WelcomeScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name="search" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Map"
+        component={ProfileScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome5 name="map-marked-alt" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Area"
+        component={ProfileScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name="heart" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name="user" size={size} color={color} />
+          ),
+        }}
+      />
+    </Tab.Navigator>
+  );
+}
+
 function Navigation() {
   const authCtx = useContext(AuthContext);
   return (
     <NavigationContainer>
-        {authCtx.isAuthenticated ? <AuthenticatedStack /> : <AuthStack />}
+      {authCtx.isAuthenticated ? <AuthenticatedStack /> : <AuthStack />}
     </NavigationContainer>
   );
 }
-export default function App() {
+
+function Root() {
+  const [isTryingLogin, setIsTryingLogin] = useState(true);
+
+  const authCtx = useContext(AuthContext);
+
   const [fontsLoaded] = useFonts({
     "Poppins-Black": require("./assets/fonts/Poppins-Black.ttf"),
     "Poppins-BlackItalic": require("./assets/fonts/Poppins-BlackItalic.ttf"),
@@ -92,20 +157,46 @@ export default function App() {
     "Poppins-ThinItalic": require("./assets/fonts/Poppins-ThinItalic.ttf"),
   });
 
-  if (!fontsLoaded) {
+  useEffect(() => {
+    async function fetchToken() {
+      const storedToken = await AsyncStorage.getItem("token");
+
+      if (storedToken) {
+        authCtx.authenticate(storedToken);
+      }
+
+      setIsTryingLogin(false);
+    }
+
+    fetchToken();
+  }, []);
+
+  if (isTryingLogin || !fontsLoaded) {
     return <AppLoading />;
   }
+  const insets = useSafeAreaInsets();
+
   return (
-    <SafeAreaView style={styles.container}>
-        <AuthContextProvider>
-            <Navigation />
-        </AuthContextProvider>
-    </SafeAreaView>
+    <View style={{ flex: 1, paddingTop: insets.top }}>
+      <Navigation />
+    </View>
+  );
+}
+export default function App() {
+  return (
+    <SafeAreaProvider style={styles.safeAreaProviderContaier}>
+      <AuthContextProvider>
+        <Root />
+      </AuthContextProvider>
+    </SafeAreaProvider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  safeAreaProviderContaier: {
+    backgroundColor: "#f1f1f1",
   },
 });
