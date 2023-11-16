@@ -17,7 +17,17 @@ const RegistrationScreen = ({navigation}) => {
   function navigateGoBack() {
     navigation.goBack();
   }
-  function loginHandler() {
+ async function registerHandler() {
+    try {
+      const registerResponse = await registerUser({
+        username:username,
+        email:email,
+        password:password
+      });
+      authCtx.authenticate(registerResponse.token);
+    }catch (error){
+      console.error('Registration error:', error);
+    }
     registerUser({
       username:username,
       password:password,
@@ -87,7 +97,7 @@ const RegistrationScreen = ({navigation}) => {
             }}
           />
 
-          <Button onPress={loginHandler}>Sign Up</Button>
+          <Button onPress={registerHandler}>Sign Up</Button>
 
           <View>
             <Text style={styles.registerText}>Already have an account?</Text>
