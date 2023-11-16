@@ -4,6 +4,7 @@ import Button from "../../../components/ui/Button";
 import InputText from "../../../components/ui/InputText";
 import PlainButton from "../../../components/ui/PlainButton";
 import {AuthContext} from "../../../store/auth-context";
+import {loginUser} from "../../../util/http";
 
 const LoginScreen = ({navigation}) => {
 
@@ -15,6 +16,10 @@ const LoginScreen = ({navigation}) => {
     navigation.navigate("Register");
   }
   function loginHandler() {
+    loginUser({
+      username:username,
+      password:password
+    });
     authCtx.authenticate("abc");
   }
 

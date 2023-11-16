@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, {useContext, useState} from "react";
 import { StyleSheet, View, Text, Image, ScrollView } from "react-native";
 import Button from "../../../components/ui/Button";
 import InputText from "../../../components/ui/InputText";
 import PlainButton from "../../../components/ui/PlainButton";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import {AuthContext} from "../../../store/auth-context";
+import {registerUser} from "../../../util/http";
 
 const RegistrationScreen = ({navigation}) => {
+
+  const authCtx = useContext(AuthContext);
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -14,7 +18,8 @@ const RegistrationScreen = ({navigation}) => {
     navigation.goBack();
   }
   function loginHandler() {
-    alert(username + "\n" + password);
+    registerUser(registerUserData);
+    authCtx.authenticate("abc");
   }
 
   return (
