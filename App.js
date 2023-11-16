@@ -77,6 +77,7 @@ function BottomTabNavigator() {
         tabBarStyle: { backgroundColor: Colors.darkgreen },
       }}
       tabBarOptions={{
+        showLabel: false,
         activeTintColor: Colors.orange500,
       }}
     >
