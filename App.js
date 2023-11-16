@@ -1,8 +1,7 @@
 import { StatusBar } from "expo-status-bar";
-import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import {
   SafeAreaProvider,
-  SafeAreaInsetsContext,
   useSafeAreaInsets,
 } from "react-native-safe-area-context";
 import LoginScreen from "./screens/auth/register/LoginScreen";
