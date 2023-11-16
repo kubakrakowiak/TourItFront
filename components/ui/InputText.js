@@ -28,7 +28,7 @@ function InputText({
         {icon && !iconRightAlign && <Icon />}
       </View>
       <TextInput
-        style={[styles.input, {textTransform: textTransform}]}
+        style={[styles.input, { textTransform: textTransform }]}
         onChangeText={onUpdateValue}
         value={value}
         {...textInputConfig}
@@ -60,17 +60,17 @@ const styles = StyleSheet.create({
     height: 50,
     padding: 13,
     borderRadius: 13,
-    placeholderTextColor: Colors.placeholderText,
+    color: Colors.placeholderText,
     fontFamily: "Poppins-Medium",
     fontSize: 14,
     textAlign: "left",
     letterSpacing: 2.03,
     textTransform: "lowercase",
-    outlineStyle: "none",
+    borderWidth: 0,
     paddingLeft: 1,
   },
   icon: {
-    marginLeft:9,
+    marginLeft: 9,
     marginBottom: 9,
     marginTop: 9,
   },

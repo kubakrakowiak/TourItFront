@@ -18,6 +18,7 @@ import { useFonts } from "expo-font";
 import ProfileScreen from "./screens/authenticaded/ProfileScreen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FontAwesome5, FontAwesome } from "@expo/vector-icons";
+import PlaceScreen from "./screens/authenticaded/PlaceScreen.js";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();

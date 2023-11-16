@@ -54,7 +54,7 @@ const WelcomeScreen = () => {
       <ScrollView
         style={styles.container}
         keyboardShouldPersistTaps="handled"
-        scrollEnabled={false}
+        scrollEnabled={true}
       >
         <View style={styles.header}>
           <Header headerText={"Welcome"} subHeaderText={"back!"} />
