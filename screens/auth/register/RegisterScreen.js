@@ -28,12 +28,7 @@ const RegistrationScreen = ({navigation}) => {
     }catch (error){
       console.error('Registration error:', error);
     }
-    registerUser({
-      username:username,
-      password:password,
-      email:email
-    });
-    authCtx.authenticate("abc");
+
   }
 
   return (
