@@ -44,7 +44,7 @@ const locations = [
   },
 ];
 
-const WelcomeScreen = () => {
+const WelcomeScreen = ({ navigation }) => {
   const handleCategoryPress = (categoryId) => {
     alert(`Category ${categoryId} pressed`);
   };
@@ -115,7 +115,7 @@ const WelcomeScreen = () => {
             <View style={styles.cardHolder}>
               {locations.map((location) => (
                 <LocationCard
-                  onPress={() => alert("test")}
+                  onPress={() => navigation.navigate("Place")}
                   location={location}
                   key={location.id}
                 />
@@ -194,7 +194,7 @@ const WelcomeScreen = () => {
             <View style={styles.cardHolder}>
               {locations.map((location) => (
                 <LocationCard
-                  onPress={() => alert("test")}
+                  onPress={() => navigation.navigate("Place")}
                   location={location}
                   key={location.id}
                 />

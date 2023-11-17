@@ -48,9 +48,13 @@ const comments = [
   },
 ];
 
-const PlaceScreen = () => {
+const PlaceScreen = ({ navigation }) => {
   const handleCategoryPress = (categoryId) => {
     alert(`Category ${categoryId} pressed`);
+  };
+
+  const goBack = () => {
+    navigation.goBack();
   };
 
   return (
@@ -60,7 +64,7 @@ const PlaceScreen = () => {
       scrollEnabled={true}
     >
       <View style={styles.backButton}>
-        <BackButton></BackButton>
+        <BackButton onPress={goBack}></BackButton>
       </View>
 
       <View style={styles.categoryContent}>

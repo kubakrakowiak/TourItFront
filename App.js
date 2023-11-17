@@ -66,6 +66,13 @@ function AuthenticatedStack() {
           cardStyle: { backgroundColor: Colors.darkgreen },
         }}
       />
+      <Stack.Screen
+        name="Place"
+        component={PlaceScreen}
+        options={{
+          cardStyle: { backgroundColor: Colors.darkgreen },
+        }}
+      />
     </Stack.Navigator>
   );
 }
