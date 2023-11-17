@@ -194,7 +194,7 @@ const WelcomeScreen = ({ navigation }) => {
             <View style={styles.cardHolder}>
               {locations.map((location) => (
                 <LocationCard
-                  onPress={() => navigation.navigate("Place")}
+                  onPress={() => navigation.navigate("Place", { location })}
                   location={location}
                   key={location.id}
                 />

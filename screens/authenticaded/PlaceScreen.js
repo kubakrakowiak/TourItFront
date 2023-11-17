@@ -7,15 +7,6 @@ import BackButton from "../../components/ui/BackButton";
 import PlaceCard from "../../components/ui/PlaceCard.js";
 import CommentCard from "../../components/ui/CommentCard.js";
 
-const location = {
-  image: require("../../assets/sniezka.jpeg"),
-  name: "Wieliczka",
-  rating: 4.2,
-  city: "Kopalnia Soli",
-  isLiked: false,
-  id: "id",
-};
-
 const comments = [
   {
     userImage: require("../../assets/sniezka.jpeg"),
@@ -48,7 +39,8 @@ const comments = [
   },
 ];
 
-const PlaceScreen = ({ navigation }) => {
+const PlaceScreen = ({ navigation, route }) => {
+  const location = route.params.location;
   const handleCategoryPress = (categoryId) => {
     alert(`Category ${categoryId} pressed`);
   };
