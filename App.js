@@ -19,6 +19,7 @@ import ProfileScreen from "./screens/authenticaded/ProfileScreen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FontAwesome5, FontAwesome } from "@expo/vector-icons";
 import PlaceScreen from "./screens/authenticaded/PlaceScreen.js";
+import LocationPicker from "./components/Places/LocationPicker";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -84,7 +85,7 @@ function BottomTabNavigator() {
     >
       <Tab.Screen
         name="Home"
-        component={WelcomeScreen}
+        component={LocationPicker}
         options={{
           tabBarIcon: ({ color, size }) => (
             <FontAwesome name="search" size={size} color={color} />
