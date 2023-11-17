@@ -22,6 +22,7 @@ import PlaceScreen from "./screens/authenticaded/PlaceScreen.js";
 import LocationPicker from "./components/Places/LocationPicker";
 import FullMapScreen from "./screens/authenticaded/FullMapScreen";
 import fullMapScreen from "./screens/authenticaded/FullMapScreen"
+import AreaScreen from "./screens/authenticaded/AreaScreen";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -106,7 +107,7 @@ function BottomTabNavigator() {
             />
             <Tab.Screen
                 name="Area"
-                component={ProfileScreen}
+                component={AreaScreen}
                 options={{
                     tabBarIcon: ({ color, size }) => (
                         <FontAwesome name="heart" size={size} color={color} />
