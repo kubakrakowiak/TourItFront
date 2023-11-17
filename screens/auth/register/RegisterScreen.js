@@ -1,14 +1,13 @@
-import React, {useContext, useState} from "react";
+import React, { useContext, useState } from "react";
 import { StyleSheet, View, Text, Image, ScrollView } from "react-native";
 import Button from "../../../components/ui/Button";
 import InputText from "../../../components/ui/InputText";
 import PlainButton from "../../../components/ui/PlainButton";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import {AuthContext} from "../../../store/auth-context";
-import {registerUser} from "../../../util/http";
+import { AuthContext } from "../../../store/auth-context";
+import { registerUser } from "../../../util/http";
 
-const RegistrationScreen = ({navigation}) => {
-
+const RegistrationScreen = ({ navigation }) => {
   const authCtx = useContext(AuthContext);
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -17,18 +16,17 @@ const RegistrationScreen = ({navigation}) => {
   function navigateGoBack() {
     navigation.goBack();
   }
- async function registerHandler() {
+  async function registerHandler() {
     try {
       const registerResponse = await registerUser({
-        username:username,
-        email:email,
-        password:password
+        username: username,
+        email: email,
+        password: password,
       });
       authCtx.authenticate(registerResponse.token);
-    }catch (error){
-      console.error('Registration error:', error);
+    } catch (error) {
+      console.error("Registration error:", error);
     }
-
   }
 
   return (
@@ -71,7 +69,6 @@ const RegistrationScreen = ({navigation}) => {
             onUpdateValue={setEmail}
             textInputConfig={{
               placeholder: "email",
-              secureTextEntry: true,
               keyboardType: "email-address",
             }}
           />
@@ -99,7 +96,9 @@ const RegistrationScreen = ({navigation}) => {
           </View>
 
           <View>
-            <PlainButton onPress={navigateGoBack} underline={true}>Login Here!</PlainButton>
+            <PlainButton onPress={navigateGoBack} underline={true}>
+              Login Here!
+            </PlainButton>
           </View>
         </View>
       </ScrollView>
