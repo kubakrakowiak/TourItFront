@@ -44,7 +44,7 @@ const locations = [
   },
 ];
 
-const WelcomeScreen = () => {
+const WelcomeScreen = ({ navigation }) => {
   const handleCategoryPress = (categoryId) => {
     alert(`Category ${categoryId} pressed`);
   };
@@ -115,7 +115,7 @@ const WelcomeScreen = () => {
             <View style={styles.cardHolder}>
               {locations.map((location) => (
                 <LocationCard
-                  onPress={() => alert("test")}
+                  onPress={() => navigation.navigate("Place")}
                   location={location}
                   key={location.id}
                 />
@@ -137,6 +137,70 @@ const WelcomeScreen = () => {
       >
         <View style={styles.header}>
           <Header headerText={"Welcome"} subHeaderText={"back!"} />
+        </View>
+
+        <View style={styles.pageContent}>
+          <View style={styles.searchContent}>
+            <View style={styles.textHolderContent}>
+              <SectionTitle fontSize={20}>
+                Where do you want to go?
+              </SectionTitle>
+            </View>
+
+            <View style={styles.searchBar}>
+              <InputText
+                textInputConfig={{
+                  placeholder: "Search",
+                  keyboardType: "default",
+                }}
+                icon={"search"}
+                textTransform="capitalize"
+                containerWidth="95%"
+              />
+            </View>
+          </View>
+
+          <View style={styles.categoryContent}>
+            <View style={styles.textHolderContent}>
+              <SectionTitle fontSize={20} marginBottom={5}>
+                Category
+              </SectionTitle>
+            </View>
+            <View style={styles.horizontalMenu}>
+              <HorizontalMenu onCategoryPress={handleCategoryPress} />
+            </View>
+          </View>
+
+          <View style={styles.cardHolderContainer}>
+            <View style={styles.cardContainer}>
+              <View style={styles.textCardHolderContent}>
+                <SectionTitle fontSize={20} color={"#494949"}>
+                  Last seen
+                </SectionTitle>
+              </View>
+            </View>
+
+            <View style={styles.plainButtonHolder}>
+              <PlainButton
+                fontSize={14}
+                color={"#7E7D7D"}
+                letterSpacing={0.77}
+                textDecorationLine={"normal"}
+              >
+                View all
+              </PlainButton>
+            </View>
+
+            <View style={styles.cardHolder}>
+              {locations.map((location) => (
+                <LocationCard
+                  onPress={() => navigation.navigate("Place", { location })}
+                  location={location}
+                  key={location.id}
+                />
+              ))}
+            </View>
+          </View>
         </View>
       </KeyboardAwareScrollView>
     );
