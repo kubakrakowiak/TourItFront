@@ -54,24 +54,32 @@ function AuthStack() {
 }
 
 function AuthenticatedStack() {
-    return (
-        <Stack.Navigator
-            screenOptions={{
-                headerStyle: { backgroundColor: "red" },
-                contentStyle: { backgroundColor: "red" },
-                headerShown: false,
-            }}
-        >
-            <Stack.Screen
-                name="BottomTabNavigator"
-                component={BottomTabNavigator}
-                options={{
-                    cardStyle: { backgroundColor: Colors.darkgreen },
-                }}
-            />
 
-        </Stack.Navigator>
-    );
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: "red" },
+        contentStyle: { backgroundColor: "red" },
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen
+        name="BottomTabNavigator"
+        component={BottomTabNavigator}
+        options={{
+          cardStyle: { backgroundColor: Colors.darkgreen },
+        }}
+      />
+      <Stack.Screen
+        name="Place"
+        component={PlaceScreen}
+        options={{
+          cardStyle: { backgroundColor: Colors.darkgreen },
+        }}
+      />
+    </Stack.Navigator>
+  );
+main
 }
 
 function BottomTabNavigator() {
