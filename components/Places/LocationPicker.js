@@ -4,10 +4,12 @@ import Button from "../ui/Button";
 import {Colors} from "react-native/Libraries/NewAppScreen";
 import {useState} from "react";
 import {getMapPreview} from "../../util/location";
+import {useNavigation} from "@react-navigation/native";
 
 function LocationPicker() {
-    const [pickedLocation, setPickedLocation] = useState()
+    const [pickedLocation, setPickedLocation] = useState(true)
 
+    const navigation = useNavigation();
     const [locationPermissionInformation, requestPermission] = useForegroundPermissions();
     async function verifyPermissions(){
         if (locationPermissionInformation.status === PermissionStatus.UNDETERMINED) {
@@ -40,7 +42,9 @@ function LocationPicker() {
         });
     }
 
-    function pickOnMapHandler() {}
+    function pickOnMapHandler() {
+        navigation.navigate('FullMap');
+    }
 
     let locationPreview = <Text>No location picked yet.</Text>
 
@@ -53,6 +57,8 @@ function LocationPicker() {
                }}
            />
     }
+
+    getLocationHandler();
 
     return (
         <View>
@@ -73,7 +79,7 @@ export default LocationPicker;
 const styles = StyleSheet.create({
     mapPreview: {
         width: '100%',
-        height: 200,
+        height: '100%',
         marginVertical: 8,
         justifyContent: 'center',
         alignItems: 'center',
