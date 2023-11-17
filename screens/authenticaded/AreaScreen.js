@@ -49,7 +49,7 @@ const WelcomeScreen = () => {
         alert(`Category ${categoryId} pressed`);
     };
 
-    const renderScrollView = () => {
+
         return (
             <ScrollView
                 style={styles.container}
@@ -106,26 +106,9 @@ const WelcomeScreen = () => {
                 </View>
             </ScrollView>
         );
-    };
 
-    const renderKeyboardAwareScrollView = () => {
-        return (
-            <KeyboardAwareScrollView
-                style={styles.container}
-                enableOnAndroid={true}
-                extraHeight={Platform.select({ android: 200, ios: 0 })}
-                scrollEnabled={false}
-            >
-                <View style={styles.header}>
-                    <Header headerText={"Krakow"} subHeaderText={"best places!"} />
-                </View>
-            </KeyboardAwareScrollView>
-        );
-    };
 
-    return Platform.OS === "ios"
-        ? renderKeyboardAwareScrollView()
-        : renderScrollView();
+
 };
 
 const styles = StyleSheet.create({
