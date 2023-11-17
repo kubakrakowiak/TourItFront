@@ -60,6 +60,8 @@ const WelcomeScreen = () => {
                     <Header headerText={"Krakow"} subHeaderText={"best places!"} />
                 </View>
 
+                <View style={styles.pageContent}>
+
                     <View style={styles.categoryContent}>
                         <View style={styles.textHolderContent}>
                             <SectionTitle fontSize={20} marginBottom={5}>
@@ -75,7 +77,7 @@ const WelcomeScreen = () => {
                         <View style={styles.cardContainer}>
                             <View style={styles.textCardHolderContent}>
                                 <SectionTitle fontSize={20} color={"#494949"}>
-                                    Last seen
+                                    All places in Kraków!
                                 </SectionTitle>
                             </View>
                         </View>
