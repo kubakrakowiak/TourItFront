@@ -19,6 +19,8 @@ import ProfileScreen from "./screens/authenticaded/ProfileScreen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FontAwesome5, FontAwesome } from "@expo/vector-icons";
 import PlaceScreen from "./screens/authenticaded/PlaceScreen.js";
+import AreaScreen from "./screens/authenticaded/AreaScreen";
+import FullMapScreen from "./screens/authenticaded/FullMapScreen";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -100,7 +102,7 @@ function BottomTabNavigator() {
       />
       <Tab.Screen
         name="Map"
-        component={ProfileScreen}
+        component={FullMapScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
             <FontAwesome5 name="map-marked-alt" size={size} color={color} />
@@ -109,7 +111,7 @@ function BottomTabNavigator() {
       />
       <Tab.Screen
         name="Area"
-        component={ProfileScreen}
+        component={AreaScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
             <FontAwesome name="heart" size={size} color={color} />
