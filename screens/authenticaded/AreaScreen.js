@@ -57,7 +57,7 @@ const WelcomeScreen = () => {
                 scrollEnabled={true}
             >
                 <View style={styles.header}>
-                    <Header headerText={"Krakow"} subHeaderText={"best places!"} />
+                    <Header headerText={"Kraków"} subHeaderText={"best places!"} />
                 </View>
 
                 <View style={styles.pageContent}>
