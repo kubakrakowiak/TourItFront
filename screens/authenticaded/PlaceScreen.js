@@ -59,18 +59,18 @@ const PlaceScreen = ({ navigation, route }) => {
         <BackButton onPress={goBack}></BackButton>
       </View>
 
-      <View style={styles.categoryContent}>
+      <View style={styles.placeContent}>
         <View style={styles.horizontalMenu}>
           <PlaceScreenImages onCategoryPress={handleCategoryPress} />
         </View>
       </View>
 
-      <View style={styles.cardHolderContainer}>
-        <View style={styles.cardHolder}>
+      <View style={styles.commentsHolderContainer}>
+        <View style={styles.placeNameHolder}>
           <PlaceCard location={location} key={location.id} />
         </View>
-        <View style={styles.cardContainer}>
-          <View style={styles.textCardHolderContent}>
+        <View style={styles.commentTitleContainer}>
+          <View style={styles.commentsCardHolderContent}>
             <SectionTitle fontSize={19} color={"#494949"}>
               Comments
             </SectionTitle>
@@ -110,26 +110,16 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginLeft: 20,
   },
-  categoryContent: {
+  placeContent: {
     flex: 1,
   },
   horizontalMenu: {
     alignItems: "flex-start",
   },
-  textHolderContent: {
-    textAlign: "left",
-    alignItems: "flex-start",
-    paddingLeft: "5%",
-  },
-  searchBar: {
-    flex: 1,
-    alignItems: "center",
-    paddingHorizontal: 16,
-  },
-  cardHolderContainer: {
+  commentsHolderContainer: {
     marginTop: 20,
   },
-  cardContainer: {
+  commentTitleContainer: {
     flex: 0.5,
     marginTop: 20,
   },
@@ -140,10 +130,7 @@ const styles = StyleSheet.create({
     right: 15,
     marginBottom: 5,
   },
-  cardHolder: {
-    flex: 4,
-  },
-  textCardHolderContent: {
+  commentsCardHolderContent: {
     textAlign: "left",
     alignItems: "flex-start",
     paddingLeft: "3%",
