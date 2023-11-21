@@ -13,7 +13,7 @@ const window = Dimensions.get("window");
 const standardScreenWidth = 375;
 const scaleWidth = window.width / standardScreenWidth;
 
-const categories = [
+const placesImage = [
   { id: "kopalniaSoli1", image: require("../../assets/kopalniasoli1.jpeg") },
   { id: "kopalniaSoli2", image: require("../../assets/kopalniasoli2.jpeg") },
   { id: "kopalniaSoli3", image: require("../../assets/kopalniasoli3.jpeg") },
@@ -27,13 +27,13 @@ const HorizontalMenu = ({ onCategoryPress }) => {
         showsHorizontalScrollIndicator={false}
         style={{ flexGrow: 0 }}
       >
-        {categories.map((category) => (
+        {placesImage.map((place) => (
           <TouchableOpacity
-            key={category.id}
-            onPress={() => onCategoryPress(category.id)}
-            style={styles.categoryItem}
+            key={place.id}
+            onPress={() => onCategoryPress(place.id)}
+            style={styles.placeItem}
           >
-            <Image source={category.image} style={styles.categoryImage} />
+            <Image source={category.image} style={styles.placeImage} />
           </TouchableOpacity>
         ))}
       </ScrollView>
@@ -47,12 +47,12 @@ const styles = StyleSheet.create({
     marginLeft: 12,
 
   },
-  categoryItem: {
+  placeItem: {
     alignItems: "center",
     marginRight: 16,
     outlineStyle: "none",
   },
-  categoryImage: {
+  placeImage: {
     width: 307 * scaleWidth,
     height: 344 * scaleWidth,
     borderRadius: 35,
