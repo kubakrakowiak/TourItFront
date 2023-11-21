@@ -33,7 +33,7 @@ const HorizontalMenu = ({ onCategoryPress }) => {
             onPress={() => onCategoryPress(place.id)}
             style={styles.placeItem}
           >
-            <Image source={category.image} style={styles.placeImage} />
+            <Image source={place.image} style={styles.placeImage} />
           </TouchableOpacity>
         ))}
       </ScrollView>
