@@ -135,7 +135,7 @@ function Navigation() {
   const authCtx = useContext(AuthContext);
   return (
     <NavigationContainer>
-      {authCtx.isAuthenticated ? <AuthenticatedStack /> : <AuthStack />}
+      {authCtx.isAuthenticated ? <AuthStack /> : <AuthenticatedStack /> }
     </NavigationContainer>
   );
 }
