@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, View, ScrollView } from "react-native";
 import SectionTitle from "../../components/ui/SectionTitle";
 import PlainButton from "../../components/ui/PlainButton";
@@ -6,6 +6,7 @@ import PlaceScreenImages from "../../components/partials/PlaceScreenImages.js";
 import BackButton from "../../components/ui/BackButton";
 import PlaceCard from "../../components/ui/PlaceCard.js";
 import CommentCard from "../../components/ui/CommentCard.js";
+import AddCommentSlider from "../../components/ui/AddCommentSlider.js";
 
 const comments = [
   {
@@ -40,9 +41,17 @@ const comments = [
 ];
 
 const PlaceScreen = ({ navigation, route }) => {
+  const [sliderVisible, setSliderVisible] = useState(false);
   const location = route.params.location;
+
   const handleCategoryPress = (categoryId) => {
     alert(`Category ${categoryId} pressed`);
+  };
+
+  const handleRatingSubmit = (rating, comment) => {
+    console.log("Rating:", rating);
+    console.log("Comment:", comment);
+    setSliderVisible(false); 
   };
 
   const goBack = () => {
@@ -83,10 +92,21 @@ const PlaceScreen = ({ navigation, route }) => {
             color={"#7E7D7D"}
             letterSpacing={0.77}
             textDecorationLine={"none"}
+            onPress={() => setSliderVisible(true)}
           >
             Add Comment
           </PlainButton>
         </View>
+
+        {sliderVisible && (
+          <AddCommentSlider
+            onSubmit={handleRatingSubmit}
+            onClose={() => setSliderVisible(false)}
+            userName="Janina Nowak"
+            userAvatar={require("../../assets/avatar.jpeg")}
+          />
+        )}
+
         <View>
           {comments.map((comment) => (
             <CommentCard comment={comment} key={comment.id} />
