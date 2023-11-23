@@ -1,114 +1,93 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
     StyleSheet,
     View,
-    Dimensions,
     ScrollView,
-    KeyboardAvoidingView,
-    Platform,
 } from "react-native";
 import Header from "../../components/partials/Header";
-import InputText from "../../components/ui/InputText";
 import LocationCard from "../../components/ui/LocationCard";
 import SectionTitle from "../../components/ui/SectionTitle";
 import HorizontalMenu from "../../components/partials/HorizontalMenu";
 import PlainButton from "../../components/ui/PlainButton";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-const { width, height } = Dimensions.get("window");
+import { getNearestLocations } from "../../http"; // Import funkcji getNearestLocations
 
-const locations = [
-    {
-        image: require("../../assets/sniezka.jpeg"),
-        name: "Poland",
-        rating: 4.9,
-        city: "Kraków",
-        isLiked: false,
-        id: "id",
-    },
-    {
-        image: require("../../assets/malbork.jpeg"),
-        name: "Poland",
-        rating: 4.6,
-        city: "Poznań",
-        isLiked: false,
-        id: "id",
-    },
-    {
-        image: require("../../assets/suntago.jpeg"),
-        name: "Poland",
-        rating: 4.1,
-        city: "Warszawa",
-        isLiked: false,
-        id: "id",
-    },
-];
+const AreaScreen = () => {
+    const [locations, setLocations] = useState([]); // Stan dla lokacji
 
-const WelcomeScreen = () => {
+    useEffect(() => {
+        // Pobieranie danych przy montowaniu komponentu
+        const xCoord = 1; // Przykładowe współrzędne, do zmiany w zależności od potrzeb
+        const yCoord = 1;
+
+        getNearestLocations(xCoord, yCoord)
+            .then(data => {
+                setLocations(data); // Aktualizacja stanu lokacji
+            })
+            .catch(error => {
+                console.error("Błąd podczas pobierania lokacji", error);
+            });
+    }, []);
+
     const handleCategoryPress = (categoryId) => {
         alert(`Category ${categoryId} pressed`);
     };
 
+    return (
+        <ScrollView
+            style={styles.container}
+            keyboardShouldPersistTaps="handled"
+            scrollEnabled={true}
+        >
+            <View style={styles.header}>
+                <Header headerText={"Kraków"} subHeaderText={"best places!"} />
+            </View>
 
-        return (
-            <ScrollView
-                style={styles.container}
-                keyboardShouldPersistTaps="handled"
-                scrollEnabled={true}
-            >
-                <View style={styles.header}>
-                    <Header headerText={"Kraków"} subHeaderText={"best places!"} />
+            <View style={styles.pageContent}>
+                <View style={styles.categoryContent}>
+                    <View style={styles.textHolderContent}>
+                        <SectionTitle fontSize={20} marginBottom={5}>
+                            Category
+                        </SectionTitle>
+                    </View>
+                    <View style={styles.horizontalMenu}>
+                        <HorizontalMenu onCategoryPress={handleCategoryPress} />
+                    </View>
                 </View>
 
-                <View style={styles.pageContent}>
-
-                    <View style={styles.categoryContent}>
-                        <View style={styles.textHolderContent}>
-                            <SectionTitle fontSize={20} marginBottom={5}>
-                                Category
+                <View style={styles.cardHolderContainer}>
+                    <View style={styles.cardContainer}>
+                        <View style={styles.textCardHolderContent}>
+                            <SectionTitle fontSize={20} color={"#494949"}>
+                                All places in Kraków!
                             </SectionTitle>
                         </View>
-                        <View style={styles.horizontalMenu}>
-                            <HorizontalMenu onCategoryPress={handleCategoryPress} />
-                        </View>
                     </View>
 
-                    <View style={styles.cardHolderContainer}>
-                        <View style={styles.cardContainer}>
-                            <View style={styles.textCardHolderContent}>
-                                <SectionTitle fontSize={20} color={"#494949"}>
-                                    All places in Kraków!
-                                </SectionTitle>
-                            </View>
-                        </View>
+                    <View style={styles.plainButtonHolder}>
+                        <PlainButton
+                            fontSize={14}
+                            color={"#7E7D7D"}
+                            letterSpacing={0.77}
+                            textDecorationLine={"normal"}
+                        >
+                            Sort by
+                        </PlainButton>
+                    </View>
 
-                        <View style={styles.plainButtonHolder}>
-                            <PlainButton
-                                fontSize={14}
-                                color={"#7E7D7D"}
-                                letterSpacing={0.77}
-                                textDecorationLine={"normal"}
-                            >
-                                Sort by
-                            </PlainButton>
-                        </View>
-
-                        <View style={styles.cardHolder}>
-                            {locations.map((location) => (
-                                <LocationCard
-                                    onPress={() => alert("test")}
-                                    location={location}
-                                    key={location.id}
-                                />
-                            ))}
-                        </View>
+                    <View style={styles.cardHolder}>
+                        {locations.map((location) => (
+                            <LocationCard
+                                onPress={() => alert("test")}
+                                location={location}
+                                key={location.id}
+                            />
+                        ))}
                     </View>
                 </View>
-            </ScrollView>
-        );
-
-
-
+            </View>
+        </ScrollView>
+    );
 };
 
 const styles = StyleSheet.create({
@@ -122,10 +101,6 @@ const styles = StyleSheet.create({
     pageContent: {
         flex: 5,
     },
-    searchContent: {
-        flex: 1.5,
-        bottom: 20,
-    },
     categoryContent: {
         flex: 1.8,
     },
@@ -136,11 +111,6 @@ const styles = StyleSheet.create({
         textAlign: "left",
         alignItems: "flex-start",
         paddingLeft: "5%",
-    },
-    searchBar: {
-        flex: 1,
-        alignItems: "center",
-        paddingHorizontal: 16,
     },
     cardHolderContainer: {
         flex: 6,
@@ -167,4 +137,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default WelcomeScreen;
+export default AreaScreen;

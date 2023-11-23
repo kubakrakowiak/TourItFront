@@ -31,7 +31,14 @@ export async function getNearestLocations(xCoord, yCoord) {
                 'Content-Type': 'application/json'
             }
         });
-        return response.data;
+        return response.data.map(item => ({
+            image: require(`../../assets/${item.imageName}.jpeg`),
+            name: item.name,
+            rating: item.rating,
+            city: item.city,
+            isLiked: false,
+            id: item.id
+        }));
     } catch (error) {
         console.error('Failed to fetch nearest locations', error);
         throw error;

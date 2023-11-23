@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -15,42 +15,32 @@ import HorizontalMenu from "../../components/partials/HorizontalMenu";
 import PlainButton from "../../components/ui/PlainButton";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
+import { getNearestLocations } from "util/http"; // Import funkcji getNearestLocations
+
 const { width, height } = Dimensions.get("window");
 
-const locations = [
-  {
-    image: require("../../assets/sniezka.jpeg"),
-    name: "Molo",
-    rating: 4.9,
-    city: "Sopot",
-    isLiked: false,
-    id: "id",
-  },
-  {
-    image: require("../../assets/malbork.jpeg"),
-    name: "Zamek w Malborku",
-    rating: 4.6,
-    city: "Malbork",
-    isLiked: false,
-    id: "id",
-  },
-  {
-    image: require("../../assets/suntago.jpeg"),
-    name: "Suntago",
-    rating: 4.1,
-    city: "Warszawa",
-    isLiked: false,
-    id: "id",
-  },
-];
-
 const WelcomeScreen = ({ navigation }) => {
+  const [locations, setLocations] = useState([]); // Stan dla lokacji
+
+  useEffect(() => {
+    // Pobieranie danych przy montowaniu komponentu
+    const xCoord = 1; // Przykładowe współrzędne, do zmiany w zależności od potrzeb
+    const yCoord = 1;
+
+    getNearestLocations(xCoord, yCoord)
+        .then(data => {
+          setLocations(data); // Aktualizacja stanu lokacji
+        })
+        .catch(error => {
+          console.error("Błąd podczas pobierania lokacji", error);
+        });
+  }, []);
+
   const handleCategoryPress = (categoryId) => {
     alert(`Category ${categoryId} pressed`);
   };
 
-  const WelcomeScreenContent = ({}) => {
-    return (
+  const WelcomeScreenContent = () => (
       <View>
         <View style={styles.header}>
           <Header headerText={"Welcome"} subHeaderText={"back!"} />
@@ -66,13 +56,13 @@ const WelcomeScreen = ({ navigation }) => {
 
             <View style={styles.searchBar}>
               <InputText
-                textInputConfig={{
-                  placeholder: "Search",
-                  keyboardType: "default",
-                }}
-                icon={"search"}
-                textTransform="capitalize"
-                containerWidth="95%"
+                  textInputConfig={{
+                    placeholder: "Search",
+                    keyboardType: "default",
+                  }}
+                  icon={"search"}
+                  textTransform="capitalize"
+                  containerWidth="95%"
               />
             </View>
           </View>
@@ -99,10 +89,10 @@ const WelcomeScreen = ({ navigation }) => {
 
             <View style={styles.plainButtonHolder}>
               <PlainButton
-                fontSize={14}
-                color={"#7E7D7D"}
-                letterSpacing={0.77}
-                textDecorationLine={"normal"}
+                  fontSize={14}
+                  color={"#7E7D7D"}
+                  letterSpacing={0.77}
+                  textDecorationLine={"normal"}
               >
                 View all
               </PlainButton>
@@ -110,47 +100,36 @@ const WelcomeScreen = ({ navigation }) => {
 
             <View style={styles.cardHolder}>
               {locations.map((location) => (
-                <LocationCard
-                  onPress={() => navigation.navigate("Place", { location })}
-                  location={location}
-                  key={location.id}
-                />
+                  <LocationCard
+                      onPress={() => navigation.navigate("Place", { location })}
+                      location={location}
+                      key={location.id}
+                  />
               ))}
             </View>
           </View>
         </View>
       </View>
-    );
-  };
+  );
 
-  const renderScrollView = () => {
-    return (
-      <ScrollView
-        style={styles.container}
-        keyboardShouldPersistTaps="handled"
-        scrollEnabled={true}
-      >
-        <WelcomeScreenContent />
-      </ScrollView>
-    );
-  };
-
-  const renderKeyboardAwareScrollView = () => {
-    return (
+  return Platform.OS === "ios" ? (
       <KeyboardAwareScrollView
-        style={styles.container}
-        enableOnAndroid={true}
-        extraHeight={Platform.select({ android: 200, ios: 0 })}
-        scrollEnabled={false}
+          style={styles.container}
+          enableOnAndroid={true}
+          extraHeight={Platform.select({ android: 200, ios: 0 })}
+          scrollEnabled={false}
       >
         <WelcomeScreenContent />
       </KeyboardAwareScrollView>
-    );
-  };
-
-  return Platform.OS === "ios"
-    ? renderKeyboardAwareScrollView()
-    : renderScrollView();
+  ) : (
+      <ScrollView
+          style={styles.container}
+          keyboardShouldPersistTaps="handled"
+          scrollEnabled={true}
+      >
+        <WelcomeScreenContent />
+      </ScrollView>
+  );
 };
 
 const styles = StyleSheet.create({
