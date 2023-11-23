@@ -1,5 +1,5 @@
 import axios from 'axios';
-const backendUrl = "http://127.0.0.1:8000/"
+const backendUrl = "http://10.0.2.2:8000/"
 
 export async function registerUser(registerUserData){
     try {
@@ -18,5 +18,22 @@ export async function loginUser(loginUserData){
     }catch (error){
         console.error('Login failed', error);
         throw  error;
+    }
+}
+export async function getNearestLocations(xCoord, yCoord) {
+    try {
+        const response = await axios.get(backendUrl + 'api/nearest-locations/', {
+            params: {
+                x_coord: xCoord,
+                y_coord: yCoord
+            },
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Failed to fetch nearest locations', error);
+        throw error;
     }
 }
