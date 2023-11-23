@@ -20,23 +20,23 @@ const { width, height } = Dimensions.get("window");
 const locations = [
   {
     image: require("../../assets/sniezka.jpeg"),
-    name: "Poland",
+    name: "Molo",
     rating: 4.9,
-    city: "Kraków",
+    city: "Sopot",
     isLiked: false,
     id: "id",
   },
   {
     image: require("../../assets/malbork.jpeg"),
-    name: "Poland",
+    name: "Zamek w Malborku",
     rating: 4.6,
-    city: "Poznań",
+    city: "Malbork",
     isLiked: false,
     id: "id",
   },
   {
     image: require("../../assets/suntago.jpeg"),
-    name: "Poland",
+    name: "Suntago",
     rating: 4.1,
     city: "Warszawa",
     isLiked: false,
@@ -52,76 +52,76 @@ const WelcomeScreen = ({ navigation }) => {
   const WelcomeScreenContent = ({}) => {
     return (
       <View>
-      <View style={styles.header}>
-      <Header headerText={"Welcome"} subHeaderText={"back!"} />
-    </View>
-
-    <View style={styles.pageContent}>
-      <View style={styles.searchContent}>
-        <View style={styles.textHolderContent}>
-          <SectionTitle fontSize={20}>
-            Where do you want to go?
-          </SectionTitle>
+        <View style={styles.header}>
+          <Header headerText={"Welcome"} subHeaderText={"back!"} />
         </View>
 
-        <View style={styles.searchBar}>
-          <InputText
-            textInputConfig={{
-              placeholder: "Search",
-              keyboardType: "default",
-            }}
-            icon={"search"}
-            textTransform="capitalize"
-            containerWidth="95%"
-          />
-        </View>
-      </View>
+        <View style={styles.pageContent}>
+          <View style={styles.searchContent}>
+            <View style={styles.textHolderContent}>
+              <SectionTitle fontSize={20}>
+                Where do you want to go?
+              </SectionTitle>
+            </View>
 
-      <View style={styles.categoryContent}>
-        <View style={styles.textHolderContent}>
-          <SectionTitle fontSize={20} marginBottom={5}>
-            Category
-          </SectionTitle>
-        </View>
-        <View style={styles.horizontalMenu}>
-          <HorizontalMenu onCategoryPress={handleCategoryPress} />
-        </View>
-      </View>
+            <View style={styles.searchBar}>
+              <InputText
+                textInputConfig={{
+                  placeholder: "Search",
+                  keyboardType: "default",
+                }}
+                icon={"search"}
+                textTransform="capitalize"
+                containerWidth="95%"
+              />
+            </View>
+          </View>
 
-      <View style={styles.cardHolderContainer}>
-        <View style={styles.cardContainer}>
-          <View style={styles.textCardHolderContent}>
-            <SectionTitle fontSize={20} color={"#494949"}>
-              Last seen
-            </SectionTitle>
+          <View style={styles.categoryContent}>
+            <View style={styles.textHolderContent}>
+              <SectionTitle fontSize={20} marginBottom={5}>
+                Category
+              </SectionTitle>
+            </View>
+            <View style={styles.horizontalMenu}>
+              <HorizontalMenu onCategoryPress={handleCategoryPress} />
+            </View>
+          </View>
+
+          <View style={styles.cardHolderContainer}>
+            <View style={styles.cardContainer}>
+              <View style={styles.textCardHolderContent}>
+                <SectionTitle fontSize={20} color={"#494949"}>
+                  Last seen
+                </SectionTitle>
+              </View>
+            </View>
+
+            <View style={styles.plainButtonHolder}>
+              <PlainButton
+                fontSize={14}
+                color={"#7E7D7D"}
+                letterSpacing={0.77}
+                textDecorationLine={"normal"}
+              >
+                View all
+              </PlainButton>
+            </View>
+
+            <View style={styles.cardHolder}>
+              {locations.map((location) => (
+                <LocationCard
+                  onPress={() => navigation.navigate("Place", { location })}
+                  location={location}
+                  key={location.id}
+                />
+              ))}
+            </View>
           </View>
         </View>
-
-        <View style={styles.plainButtonHolder}>
-          <PlainButton
-            fontSize={14}
-            color={"#7E7D7D"}
-            letterSpacing={0.77}
-            textDecorationLine={"normal"}
-          >
-            View all
-          </PlainButton>
-        </View>
-
-        <View style={styles.cardHolder}>
-          {locations.map((location) => (
-            <LocationCard
-              onPress={() => navigation.navigate("Place", { location })}
-              location={location}
-              key={location.id}
-            />
-          ))}
-        </View>
       </View>
-    </View>
-    </View>
-    )
-    };
+    );
+  };
 
   const renderScrollView = () => {
     return (
@@ -130,7 +130,7 @@ const WelcomeScreen = ({ navigation }) => {
         keyboardShouldPersistTaps="handled"
         scrollEnabled={true}
       >
-        <WelcomeScreenContent/>
+        <WelcomeScreenContent />
       </ScrollView>
     );
   };
@@ -143,7 +143,7 @@ const WelcomeScreen = ({ navigation }) => {
         extraHeight={Platform.select({ android: 200, ios: 0 })}
         scrollEnabled={false}
       >
-        <WelcomeScreenContent/>
+        <WelcomeScreenContent />
       </KeyboardAwareScrollView>
     );
   };
