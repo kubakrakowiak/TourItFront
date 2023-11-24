@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Modal,
   Image,
+  TouchableWithoutFeedback,
 } from "react-native";
 import UserStarRating from "./UserStarRating"; // Ensure this path is correct
 import CommentStarRating from "./CommentStarRating";
@@ -28,11 +29,15 @@ const AddCommentSlider = ({ onSubmit, onClose, userName, userAvatar }) => {
       visible={true}
       onRequestClose={onClose}
     >
+      <TouchableWithoutFeedback onPress={onClose}>
+        <View style={styles.modalOverlay} />
+      </TouchableWithoutFeedback>
+
       <View style={styles.modalView}>
         <View style={styles.userInfo}>
           <View style={styles.userAvatar}>
             <Image
-              source={{ Image: {userAvatar}}}
+              source={require("../../assets/avatar.jpeg")}
               style={styles.avatar}
             />
           </View>
@@ -54,9 +59,6 @@ const AddCommentSlider = ({ onSubmit, onClose, userName, userAvatar }) => {
         <TouchableOpacity onPress={handleSubmit} style={styles.button}>
           <Text style={styles.buttonText}>Add Comment</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={onClose} style={styles.closeButton}>
-          <Text style={styles.buttonText}>Close</Text>
-        </TouchableOpacity>
       </View>
     </Modal>
   );
@@ -66,34 +68,31 @@ const styles = StyleSheet.create({
   modalView: {
     marginTop: "auto",
     backgroundColor: "white",
-    borderRadius: 20,
+    borderRadius: 40,
     padding: 15,
-
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
+    flex:1,
+  },
+  modalOverlay: {
+    flex: 2,
   },
   userInfo: {
     flexDirection: "row",
-    alignItems: "flex-start",
+    alignItems: "center",
     marginBottom: 10,
-    alignContent: "flex-start",
   },
-
+  userAvatar:{
+    marginRight: 15,
+  },
   avatar: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
+    width: 55,
+    height: 55,
+    borderRadius: 27.5,
     marginRight: 5,
   },
   userName: {
     fontSize: 16,
     fontWeight: "bold",
+    marginBottom: 5,
   },
   input: {
     borderWidth: 1,
