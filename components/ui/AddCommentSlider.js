@@ -9,17 +9,17 @@ import {
   Image,
   TouchableWithoutFeedback,
 } from "react-native";
-import UserStarRating from "./UserStarRating"; // Ensure this path is correct
 import CommentStarRating from "./CommentStarRating";
+import { Colors } from "../../constans/styles";
 
 const AddCommentSlider = ({ onSubmit, onClose, userName, userAvatar }) => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
 
   const handleSubmit = () => {
-    onSubmit(rating, comment); // Pass the rating and comment up to the parent component
-    setRating(0); // Reset the rating
-    setComment(""); // Reset the comment
+    onSubmit(rating, comment); 
+    setRating(0); 
+    setComment(""); 
   };
 
   return (
@@ -34,6 +34,7 @@ const AddCommentSlider = ({ onSubmit, onClose, userName, userAvatar }) => {
       </TouchableWithoutFeedback>
 
       <View style={styles.modalView}>
+      <TouchableOpacity onPress={handleSubmit} style={styles.bar}/>
         <View style={styles.userInfo}>
           <View style={styles.userAvatar}>
             <Image
@@ -68,12 +69,20 @@ const styles = StyleSheet.create({
   modalView: {
     marginTop: "auto",
     backgroundColor: "white",
-    borderRadius: 40,
+    borderTopLeftRadius: 40,
+    borderTopRightRadius: 40,
     padding: 15,
-    flex:1,
   },
   modalOverlay: {
     flex: 2,
+  },
+  bar:{
+    width: '35%',
+    height: 5,
+    borderRadius: 5,
+    backgroundColor: '#ccc',
+    alignSelf: 'center',
+    marginBottom: 30,
   },
   userInfo: {
     flexDirection: "row",
@@ -104,10 +113,15 @@ const styles = StyleSheet.create({
     textAlignVertical: "top",
   },
   button: {
-    backgroundColor: "#007bff",
     padding: 15,
-    borderRadius: 5,
-    marginTop: 10,
+    marginTop: 20,
+    borderRadius: 16,
+    backgroundColor: Colors.darkgreen,
+    shadowColor: Colors.shadowColor,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.8,
+    shadowRadius: 4,
+    elevation: 4,
   },
   buttonText: {
     color: "#fff",
