@@ -17,9 +17,9 @@ const AddCommentSlider = ({ onSubmit, onClose, userName, userAvatar }) => {
   const [comment, setComment] = useState("");
 
   const handleSubmit = () => {
-    onSubmit(rating, comment); 
-    setRating(0); 
-    setComment(""); 
+    onSubmit(rating, comment);
+    setRating(0);
+    setComment("");
   };
 
   return (
@@ -34,7 +34,7 @@ const AddCommentSlider = ({ onSubmit, onClose, userName, userAvatar }) => {
       </TouchableWithoutFeedback>
 
       <View style={styles.modalView}>
-      <TouchableOpacity onPress={handleSubmit} style={styles.bar}/>
+        <TouchableOpacity onPress={handleSubmit} style={styles.bar} />
         <View style={styles.userInfo}>
           <View style={styles.userAvatar}>
             <Image
@@ -76,12 +76,12 @@ const styles = StyleSheet.create({
   modalOverlay: {
     flex: 2,
   },
-  bar:{
-    width: '35%',
+  bar: {
+    width: "35%",
     height: 5,
     borderRadius: 5,
-    backgroundColor: '#ccc',
-    alignSelf: 'center',
+    backgroundColor: "#ccc",
+    alignSelf: "center",
     marginBottom: 30,
   },
   userInfo: {
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 10,
   },
-  userAvatar:{
+  userAvatar: {
     marginRight: 15,
   },
   avatar: {
