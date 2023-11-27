@@ -10,7 +10,7 @@ import SectionTitle from "../../components/ui/SectionTitle";
 import HorizontalMenu from "../../components/partials/HorizontalMenu";
 import PlainButton from "../../components/ui/PlainButton";
 
-import { getNearestLocations } from "../../http"; // Import funkcji getNearestLocations
+import { getNearestLocations } from "../../util/http"; // Import funkcji getNearestLocations
 
 const AreaScreen = () => {
     const [locations, setLocations] = useState([]); // Stan dla lokacji

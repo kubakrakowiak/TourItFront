@@ -15,7 +15,7 @@ import HorizontalMenu from "../../components/partials/HorizontalMenu";
 import PlainButton from "../../components/ui/PlainButton";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-import { getNearestLocations } from "util/http"; // Import funkcji getNearestLocations
+import { getNearestLocations } from "../../util/http"; // Import funkcji getNearestLocations
 
 const { width, height } = Dimensions.get("window");
 
