@@ -20,3 +20,14 @@ export async function loginUser(loginUserData){
         throw  error;
     }
 }
+
+export async function getLocationData(id){
+    try {
+        const url = backendUrl + 'api/get-location/?id=' + id;
+        const response = await axios.get(url);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching location data', error);
+        throw error;
+    }
+}
