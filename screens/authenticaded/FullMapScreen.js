@@ -1,12 +1,16 @@
-import MapView, { Marker } from "react-native-maps";
-import { Alert, StyleSheet } from "react-native";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
+import MapView, { Marker } from 'react-native-maps';
+import { StyleSheet, Alert } from 'react-native';
 import { useForegroundPermissions } from 'expo-location';
+import * as Location from 'expo-location';
 
 
-function Map() {
+import { getNearestLocations } from 'util/http.js';
+
+const FullMapScreen = () => {
     const [selectedLocation, setSelectedLocation] = useState(null);
     const [currentRegion, setCurrentRegion] = useState(null);
+    const [locations, setLocations] = useState([]);
 
     const [locationPermissionInformation, requestPermission] = useForegroundPermissions();
 
@@ -24,13 +28,20 @@ function Map() {
                 latitudeDelta: 0.0922,
                 longitudeDelta: 0.0421,
             });
+
+            // Pobieranie lokalizacji
+            try {
+                const nearestLocations = await getNearestLocations(location.coords.latitude, location.coords.longitude);
+                setLocations(nearestLocations);
+            } catch (error) {
+                console.error('Error fetching locations:', error);
+            }
         })();
     }, []);
 
-    async function verifyPermissions(){
+    async function verifyPermissions() {
         if (locationPermissionInformation.status === Location.PermissionStatus.UNDETERMINED) {
             const permissionResponse = await requestPermission();
-
             return permissionResponse.granted;
         }
 
@@ -48,7 +59,6 @@ function Map() {
     function selectLocationHandler(event) {
         const lat = event.nativeEvent.coordinate.latitude;
         const lng = event.nativeEvent.coordinate.longitude;
-
         setSelectedLocation({ latitude: lat, longitude: lng });
     }
 
@@ -61,11 +71,19 @@ function Map() {
             {selectedLocation && (
                 <Marker title="Selected Location" coordinate={selectedLocation} />
             )}
+
+            {locations.map((location, index) => (
+                <Marker
+                    key={index}
+                    title={location.name}
+                    coordinate={{ latitude: location.latitude, longitude: location.longitude }}
+                />
+            ))}
         </MapView>
     );
-}
+};
 
-export default Map;
+export default FullMapScreen;
 
 const styles = StyleSheet.create({
     map: {
