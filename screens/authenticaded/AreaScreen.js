@@ -1,38 +1,40 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
     StyleSheet,
     View,
+    Dimensions,
     ScrollView,
+    KeyboardAvoidingView,
+    Platform,
 } from "react-native";
 import Header from "../../components/partials/Header";
+import InputText from "../../components/ui/InputText";
 import LocationCard from "../../components/ui/LocationCard";
 import SectionTitle from "../../components/ui/SectionTitle";
 import HorizontalMenu from "../../components/partials/HorizontalMenu";
 import PlainButton from "../../components/ui/PlainButton";
-import useFetchLocations from 'hooks/useFetchLocations';
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import useFetchLocations from "../../hooks/useFetchLocations";
+
+const { width, height } = Dimensions.get("window");
 
 
-import { getNearestLocations } from "../../util/http";
+const WelcomeScreen = () => {
 
-const AreaScreen = () => {
-    const [locations, setLocations] = useState([]);
+    const { locations, isLoading, error } = useFetchLocations(1, 1);
 
-    useEffect(() => {
-        const xCoord = 1;
-        const yCoord = 1;
-
-        getNearestLocations(xCoord, yCoord)
-            .then(data => {
-                setLocations(data);
-            })
-            .catch(error => {
-                console.error("Błąd podczas pobierania lokacji", error);
-            });
-    }, []);
-
+    const processedLocations = locations.map(location => ({
+        //image: require("../../assets/sniezka.jpeg"),
+        id: location.id,
+        name: location.name,
+        rating: location.average_rating,
+        city: location.simple_address,
+        isLiked: false,
+    }));
     const handleCategoryPress = (categoryId) => {
         alert(`Category ${categoryId} pressed`);
     };
+
 
     return (
         <ScrollView
@@ -45,6 +47,7 @@ const AreaScreen = () => {
             </View>
 
             <View style={styles.pageContent}>
+
                 <View style={styles.categoryContent}>
                     <View style={styles.textHolderContent}>
                         <SectionTitle fontSize={20} marginBottom={5}>
@@ -77,7 +80,7 @@ const AreaScreen = () => {
                     </View>
 
                     <View style={styles.cardHolder}>
-                        {locations.map((location) => (
+                        {processedLocations.map(location => (
                             <LocationCard
                                 onPress={() => alert("test")}
                                 location={location}
@@ -89,6 +92,9 @@ const AreaScreen = () => {
             </View>
         </ScrollView>
     );
+
+
+
 };
 
 const styles = StyleSheet.create({
@@ -102,6 +108,10 @@ const styles = StyleSheet.create({
     pageContent: {
         flex: 5,
     },
+    searchContent: {
+        flex: 1.5,
+        bottom: 20,
+    },
     categoryContent: {
         flex: 1.8,
     },
@@ -112,6 +122,11 @@ const styles = StyleSheet.create({
         textAlign: "left",
         alignItems: "flex-start",
         paddingLeft: "5%",
+    },
+    searchBar: {
+        flex: 1,
+        alignItems: "center",
+        paddingHorizontal: 16,
     },
     cardHolderContainer: {
         flex: 6,
@@ -138,4 +153,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default AreaScreen;
+export default WelcomeScreen;
