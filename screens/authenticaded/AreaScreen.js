@@ -9,6 +9,8 @@ import LocationCard from "../../components/ui/LocationCard";
 import SectionTitle from "../../components/ui/SectionTitle";
 import HorizontalMenu from "../../components/partials/HorizontalMenu";
 import PlainButton from "../../components/ui/PlainButton";
+import useFetchLocations from 'hooks/useFetchLocations';
+
 
 import { getNearestLocations } from "../../util/http";
 
