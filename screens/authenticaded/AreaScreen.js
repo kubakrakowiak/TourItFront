@@ -10,19 +10,18 @@ import SectionTitle from "../../components/ui/SectionTitle";
 import HorizontalMenu from "../../components/partials/HorizontalMenu";
 import PlainButton from "../../components/ui/PlainButton";
 
-import { getNearestLocations } from "../../util/http"; // Import funkcji getNearestLocations
+import { getNearestLocations } from "../../util/http";
 
 const AreaScreen = () => {
-    const [locations, setLocations] = useState([]); // Stan dla lokacji
+    const [locations, setLocations] = useState([]);
 
     useEffect(() => {
-        // Pobieranie danych przy montowaniu komponentu
-        const xCoord = 1; // Przykładowe współrzędne, do zmiany w zależności od potrzeb
+        const xCoord = 1;
         const yCoord = 1;
 
         getNearestLocations(xCoord, yCoord)
             .then(data => {
-                setLocations(data); // Aktualizacja stanu lokacji
+                setLocations(data);
             })
             .catch(error => {
                 console.error("Błąd podczas pobierania lokacji", error);
