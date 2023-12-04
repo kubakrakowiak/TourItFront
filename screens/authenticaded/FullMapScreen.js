@@ -5,7 +5,7 @@ import { useForegroundPermissions } from 'expo-location';
 import * as Location from 'expo-location';
 
 
-import { getNearestLocations } from 'util/http.js';
+import { getNearestLocations } from '../../util/http';
 
 const FullMapScreen = () => {
     const [selectedLocation, setSelectedLocation] = useState(null);
@@ -29,7 +29,6 @@ const FullMapScreen = () => {
                 longitudeDelta: 0.0421,
             });
 
-            // Pobieranie lokalizacji
             try {
                 const nearestLocations = await getNearestLocations(location.coords.latitude, location.coords.longitude);
                 setLocations(nearestLocations);

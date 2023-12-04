@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../store/auth-context';
-import { fetchNearestLocations } from '../util/http';
+import { getNearestLocations } from '../util/http';
 
 const useFetchLocations = (xCoord, yCoord) => {
     const { token } = useContext(AuthContext);
@@ -14,7 +14,7 @@ const useFetchLocations = (xCoord, yCoord) => {
 
             setIsLoading(true);
             try {
-                const data = await fetchNearestLocations(token, xCoord, yCoord);
+                const data = await getNearestLocations(token, xCoord, yCoord);
                 setLocations(data);
             } catch (err) {
                 setError(err);

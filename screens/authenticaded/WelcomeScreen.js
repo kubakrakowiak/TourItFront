@@ -26,7 +26,7 @@ const WelcomeScreen = ({ navigation }) => {
   const { locations, isLoading, error } = useFetchLocations(1, 1);
 
   const processedLocations = locations.map(location => ({
-    //image: require("../../assets/sniezka.jpeg"),
+    image: require("../../assets/sniezka.jpeg"),
     id: location.id,
     name: location.name,
     rating: location.average_rating,
@@ -99,7 +99,7 @@ const WelcomeScreen = ({ navigation }) => {
               <View style={styles.cardHolder}>
                 {processedLocations.map(location => (
                     <LocationCard
-                        onPress={() => navigation.navigate("Place", { location })}
+                        onPress={() => navigation.navigate('Place', { locationId: location.id })}
                         location={location}
                         key={location.id}
                     />

@@ -15,12 +15,14 @@ import HorizontalMenu from "../../components/partials/HorizontalMenu";
 import PlainButton from "../../components/ui/PlainButton";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import useFetchLocations from "../../hooks/useFetchLocations";
+import { useNavigation } from '@react-navigation/native';
 
 const { width, height } = Dimensions.get("window");
 
 
 const WelcomeScreen = () => {
 
+    const navigation = useNavigation();
     const { locations, isLoading, error } = useFetchLocations(1, 1);
 
     const processedLocations = locations.map(location => ({
@@ -82,7 +84,7 @@ const WelcomeScreen = () => {
                     <View style={styles.cardHolder}>
                         {processedLocations.map(location => (
                             <LocationCard
-                                onPress={() => alert("test")}
+                                onPress={() => navigation.navigate('Place', { locationId: location.id })}
                                 location={location}
                                 key={location.id}
                             />

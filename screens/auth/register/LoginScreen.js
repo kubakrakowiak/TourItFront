@@ -17,6 +17,7 @@ const LoginScreen = ({navigation}) => {
   }
   async function loginHandler() {
     try {
+
       const loginResponse = await loginUser({
         username:username,
         password:password
