@@ -1,5 +1,5 @@
 import axios from 'axios';
-const backendUrl = "http://10.0.0.2:8000/"
+const backendUrl = "http://127.0.0.1:8000/"
 
 export async function registerUser(registerUserData){
     try {
@@ -30,6 +30,18 @@ export async function fetchNearestLocations(token, xCoord, yCoord) {
         return response.data;
     } catch (error) {
         console.error('Fetching nearest locations failed', error);
+        throw error;
+    }
+}
+
+
+export async function getLocationData(id){
+    try {
+        const url = backendUrl + 'api/get-location/?id=' + id;
+        const response = await axios.get(url);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching location data', error);
         throw error;
     }
 }
