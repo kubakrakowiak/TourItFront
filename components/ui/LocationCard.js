@@ -13,6 +13,9 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 
 function LocationCard({ onPress, location }) {
+ 
+  console.log(location)
+ 
   return (
     <Pressable
       style={({ pressed }) => [pressed && styles.pressed]}
@@ -23,7 +26,7 @@ function LocationCard({ onPress, location }) {
           <Image source={location.image} style={styles.locationImage} />
         </View>
         <View style={styles.dataContainer}>
-          <Text style={styles.locationTitle}>{location.city}</Text>
+          <Text style={styles.locationTitle}>{location.name}</Text>
           <View style={styles.rowDirection}>
             <FontAwesome5
               name={"map-marker-alt"}
@@ -31,7 +34,7 @@ function LocationCard({ onPress, location }) {
               size={15}
               bottom={3}
             />
-            <Text style={styles.locationPlace}>{location.name}</Text>
+            <Text style={styles.locationPlace}>{location.simple_address}</Text>
           </View>
           <View style={styles.rowDirection}>
             <FontAwesome name={"star"} color={"#FEA02F"} size={17} right={2} />

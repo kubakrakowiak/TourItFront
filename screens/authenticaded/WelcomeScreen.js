@@ -30,7 +30,7 @@ const WelcomeScreen = ({ navigation }) => {
     id: location.id,
     name: location.name,
     rating: location.average_rating,
-    city: location.simple_address,
+    simple_address: location.simple_address,
     isLiked: false,
   }));
   const handleCategoryPress = (categoryId) => {

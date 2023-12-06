@@ -34,7 +34,7 @@ const AddCommentSlider = ({ onSubmit, onClose, userName, userAvatar }) => {
       </TouchableWithoutFeedback>
 
       <View style={styles.modalView}>
-        <TouchableOpacity onPress={handleSubmit} style={styles.bar} />
+        <TouchableOpacity onPress={onClose} style={styles.bar} />
         <View style={styles.userInfo}>
           <View style={styles.userAvatar}>
             <Image
