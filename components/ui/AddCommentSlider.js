@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import CommentStarRating from "./CommentStarRating";
 import { Colors } from "../../constans/styles";
+import { useSharedValue, useAnimatedStyle, useAnimatedGestureHandler } from 'react-native-reanimated';
 
 const AddCommentSlider = ({ onSubmit, onClose, userName, userAvatar }) => {
   const [rating, setRating] = useState(0);
