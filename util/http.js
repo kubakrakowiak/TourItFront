@@ -1,5 +1,5 @@
 import axios from 'axios';
-const backendUrl = "http://10.0.2.2:8000/"
+const backendUrl = "http://126.0.0.1:8000/"
 
 export async function registerUser(registerUserData){
     try {
@@ -23,13 +23,13 @@ export async function loginUser(loginUserData){
 export async function getNearestLocations(token, xCoord, yCoord, latitudeDelta, longitudeDelta) {
     try {
         const response = await axios.get(`${backendUrl}api/nearest-locations/?x_coord=${xCoord}&y_coord=${yCoord}`, {
+            params: {
+                x_coord: xCoord,
+                y_coord: yCoord,
+                latitude_delta: latitudeDelta,
+                longitude_delta: longitudeDelta
+            },
             headers: {
-                params: {
-                    x_coord: xCoord,
-                    y_coord: yCoord,
-                    latitude_delta: latitudeDelta,
-                    longitude_delta: longitudeDelta
-                },
                 'Content-Type': 'application/json',
                 'Authorization': `Token ${token}`
             }
@@ -40,9 +40,14 @@ export async function getNearestLocations(token, xCoord, yCoord, latitudeDelta, 
         throw error;
     }
 }
-export async function getLocationDetails(locationId) {
+export async function getLocationDetails(locationId, token) {
     try {
-        const response = await axios.get(`${backendUrl}api/get-location/?id=${locationId}`);
+        const response = await axios.get(`${backendUrl}api/get-location/?id=${locationId}`,{
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Token ${token}`
+            }
+        });
         return response.data;
     } catch (error) {
         console.error('Fetching location details failed', error);

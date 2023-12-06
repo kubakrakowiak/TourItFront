@@ -14,7 +14,7 @@ const useFetchLocationDetails = (locationId) => {
 
             setIsLoading(true);
             try {
-                const data = await getLocationDetails(locationId);
+                const data = await getLocationDetails(locationId, token);
                 setLocationDetails(data);
             } catch (err) {
                 setError(err);

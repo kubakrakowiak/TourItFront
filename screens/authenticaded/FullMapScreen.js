@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import MapView, { Marker } from 'react-native-maps';
-import { StyleSheet, Alert } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useForegroundPermissions } from 'expo-location';
 import * as Location from 'expo-location';
@@ -11,7 +11,12 @@ import { getNearestLocations } from '../../util/http';
 const FullMapScreen = () => {
     const navigation = useNavigation();
     const [currentRegion, setCurrentRegion] = useState(null);
-    const [locations, setLocations, error] = useState([]);
+    const { locations, isLoading, error } = useFetchLocations(
+        currentRegion?.latitude,
+        currentRegion?.longitude,
+        currentRegion?.latitudeDelta,
+        currentRegion?.longitudeDelta
+    );
 
     const [locationPermissionInformation, requestPermission] = useForegroundPermissions();
 
@@ -46,10 +51,7 @@ const FullMapScreen = () => {
         }
 
         if (locationPermissionInformation.status === Location.PermissionStatus.DENIED) {
-            Alert.alert(
-                'Insufficient Permission!',
-                'You need to grant location permission to use this app.'
-            );
+            console.log('error')
             return false;
         }
 
@@ -61,15 +63,13 @@ const FullMapScreen = () => {
         navigation.navigate('Place', { locationId });
     };
     if (error){
-        Alert.alert('Location error', 'Error during fetching locations' [
-            {text: 'OK', onPress: () => console.log('OK Pressed')}
-            ]);
+        console.log(error);
     }
 
     return (
         <MapView
             style={styles.map}
-            initialRegion={currentRegion}
+            region={currentRegion}
             onRegionChangeComplete={(region) => {
                 setCurrentRegion(region);
             }}
@@ -77,13 +77,13 @@ const FullMapScreen = () => {
 
             {locations.map((location) => (
                 <Marker
-                    key={location.id}
+                    key={location.id.toString()}
                     title={location.name}
                     coordinate={{
                         latitude: location.x_coord,
                         longitude: location.y_coord,
                     }}
-                    onPress={() => selectLocationHandler(location.id)}
+                    onPress={() => navigation.navigate('Place', { locationId: location.id})}
                 />
             ))}
         </MapView>
