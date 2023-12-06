@@ -11,17 +11,45 @@ import {
 } from "react-native";
 import CommentStarRating from "./CommentStarRating";
 import { Colors } from "../../constans/styles";
-import { useSharedValue, useAnimatedStyle, useAnimatedGestureHandler } from 'react-native-reanimated';
+import { PanGestureHandler } from 'react-native-gesture-handler';
+import Animated, { useSharedValue, useAnimatedStyle, useAnimatedGestureHandler, withSpring } from 'react-native-reanimated';
+import { Dimensions } from 'react-native';
+
+const screenHeight = Dimensions.get('window').height;
+
+
 
 const AddCommentSlider = ({ onSubmit, onClose, userName, userAvatar }) => {
+  const [comment, setComment] = useState('');
   const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState("");
+  const translateY = useSharedValue(0);
+
+  const gestureHandler = useAnimatedGestureHandler({
+    onStart: (_, context) => {
+      context.startY = translateY.value;
+    },
+    onActive: (event, context) => {
+      translateY.value = Math.max(0, context.startY + event.translationY);
+    },
+    onEnd: () => {
+      if (translateY.value > screenHeight / 2) onClose();
+      else translateY.value = withSpring(0);
+    },
+  });
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ translateY: translateY.value }],
+    };
+  });
 
   const handleSubmit = () => {
     onSubmit(rating, comment);
     setRating(0);
     setComment("");
   };
+
+  console.log(gestureHandler)
 
   return (
     <Modal
@@ -30,11 +58,14 @@ const AddCommentSlider = ({ onSubmit, onClose, userName, userAvatar }) => {
       visible={true}
       onRequestClose={onClose}
     >
+      
+          
       <TouchableWithoutFeedback onPress={onClose}>
         <View style={styles.modalOverlay} />
       </TouchableWithoutFeedback>
 
-      <View style={styles.modalView}>
+      <PanGestureHandler onGestureEvent={gestureHandler}>
+        <Animated.View style={[styles.modalView, animatedStyle]}>
         <TouchableOpacity onPress={onClose} style={styles.bar} />
         <View style={styles.userInfo}>
           <View style={styles.userAvatar}>
@@ -61,21 +92,31 @@ const AddCommentSlider = ({ onSubmit, onClose, userName, userAvatar }) => {
         <TouchableOpacity onPress={handleSubmit} style={styles.button}>
           <Text style={styles.buttonText}>Add Comment</Text>
         </TouchableOpacity>
-      </View>
+        </Animated.View>
+      </PanGestureHandler>
     </Modal>
   );
 };
 
 const styles = StyleSheet.create({
   modalView: {
-    marginTop: "auto",
-    backgroundColor: "white",
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: 'white',
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
     padding: 15,
+    width: '100%',
   },
   modalOverlay: {
-    flex: 2,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'transparent',
   },
   bar: {
     width: "35%",
@@ -130,5 +171,4 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
-
 export default AddCommentSlider;
