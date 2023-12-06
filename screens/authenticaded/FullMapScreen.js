@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import MapView, { Marker } from 'react-native-maps';
 import { StyleSheet, Alert } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { useForegroundPermissions } from 'expo-location';
 import * as Location from 'expo-location';
 
-
+import useFetchLocations from '../../hooks/useFetchLocations';
 import { getNearestLocations } from '../../util/http';
 
 const FullMapScreen = () => {
-    const [selectedLocation, setSelectedLocation] = useState(null);
+    const navigation = useNavigation();
     const [currentRegion, setCurrentRegion] = useState(null);
-    const [locations, setLocations] = useState([]);
+    const [locations, setLocations, error] = useState([]);
 
     const [locationPermissionInformation, requestPermission] = useForegroundPermissions();
 
@@ -55,27 +56,34 @@ const FullMapScreen = () => {
         return true;
     }
 
-    function selectLocationHandler(event) {
-        const lat = event.nativeEvent.coordinate.latitude;
-        const lng = event.nativeEvent.coordinate.longitude;
-        setSelectedLocation({ latitude: lat, longitude: lng });
+
+    const selectLocationHandler = (locationId) => {
+        navigation.navigate('Place', { locationId });
+    };
+    if (error){
+        Alert.alert('Location error', 'Error during fetching locations' [
+            {text: 'OK', onPress: () => console.log('OK Pressed')}
+            ]);
     }
 
     return (
         <MapView
             style={styles.map}
             initialRegion={currentRegion}
-            onPress={selectLocationHandler}
+            onRegionChangeComplete={(region) => {
+                setCurrentRegion(region);
+            }}
         >
-            {selectedLocation && (
-                <Marker title="Selected Location" coordinate={selectedLocation} />
-            )}
 
-            {locations.map((location, index) => (
+            {locations.map((location) => (
                 <Marker
-                    key={index}
+                    key={location.id}
                     title={location.name}
-                    coordinate={{ latitude: location.latitude, longitude: location.longitude }}
+                    coordinate={{
+                        latitude: location.x_coord,
+                        longitude: location.y_coord,
+                    }}
+                    onPress={() => selectLocationHandler(location.id)}
                 />
             ))}
         </MapView>

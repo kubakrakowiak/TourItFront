@@ -16,7 +16,6 @@ const useFetchLocationDetails = (locationId) => {
             try {
                 const data = await getLocationDetails(locationId);
                 setLocationDetails(data);
-                console.log(locationDetails)
             } catch (err) {
                 setError(err);
             } finally {
