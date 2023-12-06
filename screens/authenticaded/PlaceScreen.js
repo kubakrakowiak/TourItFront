@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {StyleSheet, View, ScrollView, Text} from "react-native";
 import SectionTitle from "../../components/ui/SectionTitle";
 import PlainButton from "../../components/ui/PlainButton";
@@ -6,10 +6,12 @@ import PlaceScreenImages from "../../components/partials/PlaceScreenImages.js";
 import BackButton from "../../components/ui/BackButton";
 import PlaceCard from "../../components/ui/PlaceCard.js";
 import CommentCard from "../../components/ui/CommentCard.js";
+import AddCommentSlider from "../../components/ui/AddCommentSlider.js";
 import processComment from "../../util/processComment";
 import useFetchLocationDetails from "../../hooks/useFetchLocationsDetails";
 
 const PlaceScreen = ({ navigation, route }) => {
+  const [sliderVisible, setSliderVisible] = useState(false);
 
   const {locationId} = route.params;
   const { locationDetails,isLoading,error } = useFetchLocationDetails(locationId);
@@ -27,8 +29,15 @@ const PlaceScreen = ({ navigation, route }) => {
   }
 
 
+
   const handleCategoryPress = (categoryId) => {
     alert(`Category ${categoryId} pressed`);
+  };
+
+  const handleRatingSubmit = (rating, comment) => {
+    console.log("Rating:", rating);
+    console.log("Comment:", comment);
+    setSliderVisible(false); 
   };
 
   const goBack = () => {
@@ -46,7 +55,7 @@ const PlaceScreen = ({ navigation, route }) => {
         <BackButton onPress={goBack}></BackButton>
       </View>
 
-      <View style={styles.categoryContent}>
+      <View style={styles.placeContent}>
         <View style={styles.horizontalMenu}>
           <PlaceScreenImages onCategoryPress={handleCategoryPress} />
         </View>
@@ -56,8 +65,8 @@ const PlaceScreen = ({ navigation, route }) => {
         <View style={styles.cardHolder}>
           <PlaceCard location={locationDetails.location} />
         </View>
-        <View style={styles.cardContainer}>
-          <View style={styles.textCardHolderContent}>
+        <View style={styles.commentTitleContainer}>
+          <View style={styles.commentsCardHolderContent}>
             <SectionTitle fontSize={19} color={"#494949"}>
               Comments
             </SectionTitle>
@@ -70,10 +79,21 @@ const PlaceScreen = ({ navigation, route }) => {
             color={"#7E7D7D"}
             letterSpacing={0.77}
             textDecorationLine={"none"}
+            onPress={() => setSliderVisible(true)}
           >
             Add Comment
           </PlainButton>
         </View>
+
+        {sliderVisible && (
+          <AddCommentSlider
+            onSubmit={handleRatingSubmit}
+            onClose={() => setSliderVisible(false)}
+            userName="Janina Nowak"
+            userAvatar={require("../../assets/avatar.jpeg")}
+          />
+        )}
+
         <View>
           {locationDetails.ratings.map(comment => (
             <CommentCard comment={processComment(comment)} key={comment.id} />
@@ -97,26 +117,16 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginLeft: 20,
   },
-  categoryContent: {
+  placeContent: {
     flex: 1,
   },
   horizontalMenu: {
     alignItems: "flex-start",
   },
-  textHolderContent: {
-    textAlign: "left",
-    alignItems: "flex-start",
-    paddingLeft: "5%",
-  },
-  searchBar: {
-    flex: 1,
-    alignItems: "center",
-    paddingHorizontal: 16,
-  },
-  cardHolderContainer: {
+  commentsHolderContainer: {
     marginTop: 20,
   },
-  cardContainer: {
+  commentTitleContainer: {
     flex: 0.5,
     marginTop: 20,
   },
@@ -127,10 +137,7 @@ const styles = StyleSheet.create({
     right: 15,
     marginBottom: 5,
   },
-  cardHolder: {
-    flex: 4,
-  },
-  textCardHolderContent: {
+  commentsCardHolderContent: {
     textAlign: "left",
     alignItems: "flex-start",
     paddingLeft: "3%",

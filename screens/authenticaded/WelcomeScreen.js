@@ -80,7 +80,7 @@ const WelcomeScreen = ({ navigation }) => {
               <View style={styles.cardContainer}>
                 <View style={styles.textCardHolderContent}>
                   <SectionTitle fontSize={20} color={"#494949"}>
-                    Last seen
+                    Trending
                   </SectionTitle>
                 </View>
               </View>
@@ -92,7 +92,7 @@ const WelcomeScreen = ({ navigation }) => {
                     letterSpacing={0.77}
                     textDecorationLine={"normal"}
                 >
-                  View all
+                  Explore
                 </PlainButton>
               </View>
 
