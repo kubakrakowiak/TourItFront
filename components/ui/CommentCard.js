@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Image, StyleSheet, Dimensions } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
-import UserStarRating from "./UserStarRating"; // Upewnij się, że ścieżka jest poprawna
+import UserStarRating from "./UserStarRating";
 
 const { width, height } = Dimensions.get("window");
 

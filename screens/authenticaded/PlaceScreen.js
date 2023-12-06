@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, View, ScrollView } from "react-native";
+import {StyleSheet, View, ScrollView, Text} from "react-native";
 import SectionTitle from "../../components/ui/SectionTitle";
 import PlainButton from "../../components/ui/PlainButton";
 import PlaceScreenImages from "../../components/partials/PlaceScreenImages.js";
@@ -7,42 +7,28 @@ import BackButton from "../../components/ui/BackButton";
 import PlaceCard from "../../components/ui/PlaceCard.js";
 import CommentCard from "../../components/ui/CommentCard.js";
 import AddCommentSlider from "../../components/ui/AddCommentSlider.js";
-
-const comments = [
-  {
-    userImage: require("../../assets/sniezka.jpeg"),
-    commentDate: "month ago",
-    userRating: 2,
-    userName: "Andrzej Kowalski",
-    isLiked: false,
-    id: "id",
-    commentText:
-      "asdddddddddwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwqdq",
-  },
-  {
-    userImage: require("../../assets/sniezka.jpeg"),
-    commentDate: "month ago",
-    userRating: 4,
-    userName: "Andrzej Nowak",
-    isLiked: false,
-    id: "id",
-    commentText: "asddddddddddddddd",
-  },
-  {
-    userImage: require("../../assets/sniezka.jpeg"),
-    commentDate: "month ago",
-    userRating: 3,
-    userName: "Andrzej Kowalski",
-    isLiked: false,
-    id: "id",
-    commentText:
-      "Lorem Ipsum aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-  },
-];
+import processComment from "../../util/processComment";
+import useFetchLocationDetails from "../../hooks/useFetchLocationsDetails";
 
 const PlaceScreen = ({ navigation, route }) => {
   const [sliderVisible, setSliderVisible] = useState(false);
-  const location = route.params.location;
+
+  const {locationId} = route.params;
+  const { locationDetails,isLoading,error } = useFetchLocationDetails(locationId);
+
+  if (isLoading){
+    return <Text>Loading location details</Text>
+  }
+
+  if (error){
+    return <Text>Error loading location details: {error.message}</Text>
+  }
+
+  if (!locationDetails) {
+    return <Text>No location details available.</Text>;
+  }
+
+
 
   const handleCategoryPress = (categoryId) => {
     alert(`Category ${categoryId} pressed`);
@@ -57,6 +43,7 @@ const PlaceScreen = ({ navigation, route }) => {
   const goBack = () => {
     navigation.goBack();
   };
+
 
   return (
     <ScrollView
@@ -74,9 +61,9 @@ const PlaceScreen = ({ navigation, route }) => {
         </View>
       </View>
 
-      <View style={styles.commentsHolderContainer}>
-        <View style={styles.placeNameHolder}>
-          <PlaceCard location={location} key={location.id} />
+      <View style={styles.cardHolderContainer}>
+        <View style={styles.cardHolder}>
+          <PlaceCard location={locationDetails.location} />
         </View>
         <View style={styles.commentTitleContainer}>
           <View style={styles.commentsCardHolderContent}>
@@ -108,8 +95,8 @@ const PlaceScreen = ({ navigation, route }) => {
         )}
 
         <View>
-          {comments.map((comment) => (
-            <CommentCard comment={comment} key={comment.id} />
+          {locationDetails.ratings.map(comment => (
+            <CommentCard comment={processComment(comment)} key={comment.id} />
           ))}
         </View>
       </View>
