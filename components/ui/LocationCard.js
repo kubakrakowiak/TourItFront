@@ -64,8 +64,8 @@ const styles = StyleSheet.create({
     flex: 3,
   },
   locationImage: {
-    width: 71,
-    height: 71,
+    width: 76,
+    height: 76,
     borderRadius: 16,
     marginLeft: 8,
   },
