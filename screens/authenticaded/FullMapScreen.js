@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, onClose } from 'react';
 import MapView, { Marker } from 'react-native-maps';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useForegroundPermissions } from 'expo-location';
 import * as Location from 'expo-location';
+import MapSlider from "../../components/ui/MapSlider";
 
 import useFetchLocations from '../../hooks/useFetchLocations';
 import { getNearestLocations } from '../../util/http';
 
 const FullMapScreen = () => {
+    const [sliderVisible, setSliderVisible] = useState(false);
     const navigation = useNavigation();
     const [currentRegion, setCurrentRegion] = useState(null);
     const { locations, isLoading, error } = useFetchLocations(
@@ -16,7 +18,9 @@ const FullMapScreen = () => {
         currentRegion?.longitude,
         currentRegion?.latitudeDelta,
         currentRegion?.longitudeDelta
+        
     );
+    
 
     const [locationPermissionInformation, requestPermission] = useForegroundPermissions();
 
@@ -67,6 +71,7 @@ const FullMapScreen = () => {
     }
 
     return (
+        <>
         <MapView
             style={styles.map}
             region={currentRegion}
@@ -87,6 +92,18 @@ const FullMapScreen = () => {
                 />
             ))}
         </MapView>
+
+        <View style={styles.barContainer}>
+        <TouchableOpacity onPress={() => setSliderVisible(true)} style={styles.bar} />
+        </View>
+        {sliderVisible && (
+        <MapSlider
+
+
+          onClose={() => setSliderVisible(false)}
+        />
+      )}
+        </>
     );
 };
 
@@ -96,4 +113,16 @@ const styles = StyleSheet.create({
     map: {
         flex: 1,
     },
+    barContainer:{
+        backgroundColor: "transparent",
+        paddingBottom: 20,
+    },
+    bar: {
+        width: "35%",
+        height: 5,
+        borderRadius: 5,
+        backgroundColor: "#ccc",
+        alignSelf: "center",
+        
+      },
 });
