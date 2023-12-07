@@ -68,3 +68,18 @@ export async function getTrendingLocations(token) {
         throw error;
     }
 }
+
+export async function getViewedLocations(token) {
+    try {
+        const response = await axios.get(`${backendUrl}api/viewed-locations/`, {
+            headers: {
+                'Authorization': `Token ${token}`,
+                'Content-Type': 'application/json',
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Fetching trending locations failed', error);
+        throw error;
+    }
+}
