@@ -10,7 +10,7 @@ export default OuterCardLayout;
 const styles = StyleSheet.create({
   outerCardContainer: {
     backgroundColor: "#FFF",
-    height: 86,
+    height: 99,
     flexDirection: "row",
     borderRadius: 16,
     elevation: 4,

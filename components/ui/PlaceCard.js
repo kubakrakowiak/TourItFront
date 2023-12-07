@@ -8,7 +8,6 @@ import {
   Dimensions,
 } from "react-native";
 import { Colors } from "../../constans/styles.js";
-import OuterPlaceCardLayout from "./OuterPlaceCardLayout.js";
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
@@ -20,10 +19,9 @@ function PlaceCard({ location }) {
   const formattedRating = location.rating;
 
   return (
-    <OuterPlaceCardLayout>
+    
       <View style={styles.cardContainer}>
         <Text style={styles.locationTitle}>{location.name}</Text>
-
         <View style={styles.rowDirection}>
           <FontAwesome5
             name={"map-marker-alt"}
@@ -39,8 +37,7 @@ function PlaceCard({ location }) {
             <StarRating rating={location.rating} />
           </View>
         </View>
-      </View>
-    </OuterPlaceCardLayout>
+        </View>
   );
 }
 
@@ -48,10 +45,9 @@ export default PlaceCard;
 
 const styles = StyleSheet.create({
   cardContainer: {
+    flexDirection: "column",
     flex: 1,
-  },
-  dataContainer: {
-    flex: 1,
+    marginHorizontal: 20,
   },
   locationTitle: {
     fontFamily: "Poppins-Bold",
