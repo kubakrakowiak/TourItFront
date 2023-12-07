@@ -1,16 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import MapView, { Marker } from 'react-native-maps';
-import { StyleSheet, Alert } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { useForegroundPermissions } from 'expo-location';
 import * as Location from 'expo-location';
 
-
+import useFetchLocations from '../../hooks/useFetchLocations';
 import { getNearestLocations } from '../../util/http';
 
 const FullMapScreen = () => {
-    const [selectedLocation, setSelectedLocation] = useState(null);
+    const navigation = useNavigation();
     const [currentRegion, setCurrentRegion] = useState(null);
-    const [locations, setLocations] = useState([]);
+    const { locations, isLoading, error } = useFetchLocations(
+        currentRegion?.latitude,
+        currentRegion?.longitude,
+        currentRegion?.latitudeDelta,
+        currentRegion?.longitudeDelta
+    );
 
     const [locationPermissionInformation, requestPermission] = useForegroundPermissions();
 
@@ -45,37 +51,39 @@ const FullMapScreen = () => {
         }
 
         if (locationPermissionInformation.status === Location.PermissionStatus.DENIED) {
-            Alert.alert(
-                'Insufficient Permission!',
-                'You need to grant location permission to use this app.'
-            );
+            console.log('error')
             return false;
         }
 
         return true;
     }
 
-    function selectLocationHandler(event) {
-        const lat = event.nativeEvent.coordinate.latitude;
-        const lng = event.nativeEvent.coordinate.longitude;
-        setSelectedLocation({ latitude: lat, longitude: lng });
+
+    const selectLocationHandler = (locationId) => {
+        navigation.navigate('Place', { locationId });
+    };
+    if (error){
+        console.log(error);
     }
 
     return (
         <MapView
             style={styles.map}
-            initialRegion={currentRegion}
-            onPress={selectLocationHandler}
+            region={currentRegion}
+            onRegionChangeComplete={(region) => {
+                setCurrentRegion(region);
+            }}
         >
-            {selectedLocation && (
-                <Marker title="Selected Location" coordinate={selectedLocation} />
-            )}
 
-            {locations.map((location, index) => (
+            {locations.map((location) => (
                 <Marker
-                    key={index}
+                    key={location.id.toString()}
                     title={location.name}
-                    coordinate={{ latitude: location.latitude, longitude: location.longitude }}
+                    coordinate={{
+                        latitude: location.x_coord,
+                        longitude: location.y_coord,
+                    }}
+                    onPress={() => navigation.navigate('Place', { locationId: location.id})}
                 />
             ))}
         </MapView>

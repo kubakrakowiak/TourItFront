@@ -1,8 +1,8 @@
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../store/auth-context';
-import { getNearestLocations } from '../util/http';
+import { getTrendingLocations } from '../util/http';
 
-const useFetchLocations = (xCoord, yCoord, latitudeDelta, longitudeDelta) => {
+const useFetchTrendingLocations = () => {
     const { token } = useContext(AuthContext);
     const [locations, setLocations] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -11,22 +11,23 @@ const useFetchLocations = (xCoord, yCoord, latitudeDelta, longitudeDelta) => {
     useEffect(() => {
         if (!token) return;
 
-        const fetchLocations = async () => {
+        const fetchTrendingLocations = async () => {
+
             setIsLoading(true);
             try {
-                const data = await getNearestLocations(token, xCoord, yCoord, latitudeDelta, longitudeDelta);
+                const data = await getTrendingLocations(token);
                 setLocations(data);
             } catch (err) {
-                setError(err);
+                setError(err.message || 'Something went wrong.');
             } finally {
                 setIsLoading(false);
             }
         };
 
-        fetchLocations();
-    }, [token, xCoord, yCoord, latitudeDelta, longitudeDelta]);
+        fetchTrendingLocations();
+    }, [token]);
 
     return { locations, isLoading, error };
 };
 
-export default useFetchLocations;
+export default useFetchTrendingLocations;

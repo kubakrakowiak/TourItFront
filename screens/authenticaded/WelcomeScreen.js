@@ -12,13 +12,19 @@ import LocationCard from "../../components/ui/LocationCard";
 import SectionTitle from "../../components/ui/SectionTitle";
 import HorizontalMenu from "../../components/partials/HorizontalMenu";
 import PlainButton from "../../components/ui/PlainButton";
-import useFetchLocations from "../../hooks/useFetchLocations";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import useFetchTrendingLocations from "../../hooks/useFetchTrendingLocations";
+
+
+const { width, height } = Dimensions.get("window");
+
+
 
 const WelcomeScreen = ({ navigation }) => {
   const xCoord = 54.4892;
   const yCoord = 18.5317;
 
-  const { locations, isLoading, error } = useFetchLocations(xCoord, yCoord);
+  const { locations, isLoading, error } = useFetchTrendingLocations();
 
   const renderLocation = ({ item }) => (
     <LocationCard
