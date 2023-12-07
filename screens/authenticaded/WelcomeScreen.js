@@ -5,6 +5,7 @@ import {
   FlatList,
   Text,
   ActivityIndicator,
+  Dimensions,
 } from "react-native";
 import Header from "../../components/partials/Header";
 import InputText from "../../components/ui/InputText";
