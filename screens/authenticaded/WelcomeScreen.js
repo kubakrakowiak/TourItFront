@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   View,
-  Dimensions,
-  ScrollView,
-  KeyboardAvoidingView,
-  Platform,
+  FlatList,
+  Text,
+  ActivityIndicator,
 } from "react-native";
 import Header from "../../components/partials/Header";
 import InputText from "../../components/ui/InputText";
@@ -13,170 +12,123 @@ import LocationCard from "../../components/ui/LocationCard";
 import SectionTitle from "../../components/ui/SectionTitle";
 import HorizontalMenu from "../../components/partials/HorizontalMenu";
 import PlainButton from "../../components/ui/PlainButton";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import useFetchLocations from "../../hooks/useFetchLocations";
 
-
-const { width, height } = Dimensions.get("window");
-
-
-
 const WelcomeScreen = ({ navigation }) => {
+  const xCoord = 54.4892;
+  const yCoord = 18.5317;
 
-  const { locations, isLoading, error } = useFetchLocations(1, 1);
+  const { locations, isLoading, error } = useFetchLocations(xCoord, yCoord);
 
-  const processedLocations = locations.map(location => ({
-    image: require("../../assets/sniezka.jpeg"),
-    id: location.id,
-    name: location.name,
-    rating: location.average_rating,
-    simple_address: location.simple_address,
-    isLiked: false,
-  }));
-  const handleCategoryPress = (categoryId) => {
-    alert(`Category ${categoryId} pressed`);
-  };
+  const renderLocation = ({ item }) => (
+    <LocationCard
+      onPress={() => navigation.navigate("Place", { locationId: item.id })}
+      location={item}
+    />
+  );
 
-  const WelcomeScreenContent = ({}) => {
+  const renderHeader = () => {
     return (
-        <View>
-          <View style={styles.header}>
-            <Header headerText={"Welcome"} subHeaderText={"back!"} />
-          </View>
-
-          <View style={styles.pageContent}>
-            <View style={styles.searchContent}>
-              <View style={styles.textHolderContent}>
-                <SectionTitle fontSize={20}>
-                  Where do you want to go?
-                </SectionTitle>
-              </View>
-
-              <View style={styles.searchBar}>
-                <InputText
-                    textInputConfig={{
-                      placeholder: "Search",
-                      keyboardType: "default",
-                    }}
-                    icon={"search"}
-                    textTransform="capitalize"
-                    containerWidth="95%"
-                />
-              </View>
-            </View>
-
-            <View style={styles.categoryContent}>
-              <View style={styles.textHolderContent}>
-                <SectionTitle fontSize={20} marginBottom={5}>
-                  Category
-                </SectionTitle>
-              </View>
-              <View style={styles.horizontalMenu}>
-                <HorizontalMenu onCategoryPress={handleCategoryPress} />
-              </View>
-            </View>
-
-            <View style={styles.cardHolderContainer}>
-              <View style={styles.cardContainer}>
-                <View style={styles.textCardHolderContent}>
-                  <SectionTitle fontSize={20} color={"#494949"}>
-                    Trending
-                  </SectionTitle>
-                </View>
-              </View>
-
-              <View style={styles.plainButtonHolder}>
-                <PlainButton
-                    fontSize={14}
-                    color={"#7E7D7D"}
-                    letterSpacing={0.77}
-                    textDecorationLine={"normal"}
-                >
-                  Explore
-                </PlainButton>
-              </View>
-
-              <View style={styles.cardHolder}>
-                {processedLocations.map(location => (
-                    <LocationCard
-                        onPress={() => navigation.navigate('Place', { locationId: location.id })}
-                        location={location}
-                        key={location.id}
-                    />
-                ))}
-              </View>
-            </View>
-          </View>
+      <View style={styles.pageContent}>
+        <Header headerText={"Welcome"} subHeaderText={"back!"} />
+        <View style={styles.searchContent}>
+          <InputText
+            textInputConfig={{
+              placeholder: "Search",
+              keyboardType: "default",
+            }}
+            icon={"search"}
+            textTransform="capitalize"
+            containerWidth="95%"
+          />
         </View>
+        
+          <View style={styles.categoryContent}>
+          <View style={styles.titleText}>
+            <SectionTitle fontSize={20} marginBottom={5}>
+              Category
+            </SectionTitle>
+            </View>
+            <HorizontalMenu />
+          </View>
+          <View style={styles.cardContainer}>
+            <View style={styles.titleText}>
+            <SectionTitle fontSize={20} color={"#494949"}>
+              Trending
+            </SectionTitle>
+            </View>
+            <View style={styles.plainButtonHolder}>
+              <PlainButton
+                fontSize={14}
+                color={"#7E7D7D"}
+                letterSpacing={0.77}
+                textDecorationLine={"normal"}
+              >
+                Explore
+              </PlainButton>
+            </View>
+          </View>
+      </View>
     );
   };
 
-  const renderScrollView = () => {
+  if (error) {
     return (
-        <ScrollView
-            style={styles.container}
-            keyboardShouldPersistTaps="handled"
-            scrollEnabled={true}
-        >
-          <WelcomeScreenContent />
-        </ScrollView>
+      <View style={styles.centered}>
+        <Text>An error occurred: {error.message}</Text>
+      </View>
     );
-  };
+  }
 
-  const renderKeyboardAwareScrollView = () => {
+  if (isLoading) {
     return (
-        <KeyboardAwareScrollView
-            style={styles.container}
-            enableOnAndroid={true}
-            extraHeight={Platform.select({ android: 200, ios: 0 })}
-            scrollEnabled={false}
-        >
-          <WelcomeScreenContent />
-        </KeyboardAwareScrollView>
+      <View style={styles.centered}>
+        <ActivityIndicator size="large" />
+      </View>
     );
-  };
+  }
 
-  return Platform.OS === "ios"
-      ? renderKeyboardAwareScrollView()
-      : renderScrollView();
+  return (
+    <FlatList
+      ListHeaderComponent={renderHeader}
+      data={locations}
+      renderItem={renderLocation}
+      keyExtractor={(item) => item.id.toString()}
+      ListFooterComponent={
+        isLoading ? <ActivityIndicator size="large" /> : null
+      }
+      contentContainerStyle={styles.container}
+    />
+  );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  centered: {
     flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  container: {
     backgroundColor: "#F1F1F1",
   },
   header: {
     flex: 1,
   },
   pageContent: {
-    flex: 5,
+    flex: 1,
+    justifyContent: "center",
+  },
+  titleText: {
+    marginLeft: 10,
   },
   searchContent: {
-    flex: 1.5,
-    bottom: 20,
+    alignItems: "center"
   },
   categoryContent: {
     flex: 1.8,
   },
-  horizontalMenu: {
-    alignItems: "center",
-  },
-  textHolderContent: {
-    textAlign: "left",
-    alignItems: "flex-start",
-    paddingLeft: "5%",
-  },
-  searchBar: {
-    flex: 1,
-    alignItems: "center",
-    paddingHorizontal: 16,
-  },
-  cardHolderContainer: {
-    flex: 6,
-  },
   cardContainer: {
-    flex: 0.5,
+    marginTop:10,
   },
   plainButtonHolder: {
     textAlign: "right",
@@ -185,15 +137,6 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
     right: 15,
     marginBottom: 5,
-  },
-  cardHolder: {
-    flex: 4,
-  },
-  textCardHolderContent: {
-    textAlign: "left",
-    alignItems: "flex-start",
-    paddingLeft: "5%",
-    top: 20,
   },
 });
 
