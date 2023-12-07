@@ -14,7 +14,7 @@ import SectionTitle from "../../components/ui/SectionTitle";
 import HorizontalMenu from "../../components/partials/HorizontalMenu";
 import PlainButton from "../../components/ui/PlainButton";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import useFetchLocations from "../../hooks/useFetchLocations";
+import useFetchTrendingLocations from '../../hooks/useFetchTrendingLocations';
 
 
 const { width, height } = Dimensions.get("window");
@@ -23,7 +23,7 @@ const { width, height } = Dimensions.get("window");
 
 const WelcomeScreen = ({ navigation }) => {
 
-  const { locations, isLoading, error } = useFetchLocations(1, 1);
+  const { locations, isLoading, error } = useFetchTrendingLocations();
 
   const processedLocations = locations.map(location => ({
     image: require("../../assets/sniezka.jpeg"),
