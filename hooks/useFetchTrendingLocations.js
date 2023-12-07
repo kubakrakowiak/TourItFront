@@ -9,8 +9,9 @@ const useFetchTrendingLocations = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
+        if (!token) return;
+
         const fetchTrendingLocations = async () => {
-            if (!token) return;
 
             setIsLoading(true);
             try {

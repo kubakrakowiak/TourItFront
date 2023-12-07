@@ -14,7 +14,7 @@ import SectionTitle from "../../components/ui/SectionTitle";
 import HorizontalMenu from "../../components/partials/HorizontalMenu";
 import PlainButton from "../../components/ui/PlainButton";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import useFetchTrendingLocations from '../../hooks/useFetchTrendingLocations';
+import useFetchTrendingLocations from "../../hooks/useFetchTrendingLocations";
 
 
 const { width, height } = Dimensions.get("window");
