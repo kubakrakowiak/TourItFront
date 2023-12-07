@@ -1,4 +1,3 @@
-// useFetchTrendingLocations.js
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../store/auth-context';
 import { getTrendingLocations } from '../util/http';
