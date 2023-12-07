@@ -28,9 +28,6 @@ export async function loginUser(loginUserData){
 }
 export async function getNearestLocations(token, xCoord, yCoord) {
     try {
-        xCoord =54.4892
-        yCoord =18.5317
-
         const response = await axios.get(`${backendUrl}api/nearest-locations/?x_coord=${xCoord}&y_coord=${yCoord}`, {
             headers: {
                 'Content-Type': 'application/json',
