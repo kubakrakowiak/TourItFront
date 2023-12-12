@@ -5,7 +5,6 @@ import { useNavigation } from '@react-navigation/native';
 import { useForegroundPermissions } from 'expo-location';
 import * as Location from 'expo-location';
 import MapSlider from "../../components/ui/MapSlider";
-
 import useFetchLocations from '../../hooks/useFetchLocations';
 import { getNearestLocations } from '../../util/http';
 
