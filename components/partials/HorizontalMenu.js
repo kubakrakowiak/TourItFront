@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -8,50 +8,55 @@ import {
   TouchableOpacity,
   Dimensions,
 } from "react-native";
+import SubcategoryModal from "./SubcategoryModal";
 
 const { width } = Dimensions.get("window");
 
 const categories = [
-  { id: "mount", name: "Mount", image: require("../../assets/mount.png") },
-  { id: "beach", name: "Beach", image: require("../../assets/beach.png") },
-  {
-    id: "waterfall",
-    name: "Waterfall",
-    image: require("../../assets/waterfall.png"),
-  },
-  { id: "lake", name: "Lake", image: require("../../assets/lake.png") },
-  { id: "river", name: "River", image: require("../../assets/river.png") },
-  { id: "city", name: "City", image: require("../../assets/city.png") },
-  { id: "city", name: "City", image: require("../../assets/city.png") },
-  { id: "city", name: "City", image: require("../../assets/city.png") },
+  { id: "mount", name: "Mount", image: require("../../assets/mount.png"), subcategories: [{ id: 'hiking', name: 'Hiking' }, { id: 'climbing', name: 'Climbing' }] },
+  { id: "beach", name: "Beach", image: require("../../assets/beach.png"), subcategories: [{ id: 'surfing', name: 'Surfing' }, { id: 'sunbathing', name: 'Sunbathing' }] },
+  // Dodaj więcej kategorii i subkategorii według potrzeb
 ];
 
-const HorizontalMenu = ({ onCategoryPress }) => {
+const HorizontalMenu = () => {
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const handleCategoryPress = (category) => {
+    setSelectedCategory(category);
+    setModalVisible(true);
+  };
+
+  const handleSelectSubcategories = (subcategories) => {
+    console.log("Wybrane subkategorie dla", selectedCategory.name, ":", subcategories);
+    // Tutaj dodaj logikę obsługi wybranych subkategorii
+  };
+
   return (
-    <View style={styles.horizontalMenu}>
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        style={{ flexGrow: 0 }}
-      >
-        {categories.map((category) => (
-          <TouchableOpacity
-            key={category.id}
-            onPress={() => onCategoryPress(category.id)}
-            style={styles.categoryItem}
-          >
+     <View style={styles.horizontalMenu}>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.scrollView}>
+        {categories.map(category => (
+          <TouchableOpacity key={category.id} onPress={() => handleCategoryPress(category)} style={styles.categoryItem}>
             <Image source={category.image} style={styles.categoryImage} />
             <Text style={styles.categoryText}>{category.name}</Text>
           </TouchableOpacity>
         ))}
       </ScrollView>
+      {selectedCategory && (
+        <SubcategoryModal
+          isVisible={modalVisible}
+          subcategories={selectedCategory.subcategories}
+          onSelectSubcategories={handleSelectSubcategories}
+          onClose={() => setModalVisible(false)}
+        />
+      )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   horizontalMenu: {
-    alignItems: "center",
+    alignItems: "flex-start",
     width: "100%",
     marginLeft: 12,
   },
@@ -66,11 +71,11 @@ const styles = StyleSheet.create({
     borderRadius: width * 0.125,
     marginBottom: 4,
   },
-  categoryText:{
+  categoryText: {
     fontFamily: "Poppins-SemiBold",
     fontSize: 12,
     letterSpacing: 1,
-  }
+  },
 });
 
 export default HorizontalMenu;
