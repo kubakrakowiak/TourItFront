@@ -46,10 +46,10 @@ const ProfileScreen = () => {
       </View>
       <View style={styles.settingsContainer}>
         <View style={styles.settingsContent}>
-          <TouchableOpacity style={styles.settingsButtons}>
+          <TouchableOpacity onPress={() => navigation.navigate('ManageUser')} style={styles.settingsButtons}>
             <View style={styles.icon}>
               <View style={styles.iconBackground}>
-                <FontAwesome5 name="user-friends" size={20} color="#FEA02F" />
+                <FontAwesome5  name="user-friends" size={20} color="#FEA02F" />
               </View>
             </View>
             <View style={styles.buttonText}>

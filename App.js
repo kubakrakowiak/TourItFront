@@ -22,6 +22,7 @@ import PlaceScreen from "./screens/authenticaded/PlaceScreen.js";
 import AreaScreen from "./screens/authenticaded/AreaScreen";
 import FullMapScreen from "./screens/authenticaded/FullMapScreen";
 import LastSeen from "./screens/authenticaded/LastSeen";
+import ManageUser from "./screens/authenticaded/ManageUser.js";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -79,6 +80,13 @@ function AuthenticatedStack() {
       <Stack.Screen
         name="LastSeen"
         component={LastSeen}
+        options={{
+          cardStyle: { backgroundColor: Colors.darkgreen },
+        }}
+      />
+      <Stack.Screen
+        name="ManageUser"
+        component={ManageUser}
         options={{
           cardStyle: { backgroundColor: Colors.darkgreen },
         }}
