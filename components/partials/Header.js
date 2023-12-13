@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
     letterSpacing: 3.57,
     top: height * 0.02,
     right: 5,
+    marginBottom:-10,
   },
   subHeaderFirstText: {
     color: "#FEA02F",
@@ -58,6 +59,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     letterSpacing: 1.7,
     paddingTop: width * 0.01,
+    right: 2,
   },
   smallLogoContainer: {
     width: width * 0.15,
