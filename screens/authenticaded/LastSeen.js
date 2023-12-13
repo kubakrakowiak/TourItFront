@@ -18,9 +18,10 @@ import useFetchLocations from "../../hooks/useFetchLocations";
 import { useNavigation } from "@react-navigation/native";
 import BackButton from "../../components/ui/BackButton";
 
+
 const { width, height } = Dimensions.get("window");
 
-const WelcomeScreen = () => {
+const LastSeen = () => {
   const navigation = useNavigation();
   const { locations, isLoading, error } = useFetchLocations(1, 1);
 
@@ -32,9 +33,7 @@ const WelcomeScreen = () => {
     city: location.simple_address,
     isLiked: false,
   }));
-  const handleCategoryPress = (categoryId) => {
-    alert(`Category ${categoryId} pressed`);
-  };
+ 
   const goBack = () => {
     navigation.goBack();
   };
@@ -96,4 +95,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default WelcomeScreen;
+export default LastSeen;
