@@ -5,7 +5,7 @@ import {
   Dimensions,
   ScrollView,
   KeyboardAvoidingView,
-  Platform,
+  Platform, Text, ActivityIndicator,
 } from "react-native";
 import Header from "../../components/partials/Header";
 import InputText from "../../components/ui/InputText";
@@ -14,7 +14,7 @@ import SectionTitle from "../../components/ui/SectionTitle";
 import HorizontalMenu from "../../components/partials/HorizontalMenu";
 import PlainButton from "../../components/ui/PlainButton";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import useFetchLocations from "../../hooks/useFetchLocations";
+import useViewedLocations from "../../hooks/useViewedLocations";
 import { useNavigation } from "@react-navigation/native";
 import BackButton from "../../components/ui/BackButton";
 
@@ -23,7 +23,7 @@ const { width, height } = Dimensions.get("window");
 
 const LastSeen = () => {
   const navigation = useNavigation();
-  const { locations, isLoading, error } = useFetchLocations(1, 1);
+  const { locations, isLoading, error } = useViewedLocations();
 
   const processedLocations = locations.map((location) => ({
     //image: require("../../assets/sniezka.jpeg"),
@@ -33,10 +33,26 @@ const LastSeen = () => {
     city: location.simple_address,
     isLiked: false,
   }));
- 
+
   const goBack = () => {
     navigation.goBack();
   };
+
+  if (error) {
+    return (
+        <View style={styles.centered}>
+          <Text>An error occurred: {error.message}</Text>
+        </View>
+    );
+  }
+
+  if (isLoading) {
+    return (
+        <View style={styles.centered}>
+          <ActivityIndicator size="large" />
+        </View>
+    );
+  }
 
   return (
     <ScrollView

@@ -1,5 +1,5 @@
 import axios from 'axios';
-const backendUrl = "http://10.0.2.2:8000/"
+const backendUrl = "http://127.0.0.1:8000/"
 
 export async function registerUser(registerUserData){
     try {
@@ -57,6 +57,21 @@ export async function getLocationDetails(locationId, token) {
 export async function getTrendingLocations(token) {
     try {
         const response = await axios.get(`${backendUrl}api/trending/`, {
+            headers: {
+                'Authorization': `Token ${token}`,
+                'Content-Type': 'application/json',
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Fetching trending locations failed', error);
+        throw error;
+    }
+}
+
+export async function getViewedLocations(token) {
+    try {
+        const response = await axios.get(`${backendUrl}api/viewed-locations/`, {
             headers: {
                 'Authorization': `Token ${token}`,
                 'Content-Type': 'application/json',
