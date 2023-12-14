@@ -21,6 +21,7 @@ import { FontAwesome5, FontAwesome } from "@expo/vector-icons";
 import PlaceScreen from "./screens/authenticaded/PlaceScreen.js";
 import AreaScreen from "./screens/authenticaded/AreaScreen";
 import FullMapScreen from "./screens/authenticaded/FullMapScreen";
+import LastSeen from "./screens/authenticaded/LastSeen";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -71,6 +72,13 @@ function AuthenticatedStack() {
       <Stack.Screen
         name="Place"
         component={PlaceScreen}
+        options={{
+          cardStyle: { backgroundColor: Colors.darkgreen },
+        }}
+      />
+      <Stack.Screen
+        name="LastSeen"
+        component={LastSeen}
         options={{
           cardStyle: { backgroundColor: Colors.darkgreen },
         }}
@@ -135,7 +143,7 @@ function Navigation() {
   const authCtx = useContext(AuthContext);
   return (
     <NavigationContainer>
-      {authCtx.isAuthenticated ? <AuthenticatedStack /> : <AuthStack /> }
+      {authCtx.isAuthenticated ? <AuthenticatedStack /> : <AuthStack />}
     </NavigationContainer>
   );
 }
@@ -159,7 +167,7 @@ function Root() {
     "Poppins-LightItalic": require("./assets/fonts/Poppins-LightItalic.ttf"),
     "Poppins-Medium": require("./assets/fonts/Poppins-Medium.ttf"),
     "Poppins-MediumItalic": require("./assets/fonts/Poppins-MediumItalic.ttf"),
-    "Poppins": require("./assets/fonts/Poppins-Regular.ttf"),
+    Poppins: require("./assets/fonts/Poppins-Regular.ttf"),
     "Poppins-SemiBold": require("./assets/fonts/Poppins-SemiBold.ttf"),
     "Poppins-SemiBoldItalic": require("./assets/fonts/Poppins-SemiBoldItalic.ttf"),
     "Poppins-Thin": require("./assets/fonts/Poppins-Thin.ttf"),

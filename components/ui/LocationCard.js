@@ -12,10 +12,11 @@ import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 
+import defaultImage from "../../assets/sniezka.jpeg";
+
 function LocationCard({ onPress, location }) {
- 
-  console.log(location)
- 
+  console.log(location);
+
   return (
     <Pressable
       style={({ pressed }) => [pressed && styles.pressed]}
@@ -23,7 +24,10 @@ function LocationCard({ onPress, location }) {
     >
       <OuterCardLayout>
         <View style={styles.imageContainer}>
-          <Image source={location.image} style={styles.locationImage} />
+          <Image
+            source={location.image ? { uri: location.image } : defaultImage}
+            style={styles.locationImage}
+          />
         </View>
         <View style={styles.dataContainer}>
           <Text style={styles.locationTitle}>{location.name}</Text>
