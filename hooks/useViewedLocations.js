@@ -11,7 +11,7 @@ const useViewedLocations = () => {
     useEffect(() => {
         if (!token) return;
 
-        const fetchTrendingLocations = async () => {
+        const fetchViewedLocations = async () => {
 
             setIsLoading(true);
             try {
@@ -24,10 +24,10 @@ const useViewedLocations = () => {
             }
         };
 
-        fetchTrendingLocations();
+        fetchViewedLocations();
     }, [token]);
 
     return { locations, isLoading, error };
 };
 
-export default useFetchTrendingLocations;
+export default useViewedLocations;
