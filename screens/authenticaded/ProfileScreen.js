@@ -16,14 +16,17 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { MaterialIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 const { width, height } = Dimensions.get("window");
 
 const ProfileScreen = () => {
   const authCtx = useContext(AuthContext);
+  const navigation = useNavigation();
   async function logoutHandler() {
     authCtx.logout();
   }
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.profileContainer}>
@@ -43,10 +46,10 @@ const ProfileScreen = () => {
       </View>
       <View style={styles.settingsContainer}>
         <View style={styles.settingsContent}>
-          <TouchableOpacity style={styles.settingsButtons}>
+          <TouchableOpacity onPress={() => navigation.navigate('ManageUser')} style={styles.settingsButtons}>
             <View style={styles.icon}>
               <View style={styles.iconBackground}>
-                <FontAwesome5 name="user-friends" size={20} color="#FEA02F" />
+                <FontAwesome5  name="user-friends" size={20} color="#FEA02F" />
               </View>
             </View>
             <View style={styles.buttonText}>
@@ -62,7 +65,7 @@ const ProfileScreen = () => {
               </View>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.settingsButtons}>
+          <TouchableOpacity onPress={() => navigation.navigate('LastSeen')} style={styles.settingsButtons}>
             <View style={styles.icon}>
               <View style={styles.iconBackground}>
                 <MaterialCommunityIcons
