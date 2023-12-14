@@ -12,6 +12,9 @@ const RegistrationScreen = ({ navigation }) => {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [userlastname, setLastName] = useState("");
+  
 
   function navigateGoBack() {
     navigation.goBack();
@@ -22,6 +25,12 @@ const RegistrationScreen = ({ navigation }) => {
         username: username,
         email: email,
         password: password,
+        // profilelast_name: userlastname,
+        // profilename: name,
+
+         // Do polaczenia z backendem ^^^^^
+        
+        
       });
       authCtx.authenticate(registerResponse.token);
     } catch (error) {
@@ -55,6 +64,22 @@ const RegistrationScreen = ({ navigation }) => {
         </View>
 
         <View style={styles.registerContainer}>
+        <InputText
+            value={name}
+            onUpdateValue={setName}
+            textInputConfig={{
+              placeholder: "name",
+              keyboardType: "default",
+            }}
+          />
+          <InputText
+            value={userlastname}
+            onUpdateValue={setLastName}
+            textInputConfig={{
+              placeholder: "last name",
+              keyboardType: "default",
+            }}
+          />
           <InputText
             value={username}
             onUpdateValue={setUserName}
@@ -95,7 +120,7 @@ const RegistrationScreen = ({ navigation }) => {
             <Text style={styles.registerText}>Already have an account?</Text>
           </View>
 
-          <View>
+          <View style={styles.addMarginBottom}>
             <PlainButton onPress={navigateGoBack} underline={true}>
               Login Here!
             </PlainButton>
@@ -187,6 +212,9 @@ const styles = StyleSheet.create({
     height: 100,
     margin: 10,
   },
+  addMarginBottom:{
+    marginBottom: 30,
+  }
 });
 
 export default RegistrationScreen;
