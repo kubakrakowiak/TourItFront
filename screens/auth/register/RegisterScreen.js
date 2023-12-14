@@ -14,7 +14,6 @@ const RegistrationScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [userlastname, setLastName] = useState("");
-  
 
   function navigateGoBack() {
     navigation.goBack();
@@ -25,12 +24,7 @@ const RegistrationScreen = ({ navigation }) => {
         username: username,
         email: email,
         password: password,
-        // profilelast_name: userlastname,
-        // profilename: name,
-
-         // Do polaczenia z backendem ^^^^^
-        
-        
+        profile: { name: name, last_name: userlastname },
       });
       authCtx.authenticate(registerResponse.token);
     } catch (error) {
@@ -64,7 +58,7 @@ const RegistrationScreen = ({ navigation }) => {
         </View>
 
         <View style={styles.registerContainer}>
-        <InputText
+          <InputText
             value={name}
             onUpdateValue={setName}
             textInputConfig={{
@@ -212,9 +206,9 @@ const styles = StyleSheet.create({
     height: 100,
     margin: 10,
   },
-  addMarginBottom:{
+  addMarginBottom: {
     marginBottom: 30,
-  }
+  },
 });
 
 export default RegistrationScreen;

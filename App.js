@@ -24,7 +24,9 @@ import FullMapScreen from "./screens/authenticaded/FullMapScreen";
 import LastSeen from "./screens/authenticaded/LastSeen";
 import ManageUser from "./screens/authenticaded/ManageUser.js";
 
+
 const Stack = createStackNavigator();
+const WelcomeStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 function AuthStack() {
@@ -53,7 +55,32 @@ function AuthStack() {
     </Stack.Navigator>
   );
 }
-
+function WelcomeScreenStack() {
+return (
+<WelcomeStack.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: "red" },
+        contentStyle: { backgroundColor: "red" },
+        headerShown: false,
+      }}
+    >
+      <WelcomeStack.Screen
+        name="WelcomeScreen"
+        component={WelcomeScreen}
+        options={{
+          cardStyle: { backgroundColor: Colors.darkgreen },
+        }}
+      />
+      <WelcomeStack.Screen
+        name="WelcomeAreaScreen"
+        component={AreaScreen}
+        options={{
+          cardStyle: { backgroundColor: Colors.darkgreen },
+        }}
+      />
+      </WelcomeStack.Navigator>
+);
+}
 function AuthenticatedStack() {
   return (
     <Stack.Navigator
@@ -109,7 +136,7 @@ function BottomTabNavigator() {
     >
       <Tab.Screen
         name="Home"
-        component={WelcomeScreen}
+        component={WelcomeScreenStack}
         options={{
           tabBarIcon: ({ color, size }) => (
             <FontAwesome name="search" size={size} color={color} />
@@ -125,15 +152,7 @@ function BottomTabNavigator() {
           ),
         }}
       />
-      <Tab.Screen
-        name="Area"
-        component={AreaScreen}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <FontAwesome name="heart" size={size} color={color} />
-          ),
-        }}
-      />
+      
       <Tab.Screen
         name="Profile"
         component={ProfileScreen}

@@ -34,7 +34,8 @@ const WelcomeScreen = ({ navigation }) => {
   );
   const handleUpdateValue = (text) => {
     setSearchQuery(text);
-    console.log("Wprowadzony tekst:", text); 
+    console.log("Wprowadzony tekst:", text);
+    navigation.navigate("WelcomeAreaScreen", {searchText: text})
   };
   const handleSearchSubmit = (event) => {
     setSearchQuery(event.nativeEvent.text);
@@ -49,36 +50,18 @@ const WelcomeScreen = ({ navigation }) => {
           <SearchInput
             value={searchQuery}
             onUpdateValue={handleUpdateValue}
-            onSubmitEditing= {handleSearchSubmit}
+            onSubmitEditing={handleSearchSubmit}
             icon={"search"}
             textTransform="capitalize"
             containerWidth="95%"
           />
         </View>
 
-        <View style={styles.categoryContent}>
-          <View style={styles.titleText}>
-            <SectionTitle fontSize={20} marginBottom={5}>
-              Category
-            </SectionTitle>
-          </View>
-          <HorizontalMenu />
-        </View>
         <View style={styles.cardContainer}>
           <View style={styles.titleText}>
             <SectionTitle fontSize={20} color={"#494949"}>
               Trending
             </SectionTitle>
-          </View>
-          <View style={styles.plainButtonHolder}>
-            <PlainButton
-              fontSize={14}
-              color={"#7E7D7D"}
-              letterSpacing={0.77}
-              textDecorationLine={"normal"}
-            >
-              Explore
-            </PlainButton>
           </View>
         </View>
       </View>
