@@ -6,7 +6,7 @@ import { useForegroundPermissions } from 'expo-location';
 import * as Location from 'expo-location';
 
 import useFetchLocations from '../../hooks/useFetchLocations';
-import { getNearestLocations } from '../../util/http';
+import { getNearestLocations, getCityName } from '../../util/http';
 
 const FullMapScreen = () => {
     const navigation = useNavigation();
@@ -66,6 +66,22 @@ const FullMapScreen = () => {
         console.log(error);
     }
 
+
+    const handleGoToAreaScreen = async () => {
+        if (!currentRegion) return;
+
+        try {
+            const cityName = await getCityName(currentRegion.latitude, currentRegion.longitude);
+            if (cityName) {
+                navigation.navigate('AreaScreen', { cityName });
+            } else {
+                Alert.alert('Error', 'Could not find the city name.');
+            }
+        } catch (error) {
+            Alert.alert('Error', error.message);
+        }
+    };
+
     return (
         <MapView
             style={styles.map}
@@ -86,6 +102,7 @@ const FullMapScreen = () => {
                     onPress={() => navigation.navigate('Place', { locationId: location.id})}
                 />
             ))}
+            <Button title="see all" onPress={handleGoToAreaScreen} /> // to tylko przykład
         </MapView>
     );
 };

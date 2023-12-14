@@ -36,6 +36,10 @@ const WelcomeScreen = () => {
     const handleCategoryPress = (categoryId) => {
         alert(`Category ${categoryId} pressed`);
     };
+    const AreaScreen = ({ route }) => {
+        const { cityName } = route.params;
+        return cityName;
+    };
 
 
     return (
@@ -45,7 +49,7 @@ const WelcomeScreen = () => {
             scrollEnabled={true}
         >
             <View style={styles.header}>
-                <Header headerText={"Kraków"} subHeaderText={"best places!"} />
+                <Header headerText={AreaScreen.cityName} subHeaderText={"best places!"} />
             </View>
 
             <View style={styles.pageContent}>
@@ -65,7 +69,7 @@ const WelcomeScreen = () => {
                     <View style={styles.cardContainer}>
                         <View style={styles.textCardHolderContent}>
                             <SectionTitle fontSize={20} color={"#494949"}>
-                                All places in Kraków!
+                                All places in {AreaScreen.cityName}!
                             </SectionTitle>
                         </View>
                     </View>
