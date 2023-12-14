@@ -83,3 +83,17 @@ export async function getViewedLocations(token) {
         throw error;
     }
 }
+export async function addReview(token, reviewData) {
+    try {
+        const response = await axios.post(`${backendUrl}api/add-review/`, reviewData, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Token ${token}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error adding review:', error.response.data);
+        throw error;
+    }
+}
