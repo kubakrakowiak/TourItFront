@@ -15,15 +15,14 @@ import HorizontalMenu from "../../components/partials/HorizontalMenu";
 import PlainButton from "../../components/ui/PlainButton";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import useFetchTrendingLocations from "../../hooks/useFetchTrendingLocations";
-
+import SearchInput from "../../components/ui/SearchInput";
 
 const { width, height } = Dimensions.get("window");
-
-
 
 const WelcomeScreen = ({ navigation }) => {
   const xCoord = 54.4892;
   const yCoord = 18.5317;
+  const [searchQuery, setSearchQuery] = useState("");
 
   const { locations, isLoading, error } = useFetchTrendingLocations();
 
@@ -33,48 +32,55 @@ const WelcomeScreen = ({ navigation }) => {
       location={item}
     />
   );
+  const handleUpdateValue = (text) => {
+    setSearchQuery(text);
+    console.log("Wprowadzony tekst:", text); 
+  };
+  const handleSearchSubmit = (event) => {
+    setSearchQuery(event.nativeEvent.text);
+    console.log("Wyszukiwany tekst:", event.nativeEvent.text);
+  };
 
   const renderHeader = () => {
     return (
       <View style={styles.pageContent}>
         <Header headerText={"Welcome"} subHeaderText={"back!"} />
         <View style={styles.searchContent}>
-          <InputText
-            textInputConfig={{
-              placeholder: "Search",
-              keyboardType: "default",
-            }}
+          <SearchInput
+            value={searchQuery}
+            onUpdateValue={handleUpdateValue}
+            onSubmitEditing= {handleSearchSubmit}
             icon={"search"}
             textTransform="capitalize"
             containerWidth="95%"
           />
         </View>
-        
-          <View style={styles.categoryContent}>
+
+        <View style={styles.categoryContent}>
           <View style={styles.titleText}>
             <SectionTitle fontSize={20} marginBottom={5}>
               Category
             </SectionTitle>
-            </View>
-            <HorizontalMenu />
           </View>
-          <View style={styles.cardContainer}>
-            <View style={styles.titleText}>
+          <HorizontalMenu />
+        </View>
+        <View style={styles.cardContainer}>
+          <View style={styles.titleText}>
             <SectionTitle fontSize={20} color={"#494949"}>
               Trending
             </SectionTitle>
-            </View>
-            <View style={styles.plainButtonHolder}>
-              <PlainButton
-                fontSize={14}
-                color={"#7E7D7D"}
-                letterSpacing={0.77}
-                textDecorationLine={"normal"}
-              >
-                Explore
-              </PlainButton>
-            </View>
           </View>
+          <View style={styles.plainButtonHolder}>
+            <PlainButton
+              fontSize={14}
+              color={"#7E7D7D"}
+              letterSpacing={0.77}
+              textDecorationLine={"normal"}
+            >
+              Explore
+            </PlainButton>
+          </View>
+        </View>
       </View>
     );
   };
@@ -129,13 +135,13 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   searchContent: {
-    alignItems: "center"
+    alignItems: "center",
   },
   categoryContent: {
     flex: 1.8,
   },
   cardContainer: {
-    marginTop:10,
+    marginTop: 10,
   },
   plainButtonHolder: {
     textAlign: "right",
