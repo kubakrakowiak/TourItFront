@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {StyleSheet, View, ScrollView, Text} from "react-native";
+import { StyleSheet, View, ScrollView, Text } from "react-native";
 import SectionTitle from "../../components/ui/SectionTitle";
 import PlainButton from "../../components/ui/PlainButton";
 import PlaceScreenImages from "../../components/partials/PlaceScreenImages.js";
@@ -13,22 +13,21 @@ import useFetchLocationDetails from "../../hooks/useFetchLocationsDetails";
 const PlaceScreen = ({ navigation, route }) => {
   const [sliderVisible, setSliderVisible] = useState(false);
 
-  const {locationId} = route.params;
-  const { locationDetails,isLoading,error } = useFetchLocationDetails(locationId);
+  const { locationId } = route.params;
+  const { locationDetails, isLoading, error } =
+    useFetchLocationDetails(locationId);
 
-  if (isLoading){
-    return <Text>Loading location details</Text>
+  if (isLoading) {
+    return <Text>Loading location details</Text>;
   }
 
-  if (error){
-    return <Text>Error loading location details: {error.message}</Text>
+  if (error) {
+    return <Text>Error loading location details: {error.message}</Text>;
   }
 
   if (!locationDetails) {
     return <Text>No location details available.</Text>;
   }
-
-
 
   const handleCategoryPress = (categoryId) => {
     alert(`Category ${categoryId} pressed`);
@@ -37,13 +36,12 @@ const PlaceScreen = ({ navigation, route }) => {
   const handleRatingSubmit = (rating, comment) => {
     console.log("Rating:", rating);
     console.log("Comment:", comment);
-    setSliderVisible(false); 
+    setSliderVisible(false);
   };
 
   const goBack = () => {
     navigation.goBack();
   };
-
 
   return (
     <ScrollView
@@ -62,43 +60,41 @@ const PlaceScreen = ({ navigation, route }) => {
       </View>
 
       <View style={styles.cardHolderContainer}>
-        <View style={styles.cardHolder}>
-          <PlaceCard location={locationDetails.location} />
+        <PlaceCard location={locationDetails.location} />
+      </View>
+      <View style={styles.commentTitleContainer}>
+        <View style={styles.commentsCardHolderContent}>
+          <SectionTitle fontSize={19} color={"#494949"}>
+            Comments
+          </SectionTitle>
         </View>
-        <View style={styles.commentTitleContainer}>
-          <View style={styles.commentsCardHolderContent}>
-            <SectionTitle fontSize={19} color={"#494949"}>
-              Comments
-            </SectionTitle>
-          </View>
-        </View>
+      </View>
 
-        <View style={styles.plainButtonHolder}>
-          <PlainButton
-            fontSize={14}
-            color={"#7E7D7D"}
-            letterSpacing={0.77}
-            textDecorationLine={"none"}
-            onPress={() => setSliderVisible(true)}
-          >
-            Add Comment
-          </PlainButton>
-        </View>
+      <View style={styles.plainButtonHolder}>
+        <PlainButton
+          fontSize={14}
+          color={"#7E7D7D"}
+          letterSpacing={0.77}
+          textDecorationLine={"none"}
+          onPress={() => setSliderVisible(true)}
+        >
+          Add Comment
+        </PlainButton>
+      </View>
 
-        {sliderVisible && (
-          <AddCommentSlider
-            onSubmit={handleRatingSubmit}
-            onClose={() => setSliderVisible(false)}
-            userName="Janina Nowak"
-            userAvatar={require("../../assets/avatar.jpeg")}
-          />
-        )}
+      {sliderVisible && (
+        <AddCommentSlider
+          onSubmit={handleRatingSubmit}
+          onClose={() => setSliderVisible(false)}
+          userName="Janina Nowak"
+          userAvatar={require("../../assets/avatar.jpeg")}
+        />
+      )}
 
-        <View>
-          {locationDetails.ratings.map(comment => (
-            <CommentCard comment={processComment(comment)} key={comment.id} />
-          ))}
-        </View>
+      <View>
+        {locationDetails.ratings.map((comment) => (
+          <CommentCard comment={processComment(comment)} key={comment.id} />
+        ))}
       </View>
     </ScrollView>
   );
@@ -109,11 +105,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#F1F1F1",
   },
-  pageContent: {
-    flex: 1,
-  },
   backButton: {
-    flex: 1,
     marginTop: 20,
     marginLeft: 20,
   },
@@ -123,8 +115,8 @@ const styles = StyleSheet.create({
   horizontalMenu: {
     alignItems: "flex-start",
   },
-  commentsHolderContainer: {
-    marginTop: 20,
+  cardHolderContainer:{
+flex: 3,
   },
   commentTitleContainer: {
     flex: 0.5,
