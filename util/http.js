@@ -97,3 +97,18 @@ export async function addReview(token, reviewData) {
         throw error;
     }
 }
+
+export async function updateProfile(token, profileData) {
+    try {
+        const response = await axios.post(`${backendUrl}api/update-profile/`, profileData, {
+                headers: {
+                    'Authorization': `Token ${token}`,
+                    'Content-Type': 'application/json',
+                }
+            });
+        return response.data;
+    } catch (error) {
+        console.error('Error updating profile:', error);
+        throw error;
+    }
+}

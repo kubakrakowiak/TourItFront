@@ -20,6 +20,8 @@ import * as ImagePicker from "expo-image-picker";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Colors } from "../../constans/styles";
 import SectionTitle from "../../components/ui/SectionTitle";
+import useUpdateProfile from '../../hooks/useUpdateProfile';
+
 
 const { width, height } = Dimensions.get("window");
 
@@ -30,6 +32,8 @@ const ManageUser = () => {
   const [profileImage, setProfileImage] = useState(null);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const updateProfileData = useUpdateProfile();
+
 
   const goBack = () => {
     navigation.goBack();
@@ -71,14 +75,16 @@ const ManageUser = () => {
 
   const saveProfileChanges = async () => {
     try {
-      // Przykład zapisywania danych lokalnie
-      await AsyncStorage.setItem(
-        "userProfile",
-        JSON.stringify({ firstName, lastName, profileImage })
-      );
+      const profileData = {
+        profile_image: profileImage,
+        name: firstName,
+        last_name: lastName,
+      };
+
+      await updateProfileData(profileData);
       alert("Profil zaktualizowany!");
     } catch (error) {
-      alert("Wystąpił błąd podczas zapisywania profilu.");
+      alert("Wystąpił błąd podczas zapisywania profilu: " + error.message);
     }
   };
 
