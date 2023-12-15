@@ -1,92 +1,67 @@
-import React from "react";
+import React from 'react';
 import {
   StyleSheet,
   View,
-  Dimensions,
-  ScrollView,
-  KeyboardAvoidingView,
-  Platform, Text, ActivityIndicator,
-} from "react-native";
-import Header from "../../components/partials/Header";
-import InputText from "../../components/ui/InputText";
-import LocationCard from "../../components/ui/LocationCard";
-import SectionTitle from "../../components/ui/SectionTitle";
-import HorizontalMenu from "../../components/partials/HorizontalMenu";
-import PlainButton from "../../components/ui/PlainButton";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import useViewedLocations from "../../hooks/useViewedLocations";
-import { useNavigation } from "@react-navigation/native";
-import BackButton from "../../components/ui/BackButton";
+  Text,
+  ActivityIndicator,
+  FlatList,
+} from 'react-native';
+import LocationCard from '../../components/ui/LocationCard';
+import Header from '../../components/partials/Header';
+import BackButton from '../../components/ui/BackButton';
+import useViewedLocations from '../../hooks/useViewedLocations'; // Import the custom hook
+import SectionTitle from '../../components/ui/SectionTitle';
 
+const LastSeen = ({ navigation }) => {
+  const { locations, isLoading, error } = useViewedLocations(); // Make sure this hook provides the correct data structure
 
-const { width, height } = Dimensions.get("window");
-
-const LastSeen = () => {
-  const navigation = useNavigation();
-  const { locations, isLoading, error } = useViewedLocations();
-
-  const processedLocations = locations.map((location) => ({
-    //image: require("../../assets/sniezka.jpeg"),
-    id: location.id,
-    name: location.name,
-    rating: location.average_rating,
-    city: location.simple_address,
-    isLiked: false,
-  }));
-
-  const goBack = () => {
-    navigation.goBack();
-  };
+  const renderLocation = ({ item }) => (
+    <LocationCard
+      onPress={() => navigation.navigate("Place", { locationId: item.id })}
+      location={item}
+    />
+  );
 
   if (error) {
     return (
-        <View style={styles.centered}>
-          <Text>An error occurred: {error.message}</Text>
-        </View>
+      <View style={styles.centered}>
+        <Text>An error occurred: {error.message}</Text>
+      </View>
     );
   }
 
   if (isLoading) {
     return (
-        <View style={styles.centered}>
-          <ActivityIndicator size="large" />
-        </View>
+      <View style={styles.centered}>
+        <ActivityIndicator size="large" />
+      </View>
     );
   }
 
   return (
-    <ScrollView
-      style={styles.container}
-      keyboardShouldPersistTaps="handled"
-      scrollEnabled={true}
-    >
+    <View style={styles.container}>
       <View style={styles.fullHeader}>
         <View style={styles.backButton}>
-          <BackButton onPress={goBack}></BackButton>
+        <BackButton onPress={() => navigation.goBack()} />
         </View>
         <View style={styles.header}>
-          <Header headerText={"Last"} subHeaderText={"seen!"} />
+        <Header headerText="Last" subHeaderText="seen!" />
         </View>
       </View>
-
-      <View style={styles.textCardHolderContent}>
-        <SectionTitle fontSize={20} color={"#494949"}>
+      <View style={styles.title}>
+      <SectionTitle fontSize={20} color={"#494949"} >
           All last seen places!
         </SectionTitle>
-        {processedLocations.map((location) => (
-          <LocationCard
-            onPress={() =>
-              navigation.navigate("Place", { locationId: location.id })
-            }
-            location={location}
-            key={location.id}
-          />
-        ))}
-      </View>
-    </ScrollView>
+        </View>
+      <FlatList
+        data={locations}
+        renderItem={renderLocation}
+        keyExtractor={(item) => item.id.toString()}
+        contentContainerStyle={styles.listContent}
+      />
+    </View>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -108,6 +83,14 @@ const styles = StyleSheet.create({
   backButton: {
     marginTop: 20,
     marginLeft: 20,
+  },
+  centered: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
+  },
+  title:{
+marginLeft: 10,
   },
 });
 
