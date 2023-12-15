@@ -9,9 +9,13 @@ import CommentCard from "../../components/ui/CommentCard.js";
 import AddCommentSlider from "../../components/ui/AddCommentSlider.js";
 import processComment from "../../util/processComment";
 import useFetchLocationDetails from "../../hooks/useFetchLocationsDetails";
+import useAddReview from '../../hooks/useAddReview';
+
 
 const PlaceScreen = ({ navigation, route }) => {
   const [sliderVisible, setSliderVisible] = useState(false);
+  const addReview = useAddReview();
+
 
   const { locationId } = route.params;
   const { locationDetails, isLoading, error } =
@@ -33,10 +37,16 @@ const PlaceScreen = ({ navigation, route }) => {
     alert(`Category ${categoryId} pressed`);
   };
 
-  const handleRatingSubmit = (rating, comment) => {
-    console.log("Rating:", rating);
-    console.log("Comment:", comment);
-    setSliderVisible(false);
+  const handleRatingSubmit = async (rating, comment) => {
+    try {
+      const result = await addReview(locationId, rating, comment);
+      console.log('Review submitted:', result);
+
+
+      setSliderVisible(false);
+    } catch (error) {
+      console.error('Error submitting review:', error);
+    }
   };
 
   const goBack = () => {
