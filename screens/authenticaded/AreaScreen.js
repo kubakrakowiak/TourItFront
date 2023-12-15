@@ -3,83 +3,76 @@ import {
   StyleSheet,
   View,
   Dimensions,
-  ScrollView,
-  KeyboardAvoidingView,
-  Platform,
+  FlatList,
+  ActivityIndicator,
+  Text,
 } from "react-native";
 import Header from "../../components/partials/Header";
-import InputText from "../../components/ui/InputText";
 import LocationCard from "../../components/ui/LocationCard";
 import SectionTitle from "../../components/ui/SectionTitle";
 import HorizontalMenu from "../../components/partials/HorizontalMenu";
-import PlainButton from "../../components/ui/PlainButton";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import useFetchLocations from "../../hooks/useFetchLocations";
 import { useNavigation } from "@react-navigation/native";
 
 const { width, height } = Dimensions.get("window");
 
-const AreaScreen = ( {route}) => {
+const AreaScreen = ({ route }) => {
   const navigation = useNavigation();
   const { locations, isLoading, error } = useFetchLocations(1, 1);
   const { searchText } = route.params;
 
-  const processedLocations = locations.map((location) => ({
-    //image: require("../../assets/sniezka.jpeg"),
-    id: location.id,
-    name: location.name,
-    rating: location.average_rating,
-    city: location.simple_address,
-    isLiked: false,
-  }));
-  const handleCategoryPress = (categoryId) => {
-    alert(`Category ${categoryId} pressed`);
+  const renderLocation = ({ item }) => (
+    <LocationCard
+      onPress={() => navigation.navigate("Place", { locationId: item.id })}
+      location={item}
+    />
+  );
+
+  const sampleLocation = { //Tylko do testow, do wywalenia po sciaganiu z backa (cała zmienna)
+    id: '1',
+    name: 'Sample Place',
+    average_rating: '4.5',
+    simple_address: '123 Sample St, City',
   };
 
+  if (error) {
+    return (
+      <View style={styles.centered}>
+        <Text>An error occurred: {error.message}</Text>
+      </View>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <View style={styles.centered}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
+
+  const sampleLocations = [sampleLocation]; // Tylko do testow, wywalic po sciaganiu z backa
+
   return (
-    <ScrollView
-      style={styles.container}
-      keyboardShouldPersistTaps="handled"
-      scrollEnabled={true}
-    >
-      <View style={styles.header}>
-        <Header headerText={"Kraków"} subHeaderText={"best places!"} />
-      </View>
-
-      <View style={styles.pageContent}>
-        <View style={styles.categoryContent}>
-          <View style={styles.textHolderContent}>
-            <SectionTitle fontSize={20} marginBottom={5}>
-              Category
-            </SectionTitle>
-          </View>
-          <View style={styles.horizontalMenu}>
-            <HorizontalMenu onCategoryPress={handleCategoryPress} />
-          </View>
-        </View>
-
-        <View style={styles.cardHolderContainer}>
-          <View style={styles.cardContainer}>
-            <View style={styles.textCardHolderContent}>
-              <SectionTitle fontSize={20} color={"#494949"}>
-                All places in Kraków!
-              </SectionTitle>
-            </View>
-          </View>
-          <View style={styles.cardHolder}>
-            {processedLocations.map((location) => (
-              <LocationCard
-                onPress={() =>
-                  navigation.navigate("Place", { locationId: location.id })
-                }
-                location={location}
-                key={location.id}
-              />
-            ))}
-          </View>
+    <View style={styles.container}>
+      <View style={styles.headerContent}>
+        <Header headerText={searchText} subHeaderText={"best places!"} />
+        <View style={styles.title}>
+        <SectionTitle fontSize={20} color={"#494949"}>
+          All places in 
+          <Text style={styles.locationText}> {searchText}!</Text>
+        </SectionTitle>
         </View>
       </View>
-    </ScrollView>
+
+      <FlatList
+        //data={locations} //Poprawne do sciagania z backu, odkomentowac jak bedzie pobierac z backa
+      data={sampleLocations} // Tylko do testow, wywalic po sciganiu z backa
+        renderItem={renderLocation}
+        keyExtractor={(item) => item.id.toString()}
+        contentContainerStyle={styles.listContent}
+      />
+    </View>
   );
 };
 
@@ -88,55 +81,25 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#F1F1F1",
   },
-  header: {
+  headerContent: {
+    paddingTop: 20,
+  },
+  listContent: {
+    paddingBottom: 20,
+  },
+  centered: {
     flex: 1,
-  },
-  pageContent: {
-    flex: 5,
-  },
-  searchContent: {
-    flex: 1.5,
-    bottom: 20,
-  },
-  categoryContent: {
-    flex: 1.8,
-  },
-  horizontalMenu: {
+    justifyContent: "center",
     alignItems: "center",
   },
-  textHolderContent: {
-    textAlign: "left",
-    alignItems: "flex-start",
-    paddingLeft: "5%",
+  locationText:{
+    fontFamily: "Poppins-Bold",
+    fontSize: 20,
+    color: "black"
   },
-  searchBar: {
-    flex: 1,
-    alignItems: "center",
-    paddingHorizontal: 16,
-  },
-  cardHolderContainer: {
-    flex: 6,
-  },
-  cardContainer: {
-    flex: 0.5,
-  },
-  plainButtonHolder: {
-    textAlign: "right",
-    paddingRight: "5%",
-    alignSelf: "flex-end",
-    paddingLeft: 15,
-    right: 15,
-    marginBottom: 5,
-  },
-  cardHolder: {
-    flex: 4,
-  },
-  textCardHolderContent: {
-    textAlign: "left",
-    alignItems: "flex-start",
-    paddingLeft: "5%",
-    top: 10,
-  },
+  title:{
+    marginLeft: 10,
+  }
 });
 
 export default AreaScreen;
